@@ -3,8 +3,8 @@
 # or in a config.ini file in the current directory
 # (If both are specified, the environment takes precedence)
 # Example config.ini file:
-# [DEFAULT]
-# DATABASE_URI = mysql+pymysql://username:password@host:port/database
+# [DATABASE]
+# URI =  = mysql+pymysql://username:password@host:port/database
 
 import os
 import configparser
