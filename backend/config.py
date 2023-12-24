@@ -29,7 +29,7 @@ def get_uri_from_env():
 def get_uri_from_config():
     config = configparser.ConfigParser()
     config.read('config.ini')
-    return config['DEFAULT']['DATABASE_URI']
+    return config['DATABASE']['URI']
 
 
 # Get the connection URI from the environment or config file
