@@ -1,17 +1,18 @@
 from flask import Flask, jsonify
 import pymysql.cursors
+from config import CONFIG
 
 app = Flask(__name__)
 
-# Connect to the database (default port 3306)
-db_connection = pymysql.connect(host='DESKTOP-NB4FCDA',
-                                user='pc_comp_db_simple_user',
-                                password='123123',
-                                database='pc_components_database',
-                                charset='utf8',
-                                cursorclass=pymysql.cursors.DictCursor)
-
-
+# Connect to the database using info from config.py
+db_connection = pymysql.connect(
+    host=CONFIG['host'],
+    user=CONFIG['username'],
+    password=CONFIG['password'],
+    db=CONFIG['database'],
+    charset='utf8mb4',
+    cursorclass=pymysql.cursors.DictCursor
+)
 
 @app.route('/')
 def hello_world():
