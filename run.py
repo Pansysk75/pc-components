@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 import pymysql.cursors
 from config import CONFIG
-import models
+import model
 
 app = Flask(__name__)
 
@@ -17,26 +17,29 @@ db_connection = pymysql.connect(
 
 @app.route('/')
 def index():
-    return models.hello_world(db_connection)
+    return "Hello, world!"
 
 # Get specific build
 # Returns dict{build_id, name, username, cpu, mobo, ram, psu, storage}
 @app.route('/build/<int:build_id>')
 def get_build(build_id):
-    return models.get_build(db_connection, build_id)
+    build = model.Build.get(db_connection, build_id)
+    return build if build else (jsonify({"error": "Build not found"}), 404)
 
 
 # Get all builds
 # Returns list of dicts{build_id, name, username, cpu, mobo, ram, psu, storage}
 @app.route('/builds')
 def get_builds():
-    return models.get_builds(db_connection)
+    builds = model.Builds.get(db_connection)
+    return builds # at worst this will be an empty list
 
 
 # Get specific user from username, and all build_ids associated with that user
 @app.route('/user/<string:username>')
 def get_user(username):
-    return models.get_user(db_connection, username)
+    user = model.User.get(db_connection, username)
+    return user if user else (jsonify({"error": "User not found"}), 404)
         
 
 if __name__ == '__main__':
