@@ -18,6 +18,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
+            set -e
             
             kill -9 $(cat ~/pc-components/backend/server_pid.txt)
             kill -9 $(cat ~/pc-components/frontend/server_pid.txt)
@@ -27,9 +28,10 @@ jobs:
             git clone https://github.com/Pansysk75/pc-components.git
 
             cd ~/pc-components/backend
-              source venv/bin/activate
+            python3 -m venv venv
+            source venv/bin/activate
             pip install -r requirements.txt
-            python run.py &> server_log.txt &
+            python3 run.py &> server_log.txt &
             echo $! > server_pid.txt
 
             cd ~/pc-components/frontend
