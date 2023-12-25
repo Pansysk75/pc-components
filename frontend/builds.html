@@ -4,42 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PC Build Viewer</title>
-    <link rel="stylesheet" href="../views/styles.css" />
+    <link rel="stylesheet" href="views/styles.css" />
 </head>
 <body>
     <header>
-        <h1  class = "header">PC Components Picker</h1>
-      </header>
-      <div class="tabs">
-        <button class="button" type="button">
-          <a id="login-button" class="buttton" target="_top" href="login.html" text-decoration: none;>Log In</a>
-        </button>
-        <button class="button" type="button">
-          <a id="register-button" class="buttton" target="_top" href="register.html" text-decoration: none;>Sign Up</a>
-        </button>
-      </div>
-      <div class="menu">
-        <button class="button" type="button">
-          <a id="builder-button" class="buttton" target="_top" href="builder.html" text-decoration: none;>Builder</a>
-        </button>
-        <button class="button" type="button">
-          <a id="component-button" class="buttton" target="_top" href="components.html" text-decoration: none;>Components</a>
-        </button>
-        <button class="button" type="button">
-          <a id="build-button" class="buttton" target="_top" href="builds.html" text-decoration: none;>Builds</a>
-        </button>
-      </div>
-    <h3>PC Build Viewer</h3>
-    <div>
-        <label for="buildId">Enter Build ID:</label>
-        <input type="number" id="buildId" name="buildId">
-        <button onclick="fetchBuild()">Get Build</button>
+      <h1  class = "header">PC Components Picker</h1>
+    </header>
+    <div class="tabs">
+      <button class="button" type="button">
+        <a id="login-button" class="buttton" target="_top" href="login.html" text-decoration: none;>Log In</a>
+      </button>
+      <button class="button" type="button">
+        <a id="register-button" class="buttton" target="_top" href="register.html" text-decoration: none;>Sign Up</a>
+      </button>
+    </div>
+    <div class="menu">
+      <button class="button" type="button">
+        <a id="builder-button" class="buttton" target="_top" href="builder.html" text-decoration: none;>Builder</a>
+      </button>
+      <button class="button" type="button">
+        <a id="component-button" class="buttton" target="_top" href="components.html" text-decoration: none;>Components</a>
+      </button>
+      <button class="button" type="button">
+        <a id="build-button" class="buttton" target="_top" href="builds.html" text-decoration: none;>Builds</a>
+      </button>
+    </div>
+    <div class="main-body">
+      <h3>PC Build Viewer</h3>
+      <label for="buildId">Enter Build ID:</label>
+      <input type="number" id="buildId" name="buildId">
+      <button onclick="fetchBuild()">Get Build</button>
     </div>
     <div id="buildDetails">
         <!-- Build details will be displayed here -->
     </div>
 
-    <script>
+    <script src="src/builds.js"></script>
+    <!-- <script>
         function fetchBuild() {
             var buildId = document.getElementById('buildId').value;
             var backendUrl = 'http://localhost:81';
@@ -69,6 +70,6 @@
             var buildDetails = document.getElementById('buildDetails');
             buildDetails.innerHTML = error;
         }
-    </script>
+    </script> -->
 </body>
 </html>

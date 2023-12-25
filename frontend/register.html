@@ -2,23 +2,27 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="../views/styles.css" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="views/styles.css" />
   </head>
   <body>
     <header>
       <h1  class = "header">PC Components Picker</h1>
     </header>
-    <h1 class="paragraph">Login</h1>
+    <h1 class="paragraph">Sign Up</h1>
     <p>Please fill out this form with the required information</p>
     <form method="post" action='https://register-demo.freecodecamp.org'>     <!-- Set this!!! -->
     <!--<form action="/submit" method="post" id="myForm" onsubmit="return validateForm()">-->
       <fieldset>
         <label for="first-name">Enter Your username: <input type="text" id="username" name="username" required/></label>
+        <label for="email">Enter Your Email: <input id="email" name="email" type="email" required /></label>
         <!-- <label for="new-password">Create a New Password: <input id="new-password" name="new-password" type="password" pattern="[a-z0-5]{8,}" required /></label> -->
       </fieldset>
-      <input type="submit" value="Log In"/>
+      <label for="terms-and-conditions">
+        <input id="terms-and-conditions" type="checkbox" required name="terms-and-conditions" /> I accept the <a href="https://www.freecodecamp.org/news/terms-of-service/">terms and conditions</a>
+      </label>
+      <input type="submit" value="Sign Up"/>
     </form>
-    <p>Don't have an account? <a href="register.html">Register</a> </p>
+    <p>Already have an account? <a href="login.html">Log in</a> </p>
   </body>
 </html>
