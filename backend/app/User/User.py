@@ -1,5 +1,3 @@
-
-
 class User:
     # Get specific user from username, and all build_ids associated with that user
     # Returns dict{username, email, build_ids}
