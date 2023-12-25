@@ -18,7 +18,9 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
-            
+            set -x
+
+            # kill the previous server
             kill -9 $(cat ~/pc-components/backend/server_pid.txt)
             kill -9 $(cat ~/pc-components/frontend/server_pid.txt)
 
