@@ -25,6 +25,8 @@ class Build:
         '''
         cursor.execute(sql, (build_id))
         build = cursor.fetchone()
+        if not build:
+            return None
         sql_storage = '''
         SELECT storage.Storage_id, storage.name AS Storage_name
         FROM build_has_storage

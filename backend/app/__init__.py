@@ -1,9 +1,11 @@
 from . import Build, User
 import pymysql
 from flask import Flask, jsonify
+from flask_cors import CORS
     
 def create_app(config):
     app = Flask(__name__)
+    CORS(app)
     
     # Connect to database
     app.config['db_connection'] = pymysql.connect(
