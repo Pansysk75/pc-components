@@ -34,6 +34,7 @@ jobs:
             python3 -m venv venv
             source venv/bin/activate
             pip install -r requirements.txt
+            export DATABASE_URI=${{ secrets.DATABASE_URI }}
             python3 run.py &> server_log.txt &
             echo $! > server_pid.txt
 
