@@ -4,10 +4,15 @@
 # (If both are specified, the environment takes precedence)
 # Example config.ini file:
 # [DATABASE]
-# URI =  = mysql+pymysql://username:password@host:port/database
+# URI = mysql+pymysql://username:password@host:port/database
 
 import os
+from pathlib import Path
 import configparser
+
+config = configparser.ConfigParser()
+config_path = Path(__file__).with_name('config.ini')
+config.read(config_path)
 
 # Parse the connection URI to get the individual components
 def parse_uri(uri):
@@ -21,21 +26,24 @@ def parse_uri(uri):
     result["database"] = uri.split(':')[3].split('/')[1]
     return result
     
-# Finds the DATABASE_URI environment variable and returns it
-def get_uri_from_env():
-    return os.environ.get('DATABASE_URI')
-
-# Finds the config.ini file in the current directory and returns it
-def get_uri_from_config():
-    config = configparser.ConfigParser()
-    config.read('config.ini')
-    return config['DATABASE']['URI']
 
 
-# Get the connection URI from the environment or config file
-CONFIG = {}
-CONFIG['uri'] = get_uri_from_env() or get_uri_from_config()
-if CONFIG['uri'] is None:
-    raise Exception("No database connection URI specified. See config.py for more information.")
-CONFIG.update(parse_uri(CONFIG['uri']))
-
+def get_config_entry(section, key):
+    try:
+        return config[section][key]
+    except KeyError:
+        return None
+    
+def get_config(mode):
+    switcher = {
+        'production': 'DATABASE',
+        'development': 'DATABASE',
+        'test': 'TEST_DATABASE'
+    }
+    section = switcher.get(mode)
+    if not section:
+        raise Exception(f"Invalid configuration mode: {mode}")
+    uri = os.environ.get(section + '_URI') or get_config_entry(section, 'URI')
+    if not uri:
+        raise Exception(f"Invalid configuration, can't find URI for {mode} mode")
+    return parse_uri(uri)

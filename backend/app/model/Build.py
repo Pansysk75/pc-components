@@ -25,6 +25,23 @@ class Build:
         cursor.execute(sql, (build_id))
         build = cursor.fetchone()
         return build
+    
+    def post(db, new_build):
+        cursor = db.cursor()
+        sql = '''
+        INSERT INTO build (name, Username, CPU_id, MOBO_id, RAM_id, PSU_id)
+        VALUES (%s, %s, %s, %s, %s, %s);
+        '''
+        cursor.execute(sql, (new_build["name"], new_build["username"], new_build["CPU_id"], new_build["MOBO_id"], new_build["RAM_id"], new_build["PSU_id"]))
+        build_id = cursor.lastrowid
+        for storage_id in new_build["storage_ids"]:
+            sql = '''
+            INSERT INTO build_has_storage (Build_id, Storage_id)
+            VALUES (%s, %s);
+            '''
+            cursor.execute(sql, (build_id, storage_id))
+        db.commit()
+        return build_id
 
 class Builds:
     # Get all builds
