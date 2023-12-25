@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch:
 
 jobs:
@@ -21,7 +21,7 @@ jobs:
             
             kill -9 $(cat ~/pc-components/backend/server_pid.txt)
             kill -9 $(cat ~/pc-components/frontend/server_pid.txt)
-            
+
             set -e
 
             cd ~
