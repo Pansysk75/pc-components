@@ -1,0 +1,35 @@
+# Github action for connecting to digitalocean server and run the deploy script
+name: Deploy
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Connect to DigitalOcean Droplet
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          script: |
+            
+            kill -9 $(cat ~/pc-components/backend/server_pid.txt)
+            kill -9 $(cat ~/pc-components/frontend/server_pid.txt)
+
+            cd ~
+            rm -rf ./pc-components
+            git clone https://github.com/Pansysk75/pc-components.git
+
+            cd ~/pc-components/backend
+              source venv/bin/activate
+            pip install -r requirements.txt
+            python run.py &> server_log.txt &
+            echo $! > server_pid.txt
+
+            cd ~/pc-components/frontend
+            python -m http.server 80 &> server_log.txt &
+            echo $! > server_pid.txt
