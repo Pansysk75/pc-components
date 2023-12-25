@@ -10,16 +10,16 @@ class Build:
         # Note: The word "case" is a reserved keyword in MySQL, so we have escape it with backticks
         sql = '''
         SELECT build.Build_id, build.name, build.Username,
-               Build.CPU_id,  CPU.name AS CPU_name,     
-               Build.MOBO_id, MOBO.name AS MOBO_name,   
-               Build.RAM_id,  RAM.name AS RAM_name,     
-               Build.PSU_id,  PSU.name AS PSU_name,     
-               Build.Case_id, `case`.name AS Case_name
+               build.CPU_id,  cpu.name AS CPU_name,     
+               build.MOBO_id, mobo.name AS MOBO_name,   
+               build.RAM_id,  ram.name AS RAM_name,     
+               build.PSU_id,  psu.name AS PSU_name,     
+               build.Case_id, `case`.name AS Case_name
         FROM build
             JOIN cpu ON build.CPU_id = cpu.CPU_id
-            JOIN MOBO ON build.MOBO_id = MOBO.MOBO_id
-            JOIN RAM ON build.RAM_id = RAM.RAM_id
-            JOIN PSU ON build.PSU_id = PSU.PSU_id
+            JOIN mobo ON build.MOBO_id = mobo.MOBO_id
+            JOIN ram ON build.RAM_id = ram.RAM_id
+            JOIN psu ON build.PSU_id = psu.PSU_id
             JOIN `case` ON build.Case_id = `case`.Case_id
         WHERE build.build_id = %s;
         '''
