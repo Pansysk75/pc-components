@@ -79,6 +79,7 @@ label {
     text-decoration: none; 
     background-color: none;
     width: 70px;
+    width: auto;
     background-color: #965a5a; /* Set the background color to match the body background */
     background-color: #e3bf7b;
     background-color: #fca311;
