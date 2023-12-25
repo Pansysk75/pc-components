@@ -18,10 +18,11 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
-            set -e
             
             kill -9 $(cat ~/pc-components/backend/server_pid.txt)
             kill -9 $(cat ~/pc-components/frontend/server_pid.txt)
+            
+            set -e
 
             cd ~
             rm -rf ./pc-components
