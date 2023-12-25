@@ -22,8 +22,8 @@ def parse_uri(uri):
     result["username"] = uri.split(':')[1].split('//')[1].split(':')[0]
     result["password"] = uri.split(':')[2].split('@')[0]
     result["host"] = uri.split(':')[2].split('@')[1]
-    result["port"] = uri.split(':')[3].split('/')[0]
-    result["database"] = uri.split(':')[3].split('/')[1]
+    result["port"] = int(uri.split(':')[3].split('/')[0])
+    result["database"] = uri.split(':')[3].split('/')[1].split('?')[0]
     return result
     
 

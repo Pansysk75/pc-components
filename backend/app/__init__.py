@@ -8,8 +8,10 @@ def create_app(config):
     CORS(app)
     
     # Connect to database
+    print(f"Connecting to database {config['database']} on {config['host']}:{config['port']} as {config['username']}")
     app.config['db_connection'] = pymysql.connect(
         host=config['host'],
+        port=config['port'],
         user=config['username'],
         password=config['password'],
         db=config['database'],
