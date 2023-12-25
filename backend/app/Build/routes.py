@@ -1,4 +1,4 @@
-from flask import Blueprint, current_app, jsonify
+from flask import Blueprint, current_app, jsonify, redirect, url_for, request
 from .Build import Build, Builds
 
 build_bp = Blueprint('build', __name__)
@@ -11,6 +11,14 @@ def get_build(build_id):
     build = Build.get(db_connection, build_id)
     return build if build else (jsonify({"error": "Build not found"}), 404)
 
+# Post new build
+# Returns build_id
+@build_bp.route('/build', methods=['POST'])
+def post_build():
+    db_connection = current_app.config['db_connection']
+    new_build = request.get_json()
+    build_id = Build.post(db_connection, new_build)
+    return jsonify(build_id)
 
 # Get all builds
 # Returns list of dicts{build_id, name, username, cpu, mobo, ram, psu, storage}
