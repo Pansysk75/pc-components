@@ -1,7 +1,8 @@
+import {config} from './config.js';
+
 function fetchBuild() {
     var buildId = document.getElementById('buildId').value;
-    var backendUrl = 'http://localhost:81';
-    var url = backendUrl + '/build/' + buildId;
+    var url = config.backendUrl + '/build/' + buildId;
     console.log('Fetching build from ' + url);
     // If response is successful, parse the JSON and display the build
     // Else, display the error
@@ -18,6 +19,10 @@ function fetchBuild() {
         .then(build => displayBuild(build))
         .catch(error => displayError(error));
 }
+
+// Hook to getBuild button
+var getBuildButton = document.getElementById('getBuild');
+getBuildButton.addEventListener('click', fetchBuild);
 
 function displayBuild(build) {
     var buildDetails = document.getElementById('buildDetails');
