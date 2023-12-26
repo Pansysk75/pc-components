@@ -25,6 +25,7 @@ var getBuildButton = document.getElementById('getBuild');
 getBuildButton.addEventListener('click', fetchBuild);
 
 function displayBuild(build) {
+    console.log(typeof(build));
     var buildDetails = document.getElementById('buildDetails');
     buildDetails.innerHTML = JSON.stringify(build, null, 2);
 }
