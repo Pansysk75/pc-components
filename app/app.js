@@ -1,7 +1,17 @@
-let express = require('express');
-let router = express.Router();
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
 
+router.use(bodyParser.json());
+// router.use(bodyParser.urlencoded({ extended: true }));
 router.use("/public",express.static(__dirname + "/public"));
+router.use("/src",express.static(__dirname + "/src"));
+
+
+router.use("/", (req, res, next) => {
+    console.log(req.method + " " + req.path + " - " + req.ip);
+    next();
+});
 
 
 router.get('/', (req, res) => {
@@ -35,13 +45,5 @@ router.get('/builder.html', (req, res) => {
     res.sendFile(absolutePath);
 });
 
-
-
-
-// // Example of another route
-// router.get('/api/data', (req, res) => {
-//   // Handle data retrieval logic
-//   res.json({ message: 'Data from the server' });
-// });
 
 module.exports = router;

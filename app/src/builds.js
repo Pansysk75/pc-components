@@ -34,3 +34,4 @@ function displayError(error) {
     var buildDetails = document.getElementById('buildDetails');
     buildDetails.innerHTML = error;
 }
+
