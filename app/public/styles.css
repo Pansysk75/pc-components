@@ -16,6 +16,7 @@ header {
     background-color: #17171c;
     color: #fca311;
     font-size: 15px;
+    box-sizing: border-box;
 }
   
 p, h1 {
@@ -99,7 +100,8 @@ label {
 
 
 .main-body {
-    margin: 150px;
+    margin: 50px;
+    text-align: center;
 }
 
 .main-body p {
@@ -115,6 +117,9 @@ label {
     background-color: #e5e5e5;
     color: #ffffff;
     font-size: 20px;
+}
+
+.results {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -133,4 +138,15 @@ label {
     box-sizing: border-box; 
     font-size: 20px; 
     margin: auto;
+}
+
+#buildDetails,
+#storageDetails {
+    text-align: center;
+}
+
+/* Add this style to center the nested tables */
+.nested-table {
+    display: inline-block;
+    text-align: center; /* Adjust if needed */
 }
