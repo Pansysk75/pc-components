@@ -16,8 +16,9 @@ router.use("/src",express.static(__dirname + "/src"));
 
 
 router.get('/', (req, res) => {
-    absolutePath = __dirname + '/views/index.html';
-    res.sendFile(absolutePath);
+    // absolutePath = __dirname + '/views/index.html';
+    // res.sendFile(absolutePath);
+    res.render('index');
 });
 
 
@@ -71,23 +72,27 @@ router.get('/builds', async (req, res) => {
 
 
 router.get('/components', (req, res) => {
-    absolutePath = __dirname + '/views/components.html';
-    res.sendFile(absolutePath);
+    // absolutePath = __dirname + '/views/components.html';
+    // res.sendFile(absolutePath);
+    res.render('components');
 });
 
 router.get('/login', (req, res) => {
-    absolutePath = __dirname + '/views/login.html';
-    res.sendFile(absolutePath);
+    // absolutePath = __dirname + '/views/login.html';
+    // res.sendFile(absolutePath);
+    res.render('login');
 });
 
 router.get('/register', (req, res) => {
-    absolutePath = __dirname + '/views/register.html';
-    res.sendFile(absolutePath);
+    // absolutePath = __dirname + '/views/register.html';
+    // res.sendFile(absolutePath);
+    res.render('register');
 });
 
 router.get('/builder', (req, res) => {
-    absolutePath = __dirname + '/views/builder.html';
-    res.sendFile(absolutePath);
+    // absolutePath = __dirname + '/views/builder.html';
+    // res.sendFile(absolutePath);
+    res.render('builder');
 });
 
 

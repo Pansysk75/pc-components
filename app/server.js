@@ -1,4 +1,5 @@
 const express = require('express');
+const ejs = require('ejs');
 const app = express();
 app.set('view engine', 'ejs');
 const port = process.env.PORT || 8000;
@@ -18,6 +19,9 @@ app.use((req, res, next) => {
 
 // Routes setup
 const appRoutes = require('./app');
+
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
 
 // Use the routes defined in app.js
 app.use('/', appRoutes);
