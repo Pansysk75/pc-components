@@ -20,27 +20,27 @@ router.get('/', (req, res) => {
 });
 
 
-router.get('/builds.html', (req, res) => {
+router.get('/builds', (req, res) => {
     absolutePath = __dirname + '/views/builds.html';
     res.sendFile(absolutePath);
 });
 
-router.get('/components.html', (req, res) => {
+router.get('/components', (req, res) => {
     absolutePath = __dirname + '/views/components.html';
     res.sendFile(absolutePath);
 });
 
-router.get('/login.html', (req, res) => {
+router.get('/login', (req, res) => {
     absolutePath = __dirname + '/views/login.html';
     res.sendFile(absolutePath);
 });
 
-router.get('/register.html', (req, res) => {
+router.get('/register', (req, res) => {
     absolutePath = __dirname + '/views/register.html';
     res.sendFile(absolutePath);
 });
 
-router.get('/builder.html', (req, res) => {
+router.get('/builder', (req, res) => {
     absolutePath = __dirname + '/views/builder.html';
     res.sendFile(absolutePath);
 });
