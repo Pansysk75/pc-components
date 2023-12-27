@@ -107,7 +107,7 @@ label {
 .main-body p {
     margin-top: 10px;
     margin-bottom: 5px;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .bottom-button {
@@ -133,20 +133,24 @@ label {
     background-color: #e5e5e5;
     color: #ffffff; /* Set the text color to match the background color */
     border: none;
-    text-align: center; /* Adjust text alignment as needed */
+    text-align: center; 
     cursor: pointer;
     box-sizing: border-box; 
     font-size: 20px; 
     margin: auto;
-}
+}  
 
-#buildDetails,
-#storageDetails {
+.results {
+    width: 50%;
+    float: left; 
+    box-sizing: border-box; 
+    padding: 10px; 
     text-align: center;
 }
 
-/* Add this style to center the nested tables */
-.nested-table {
-    display: inline-block;
-    text-align: center; /* Adjust if needed */
+.results table {
+    width: 100%;
+    border-collapse: collapse; 
+
 }
+

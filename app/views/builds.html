@@ -35,25 +35,21 @@
       <form id="buildViewerForm"> 
         <label for="buildId">Enter Build ID:</label> 
           <input type="number" id="buildId" name="buildId"> 
-          <!-- <button id="getBuild" type="button" onclick="fetchBuild()">Get Build</button>  -->
-          <button id="getBuild" type="button" >Submit</button>
-      <!-- <form action="javascript:void(0);" method="post">
-          <label for="inputField">Enter something:</label>
-          <input type="text" id="inputField" name="inputField" required>
-          <button type="submit">Submit</button> -->
+          <button id="getBuild" type="button" >Get Build</button>
       </form> 
-      <!-- <label for="buildId">Enter Build ID:</label>
-      <input type="number" id="buildId" name="buildId">
-      <button id="getBuild" type="button">Get Build</button> -->
     </div>
-    <div id="results">
-      <div id="buildDetails">
-        <!-- Build details will be displayed here -->
-      </div>
+    <div id="buildDetails" class='results'>
+      <!-- Build details will be displayed here -->
+    </div>
 
+    <div id="storageDetails" class='results'>
+      <!-- Storage details will be displayed here -->
     </div>
-  
-    <!-- <div id="storageDetails"></div> -->
+
+ 
+
+    
+    
 
     <script src="../src/builds.js" type="module"></script>
     
