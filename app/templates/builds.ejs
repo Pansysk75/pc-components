@@ -1,0 +1,79 @@
+<!-- List of builds. Each build has format {
+  Build_id: 2,
+  CPU_id: 5,
+  CPU_name: 'AMD Ryzen 7 5800X',
+  Case_id: 4,
+  Case_name: 'Kolink Void Gaming Midi Tower',
+  MOBO_id: 0,
+  MOBO_name: 'MSI MPG B550 Gaming Plus',
+  PSU_id: 6,
+  PSU_name: 'Corsair AX Series AX1600i',
+  RAM_id: 4,
+  RAM_name: 'G.Skill Ripjaws V',
+  Username: 'GamerGeek88',
+  name: 'TurboGamingBeast',
+  storage: [ { Storage_id: 3, Storage_name: 'Seagate Barracuda' } ]
+}-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Builds</title>
+    <link rel="stylesheet" href="../public/styles.css" />
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+</head>
+<body>
+    <header>
+      <h1 class="header">PC Components Picker</h1>
+    </header>
+    <div class="tabs">
+      <button class="button" type="button">
+        <a id="login-button" class="buttton" target="_top" href="login" text-decoration: none;>Log In</a>
+      </button>
+      <button class="button" type="button">
+        <a id="register-button" class="buttton" target="_top" href="register" text-decoration: none;>Sign Up</a>
+      </button>
+    </div>
+    <div class="menu">
+      <button class="button" type="button">
+        <a id="builder-button" class="buttton" target="_top" href="builder" text-decoration: none;>Builder</a>
+      </button>
+      <button class="button" type="button">
+        <a id="component-button" class="buttton" target="_top" href="components" text-decoration: none;>Components</a>
+      </button>
+      <button class="button" type="button">
+        <a id="build-button" class="buttton" target="_top" href="builds" text-decoration: none;>Builds</a>
+      </button>
+    </div>
+    <div class="main-body">
+      <h3>Your Builds</h3>
+      <div id="builds" class='results'>
+        <% for (let i = 0; i < builds.length; i++) { %>
+          <div class="build">
+            <h4><%= builds[i].name %></h4>
+            <p><strong>Build ID:</strong> <%= builds[i].Build_id %></p>
+            <p><strong>User:</strong> <%= builds[i].Username %></p>
+            <p><strong>CPU:</strong> <%= builds[i].CPU_name %></p>
+            <p><strong>Motherboard:</strong> <%= builds[i].MOBO_name %></p>
+            <p><strong>Case:</strong> <%= builds[i].Case_name %></p>
+            <p><strong>Power Supply:</strong> <%= builds[i].PSU_name %></p>
+            <p><strong>RAM:</strong> <%= builds[i].RAM_name %></p>
+            <p><strong>GPU:</strong> <%= builds[i].GPU_name %></p>
+            <!-- Storage is an array -->
+            <p><strong>Storage:</strong></p>
+            <ul>
+              <% for (let j = 0; j < builds[i].storage.length; j++) { %>
+                <li><%= builds[i].storage[j].Storage_name %></li>
+              <% } %>
+            </ul>
+            <button class="button" type="button">
+              <a id="view-build-button" class="buttton" target="_top" href="build/<%= builds[i].Build_id %>" text-decoration: none;>View Build</a>
+            </button>
+            </div>
+        <% } %>
+        </div>
+    </div>
+</body>
+</html>

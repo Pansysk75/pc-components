@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+app.set('view engine', 'ejs');
 const port = process.env.PORT || 8000;
 
 // CORS middleware (similar to your provided script)
