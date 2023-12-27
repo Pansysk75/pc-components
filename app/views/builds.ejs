@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Build Viewer</title>
+    <link rel="stylesheet" href="../public/styles.css" />
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+</head>
+<body>
+    <header>
+      <h1  class = "header">PC Components Picker</h1>
+    </header>
+    <div class="tabs">
+      <button class="button" type="button">
+        <a id="login-button" class="buttton" target="_top" href="login" text-decoration: none;>Log In</a>
+      </button>
+      <button class="button" type="button">
+        <a id="register-button" class="buttton" target="_top" href="register" text-decoration: none;>Sign Up</a>
+      </button>
+    </div>
+    <div class="menu">
+      <button class="button" type="button">
+        <a id="builder-button" class="buttton" target="_top" href="builder" text-decoration: none;>Builder</a>
+      </button>
+      <button class="button" type="button">
+        <a id="component-button" class="buttton" target="_top" href="components" text-decoration: none;>Components</a>
+      </button>
+      <button class="button" type="button">
+        <a id="build-button" class="buttton" target="_top" href="builds" text-decoration: none;>Builds</a>
+      </button>
+    </div>
+    <div class="main-body">
+      <h3>PC Build Viewer</h3>
+      <form id="buildViewerForm"> 
+        <label for="buildId">Enter Build ID:</label> 
+          <input type="number" id="buildId" name="buildId"> 
+          <button id="getBuild" type="button" >Get Build</button>
+      </form> 
+    </div>
+    <div id="buildDetails" class='results'>
+      <!-- Build details will be displayed here -->
+    </div>
+
+    <div id="storageDetails" class='results'>
+      <!-- Storage details will be displayed here -->
+    </div>
+
+ 
+
+    
+    
+
+    <script src="../src/builds.js" type="module"></script>
+    
+    
+</body>
+</html>
