@@ -7,7 +7,7 @@ class User:
         # << Question: Would it be more efficient to do this in one query? >>
         # Get user info first
         sql = '''
-        SELECT * FROM user WHERE username = %s;
+        SELECT * FROM user WHERE Username = %s;
         '''
         cursor.execute(sql, (username))
         user = cursor.fetchone()
@@ -23,3 +23,21 @@ class User:
         result = user
         result["build_ids"] = [build_id["Build_id"] for build_id in build_ids]
         return result
+    
+    @staticmethod
+    def post(db, new_user):
+        cursor = db.cursor()
+        # Check if username is already taken
+        sql = '''
+        SELECT * FROM user WHERE Username = %s;
+        '''
+        cursor.execute(sql, (new_user["Username"]))
+        if cursor.fetchone():
+            return None
+        # Insert new user into database
+        sql = '''
+        INSERT INTO user (Username, email) VALUES (%s, %s);
+        '''
+        cursor.execute(sql, (new_user["Username"], new_user["email"]))
+        db.commit()
+        return new_user

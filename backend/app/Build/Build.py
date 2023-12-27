@@ -46,7 +46,7 @@ class Build:
         INSERT INTO build (name, Username, CPU_id, GPU_id, MOBO_id, RAM_id, PSU_id, Case_id, date_created)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);
         '''
-        cursor.execute(sql, (new_build["name"], new_build["username"], new_build["CPU_id"],
+        cursor.execute(sql, (new_build["name"], new_build["Username"], new_build["CPU_id"],
                              new_build.get("GPU_id", None),  # Can be null
                        new_build["MOBO_id"], new_build["RAM_id"], new_build["PSU_id"], new_build["Case_id"], date))
         build_id = cursor.lastrowid
@@ -69,17 +69,17 @@ class Builds:
         sql = '''
         SELECT build.Build_id as build_id,
                 build.name as name,
-                build.Username as username,
-                CPU.name as cpu,
-                MOBO.name as mobo,
-                RAM.name as ram,
-                PSU.name as psu,
-                Storage.name as storage
+                build.Username as Username,
+                cpu.name as cpu,
+                mobo.name as mobo,
+                ram.name as ram,
+                psu.name as psu,
+                storage.name as storage
         FROM build 
             JOIN cpu ON build.CPU_id = cpu.CPU_id
-            JOIN MOBO ON build.MOBO_id = MOBO.MOBO_id
-            JOIN RAM ON build.RAM_id = RAM.RAM_id
-            JOIN PSU ON build.PSU_id = PSU.PSU_id
+            JOIN mobo ON build.MOBO_id = mobo.MOBO_id
+            JOIN ram ON build.RAM_id = ram.RAM_id
+            JOIN psu ON build.PSU_id = psu.PSU_id
             JOIN build_has_storage ON build_has_storage.Build_id = build.Build_id
             JOIN storage ON build.Build_id = build_has_storage.Build_id;
         '''
