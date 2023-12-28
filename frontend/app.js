@@ -9,12 +9,6 @@ router.use("/public",express.static(__dirname + "/public"));
 router.use("/src",express.static(__dirname + "/src"));
 
 
-// router.use("/", (req, res, next) => {
-//     console.log(req.method + " " + req.path + " - " + req.ip);
-//     next();
-// });
-
-
 router.get('/', (req, res) => {
     res.render('index');
 });
