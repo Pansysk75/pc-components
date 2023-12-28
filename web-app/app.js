@@ -36,6 +36,51 @@ router.get('/build/:id', async (req, res) => {
     res.render("build", { build: buildData });
 });
 
+// Create html for components, based on component type
+router.get('/components/:type', async (req, res) => {
+
+    // Get id from url
+    let type = req.params.type;
+
+    // Fetch components from backend
+    const backendUrl = "http://64.226.122.251:81/components/" + type;
+    let componentsList = await fetch(backendUrl)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            return data;
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
+    // Render template with data
+    res.render("components-list", { components: componentsList });
+});
+
+// router.get('/components/cpus', async (req, res) => {
+
+    // Get id from url
+    // let type = req.params.type;
+
+    // Fetch components from backend
+    // const backendUrl = "http://64.226.122.251:81/components/cpus" 
+    // // + type;
+    // let components = await fetch(backendUrl)
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         console.log(data);
+    //         return data;
+    //     })
+    //     .catch(error => {
+    //         console.log(error);
+    //     });
+
+    // Render template with data
+    // res.render("components-list", { componentType: components });
+    // res.render("components-list");
+// });
+
 
 router.get('/builds', async (req, res) => {
 

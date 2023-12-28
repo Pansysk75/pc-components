@@ -174,3 +174,83 @@ p, h1 {
     height: 100%;
     border-radius: 5px;
 }
+
+.componentButtonsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 90%; /* Adjust as needed */
+    margin: 0 auto; /* Center the container */
+}
+
+.componentButton {
+    font-weight: bold;
+    border: #182532 2px solid;
+    height: 100%;
+    height: 60px;
+    border-radius: 5px;
+    width: 30%; /* Adjust as needed */
+    margin-bottom: 30px; /* Adjust spacing between buttons */
+    margin-top: 30px;
+}
+
+.centerComponentButton {
+    font-weight: bold;
+    border: #182532 2px solid;
+    height: 100%;
+    height: 60px;
+    border-radius: 5px;
+    width: 30%; /* Adjust as needed */
+    margin: 30px auto;
+}
+
+
+.components {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 95%;
+}
+
+.components-element {
+    background-color: rgba(0, 0, 0, 0.04);
+    margin: 10px 0;
+    width: 100%;
+}
+
+.components-element-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0 10px;
+}
+
+.components-element-title h3 {
+    margin: 10px 0;
+}
+
+.components-element-details {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    margin: 0 0;
+    padding: 10px;
+    font-size: 15px;  
+}
+
+.components-element-details div {
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #182532;
+    width: 100%;
+}
+
+.components-element-details ul {
+    margin: 0;
+    padding: 0;
+}
+
