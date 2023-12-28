@@ -85,8 +85,8 @@ p, h1 {
     text-decoration: none; 
     background-color: transparent;
     border: none;
-    text-align: center; /* Adjust text alignment as needed */
-    box-sizing: border-box;  
+    text-align: center;
+    box-sizing: border-box;
 }
 
 .button a {
@@ -210,7 +210,7 @@ p, h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 95%;
+    width: 100%;
 }
 
 .components-element {
@@ -249,8 +249,48 @@ p, h1 {
     width: 100%;
 }
 
-.components-element-details ul {
-    margin: 0;
-    padding: 0;
+.dropbtn {
+    text-decoration: none; 
+    background-color: transparent;
+    border: none;
+    text-align: center; /* Adjust text alignment as needed */
+    box-sizing: border-box;  
+    color: #000000;
+    font-weight: bold;
+    font-family: Arial;
+    padding: 0 20px; 
+    cursor: pointer;
+}
+
+.menuButton {
+    position: relative;
+    display: inline-block;
+    text-align: center; 
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #e5e5e5;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+  
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+  
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+  
+.show {
+    display: block;
 }
 
