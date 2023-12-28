@@ -1,9 +1,9 @@
 from datetime import datetime
 
 
+
 class Build:
     # Get specific build
-    # Returns dict{build_id, name, username, cpu, mobo, ram, psu, storage}
     @staticmethod
     def get(db, build_id):
         print(f"Getting build {build_id}")
@@ -41,6 +41,15 @@ class Build:
         cursor.execute(sql_storage, (build_id))
         storage = cursor.fetchall()
         build["storage"] = storage
+        sql_ratings = '''
+        SELECT Username, Build_id, rating, date, comment
+        FROM user_rates_build
+        WHERE Build_id = %s
+        ORDER BY date DESC;
+        '''
+        cursor.execute(sql_ratings, (build_id))
+        ratings = cursor.fetchall()
+        build["ratings"] = ratings
         print(build)
         return build
 
@@ -65,16 +74,54 @@ class Build:
         return build_id
 
 
+class BuildRating:
+    @staticmethod
+    def get(db, build_id):
+        cursor = db.cursor()
+        sql = '''
+        SELECT Username, Build_id, rating, date, comment
+        FROM user_rates_build
+        WHERE Build_id = %s
+        ORDER BY date DESC;
+        '''
+        cursor.execute(sql, (build_id))
+        ratings = cursor.fetchall()
+        return ratings
+
+    @staticmethod
+    def post(db, new_rating):
+        cursor = db.cursor()
+        date = datetime.today().strftime('%Y-%m-%d')
+        sql = '''
+        INSERT INTO user_rates_build (Username, Build_id, rating, date, comment)
+        VALUES (%s, %s, %s, %s, %s);
+        '''
+        cursor.execute(sql, (new_rating["Username"], new_rating["Build_id"],
+                       new_rating["rating"], date, new_rating["comment"]))
+        db.commit()
+        return cursor.lastrowid
+
+    @staticmethod
+    def delete(db, rating_id):
+        cursor = db.cursor()
+        sql = '''
+        DELETE FROM user_rates_build
+        WHERE Rating_id = %s;
+        '''
+        cursor.execute(sql, (rating_id))
+        db.commit()
+        return cursor.lastrowid
+
+
 class Builds:
     # Get all builds
-    # Returns list of dicts{build_id, name, username, cpu, mobo, ram, psu, storage}
     @staticmethod
     def get(db):
         cursor = db.cursor()
         sql = '''
         SELECT build.Build_id, build.name, build.Username,
-               build.CPU_id,  cpu.name AS CPU_name,     
-               build.MOBO_id, mobo.name AS MOBO_name,   
+               build.CPU_id,  cpu.name AS CPU_name,   
+               build.MOBO_id, mobo.name AS MOBO_name,
                build.RAM_id,  ram.name AS RAM_name,     
                build.PSU_id,  psu.name AS PSU_name,     
                build.Case_id, `case`.name AS Case_name,
@@ -91,15 +138,25 @@ class Builds:
         '''
         cursor.execute(sql)
         builds = cursor.fetchall()
-        # Get storage for each build
+        # Get storage for all builds in a single query
+        sql_storage = '''
+        SELECT build_has_storage.Build_id, storage.Storage_id, storage.name AS Storage_name
+        FROM build_has_storage
+            JOIN storage ON build_has_storage.Storage_id = storage.Storage_id
+        ORDER BY build_has_storage.Build_id;
+        '''
+        cursor.execute(sql_storage)
+        storage = cursor.fetchall()
+        # Group storage by build_id
+        storage_by_build_id = {}
+        for row in storage:
+            build_id = row["Build_id"]
+            if build_id not in storage_by_build_id:
+                storage_by_build_id[build_id] = []
+            storage_by_build_id[build_id].append(row)
+        # Add storage to each build
         for build in builds:
-            sql_storage = '''
-            SELECT storage.Storage_id, storage.name AS Storage_name
-            FROM build_has_storage
-                JOIN storage ON build_has_storage.Storage_id = storage.Storage_id
-            WHERE build_has_storage.Build_id = %s;
-            '''
-            cursor.execute(sql_storage, (build["Build_id"]))
-            storage = cursor.fetchall()
-            build["storage"] = storage
+            build_id = build["Build_id"]
+            build["storage"] = storage_by_build_id.get(build_id, [])
+
         return builds
