@@ -6,6 +6,7 @@ class Build:
     # Returns dict{build_id, name, username, cpu, mobo, ram, psu, storage}
     @staticmethod
     def get(db, build_id):
+        print(f"Getting build {build_id}")
         cursor = db.cursor()
         # Note: The word "case" is a reserved keyword in MySQL, so we have escape it with backticks
         sql = '''
@@ -14,17 +15,21 @@ class Build:
                build.MOBO_id, mobo.name AS MOBO_name,   
                build.RAM_id,  ram.name AS RAM_name,     
                build.PSU_id,  psu.name AS PSU_name,     
-               build.Case_id, `case`.name AS Case_name
+               build.Case_id, `case`.name AS Case_name,
+               build.GPU_id, gpu.name AS GPU_name,
+               build.date_created
         FROM build
             JOIN cpu ON build.CPU_id = cpu.CPU_id
             JOIN mobo ON build.MOBO_id = mobo.MOBO_id
             JOIN ram ON build.RAM_id = ram.RAM_id
             JOIN psu ON build.PSU_id = psu.PSU_id
             JOIN `case` ON build.Case_id = `case`.Case_id
-        WHERE build.build_id = %s;
+            LEFT JOIN gpu ON build.GPU_id = gpu.GPU_id
+        WHERE build.Build_id = %s;
         '''
         cursor.execute(sql, (build_id))
         build = cursor.fetchone()
+        print(build)
         if not build:
             return None
         sql_storage = '''
@@ -67,22 +72,34 @@ class Builds:
     def get(db):
         cursor = db.cursor()
         sql = '''
-        SELECT build.Build_id as build_id,
-                build.name as name,
-                build.Username as Username,
-                cpu.name as cpu,
-                mobo.name as mobo,
-                ram.name as ram,
-                psu.name as psu,
-                storage.name as storage
-        FROM build 
+        SELECT build.Build_id, build.name, build.Username,
+               build.CPU_id,  cpu.name AS CPU_name,     
+               build.MOBO_id, mobo.name AS MOBO_name,   
+               build.RAM_id,  ram.name AS RAM_name,     
+               build.PSU_id,  psu.name AS PSU_name,     
+               build.Case_id, `case`.name AS Case_name,
+               build.GPU_id, gpu.name AS GPU_name,
+               build.date_created
+        FROM build
             JOIN cpu ON build.CPU_id = cpu.CPU_id
             JOIN mobo ON build.MOBO_id = mobo.MOBO_id
             JOIN ram ON build.RAM_id = ram.RAM_id
             JOIN psu ON build.PSU_id = psu.PSU_id
-            JOIN build_has_storage ON build_has_storage.Build_id = build.Build_id
-            JOIN storage ON build.Build_id = build_has_storage.Build_id;
+            JOIN `case` ON build.Case_id = `case`.Case_id
+            LEFT JOIN gpu ON build.GPU_id = gpu.GPU_id
+        ORDER BY build.Build_id;
         '''
         cursor.execute(sql)
         builds = cursor.fetchall()
+        # Get storage for each build
+        for build in builds:
+            sql_storage = '''
+            SELECT storage.Storage_id, storage.name AS Storage_name
+            FROM build_has_storage
+                JOIN storage ON build_has_storage.Storage_id = storage.Storage_id
+            WHERE build_has_storage.Build_id = %s;
+            '''
+            cursor.execute(sql_storage, (build["Build_id"]))
+            storage = cursor.fetchall()
+            build["storage"] = storage
         return builds

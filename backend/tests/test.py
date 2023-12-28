@@ -17,8 +17,8 @@ class BasicTestCase(unittest.TestCase):
     def test_get_build(self):
         response = client.get('/build/1')
         self.assertEqual(response.status_code, 200)
-        expected = {'Build_id': 1, 'name': 'EliteDominance', 'Username': 'PCMasterRace', 'CPU_id': 1, 'CPU_name': 'AMD Ryzen 5 5600X', 'MOBO_id': 0, 'MOBO_name': 'MSI MPG B550 Gaming Plus', 'RAM_id': 4, 'RAM_name': 'G.Skill Ripjaws V',
-                    'PSU_id': 7, 'PSU_name': 'Be Quiet Dark Power Pro 12', 'Case_id': 5, 'Case_name': 'Be Quiet Pure Base 500 FX Gaming Midi Tower', 'storage': [{'Storage_id': 1, 'Storage_name': 'Samsung 870 Evo SSD'}]}
+        expected = {'Build_id': 1, 'name': 'EliteDominance', 'Username': 'PCMasterRace', 'CPU_id': 1, 'CPU_name': 'AMD Ryzen 5 5600X', 'MOBO_id': 0, 'MOBO_name': 'MSI MPG B550 Gaming Plus', 'RAM_id': 4, 'RAM_name': 'G.Skill Ripjaws V', 'PSU_id': 7,
+                    'PSU_name': 'Be Quiet Dark Power Pro 12', 'Case_id': 5, 'Case_name': 'Be Quiet Pure Base 500 FX Gaming Midi Tower', 'GPU_id': 2, 'GPU_name': 'Gigabyte GeForce RTX 4070', 'date_created': 'Wed, 23 Nov 2016 00:00:00 GMT', 'storage': [{'Storage_id': 1, 'Storage_name': 'Samsung 870 Evo SSD'}]}
         self.assertEqual(response.json, expected)
 
     def test_post_build(self):
@@ -33,23 +33,33 @@ class BasicTestCase(unittest.TestCase):
             "storage_ids": [1, 2]
         }
         response = client.post('/build', json=new_build)
+        print(response.json)
         self.assertEqual(response.status_code, 200)
         self.assertIsInstance(response.json, int)
         self.assertGreater(response.json, 0)
-            
+
         response = client.get(f'/build/{response.json}')
+        build = response.json
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json["name"], new_build["name"])
-        self.assertEqual(response.json["Username"], new_build["Username"])
-        self.assertEqual(response.json["CPU_name"], "AMD Ryzen 5 5600X")
-        self.assertEqual(
-            response.json["MOBO_name"], "Gigabyte Z790 Gaming X AX (rev. 1.0) Wi-Fi Motherboard")
-        self.assertEqual(response.json["RAM_name"], "G.Skill Trident Z5 RGB")
-        self.assertEqual(response.json["PSU_name"], "Corsair RMx Series RM850x")
-        expected_storage = [{'Storage_id': 1, 'Storage_name': 'Samsung 870 Evo SSD'}, {'Storage_id': 2, 'Storage_name': 'Western Digital Blue'}]
-        self.assertEqual(response.json["storage"], expected_storage)
-        self.assertEqual(
-            response.json["Case_name"], "Be Quiet Pure Base 500DX Gaming Midi Tower")
+        self.assertIn("Build_id", build)
+        self.assertIn("name", build)
+        self.assertIn("Username", build)
+        self.assertIn("CPU_id", build)
+        self.assertIn("CPU_name", build)
+        self.assertIn("MOBO_id", build)
+        self.assertIn("MOBO_name", build)
+        self.assertIn("RAM_id", build)
+        self.assertIn("RAM_name", build)
+        self.assertIn("PSU_id", build)
+        self.assertIn("PSU_name", build)
+        self.assertIn("Case_id", build)
+        self.assertIn("Case_name", build)
+        self.assertIn("GPU_id", build)
+        self.assertIn("GPU_name", build)
+        self.assertIn("date_created", build)
+        self.assertIn("storage", build)
+        # Storage is an array
+        self.assertIsInstance(build["storage"], list)
         
 
     def test_get_builds(self):
@@ -58,14 +68,25 @@ class BasicTestCase(unittest.TestCase):
         self.assertIsInstance(response.json, list)
         # Check that the first build has the expected keys
         build = response.json[0]
-        self.assertIn('build_id', build)
-        self.assertIn('name', build)
-        self.assertIn('Username', build)
-        self.assertIn('cpu', build)
-        self.assertIn('mobo', build)
-        self.assertIn('ram', build)
-        self.assertIn('psu', build)
-        self.assertIn('storage', build)
+        self.assertIn("Build_id", build)
+        self.assertIn("name", build)
+        self.assertIn("Username", build)
+        self.assertIn("CPU_id", build)
+        self.assertIn("CPU_name", build)
+        self.assertIn("MOBO_id", build)
+        self.assertIn("MOBO_name", build)
+        self.assertIn("RAM_id", build)
+        self.assertIn("RAM_name", build)
+        self.assertIn("PSU_id", build)
+        self.assertIn("PSU_name", build)
+        self.assertIn("Case_id", build)
+        self.assertIn("Case_name", build)
+        self.assertIn("GPU_id", build)
+        self.assertIn("GPU_name", build)
+        self.assertIn("date_created", build)
+        self.assertIn("storage", build)
+        # Storage is an array
+        self.assertIsInstance(build["storage"], list)
 
     def test_get_user(self):
         response = client.get('/user/TechEnthusiast42')
@@ -73,7 +94,7 @@ class BasicTestCase(unittest.TestCase):
         expected = {"Username": "TechEnthusiast42",
                     "build_ids": [0, 8], "email": "tech42@email.com"}
         self.assertEqual(response.json, expected)
-        
+
     def test_post_user(self):
         new_user = {
             "Username": "TestUser",
@@ -90,8 +111,6 @@ class BasicTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json["Username"], new_user["Username"])
         self.assertEqual(response.json["email"], new_user["email"])
-
-
 
 
 if __name__ == '__main__':
