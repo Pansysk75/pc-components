@@ -14,49 +14,56 @@
   <%-include('partials/navbar')-%>
   <div class="main-body">
     <h3>All Builds</h3>
-    <div id="builds" class='results'>
+    <div class='builds'>
       <% for (let i=0; i < builds.length; i++) { %>
-        <div class="build">
-          <h4>
-            <%= builds[i].name %>
-          </h4>
-          <p><strong>Build ID:</strong>
-            <%= builds[i].Build_id %>
-          </p>
-          <p><strong>User:</strong>
-            <%= builds[i].Username %>
-          </p>
-          <p><strong>CPU:</strong>
-            <%= builds[i].CPU_name %>
-          </p>
-          <p><strong>Motherboard:</strong>
-            <%= builds[i].MOBO_name %>
-          </p>
-          <p><strong>Case:</strong>
-            <%= builds[i].Case_name %>
-          </p>
-          <p><strong>Power Supply:</strong>
-            <%= builds[i].PSU_name %>
-          </p>
-          <p><strong>RAM:</strong>
-            <%= builds[i].RAM_name %>
-          </p>
-          <p><strong>GPU:</strong>
-            <%= builds[i].GPU_name %>
-          </p>
-          <!-- Storage is an array -->
-          <p><strong>Storage:</strong></p>
-          <ul>
-            <% for (let j=0; j < builds[i].storage.length; j++) { %>
-              <li>
-                <%= builds[i].storage[j].Storage_name %>
-              </li>
-              <% } %>
-          </ul>
-          <button class="button" type="button">
-            <a id="view-build-button" class="buttton" target="_top" href="build/<%= builds[i].Build_id %>"
-              text-decoration: none;>View Build</a>
-          </button>
+        <div class="builds-element">
+          <div class="builds-element-title-bar">
+            <div class="builds-element-title">
+              <h3>
+                <%= builds[i].name %>
+              </h3> <a> by user <%= builds[i].Username %> </a>
+            </div>
+            <button class="builds-element-view-button" type="button">
+              <a target="_top" href="build/<%= builds[i].Build_id %>" text-decoration: none;>View Build</a>
+            </button>
+          </div>
+          <div class="builds-element-details">
+        
+            <!-- <p><strong>Build ID:</strong>
+              <%= builds[i].Build_id %>
+            </p> -->
+
+            <div><strong>CPU:</strong>
+              <%= builds[i].CPU_name %>
+            </div>
+            <div><strong>Motherboard:</strong>
+              <%= builds[i].MOBO_name %>
+            </div>
+            <div><strong>Case:</strong>
+              <%= builds[i].Case_name %>
+            </div>
+            <div><strong>Power Supply:</strong>
+              <%= builds[i].PSU_name %>
+            </div>
+            <div><strong>RAM:</strong>
+              <%= builds[i].RAM_name %>
+            </div>
+            <div><strong>GPU:</strong>
+              <%= builds[i].GPU_name %>
+            </div>
+            <!-- Storage is an array -->
+            <div>
+              <strong>Storage:</strong>
+              <ul>
+                <% for (let j=0; j < builds[i].storage.length; j++) { %>
+                  <li>
+                    <%= builds[i].storage[j].Storage_name %>
+                  </li>
+                  <% } %>
+              </ul>
+            </div>
+          </div>
+        
         </div>
         <% } %>
     </div>
