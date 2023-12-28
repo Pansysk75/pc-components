@@ -21,8 +21,8 @@ jobs:
             set -x
 
             # kill the previous server
-            kill -9 $(cat ~/pc-components/backend/server_pid.txt)
-            kill -9 $(cat ~/pc-components/frontend/server_pid.txt)
+            kill -9 $(cat ~/pc-components/api-server/server_pid.txt)
+            kill -9 $(cat ~/pc-components/web-app/server_pid.txt)
 
             set -e
 
@@ -30,7 +30,7 @@ jobs:
             rm -rf ./pc-components
             git clone https://github.com/Pansysk75/pc-components.git
 
-            cd ~/pc-components/backend
+            cd ~/pc-components/api-server
             python3 -m venv venv
             source venv/bin/activate
             pip install -r requirements.txt
@@ -38,7 +38,7 @@ jobs:
             python3 run.py &> server_log.txt &
             echo $! > server_pid.txt
 
-            cd ~/pc-components/frontend
+            cd ~/pc-components/web-app
             npm install
             node server.js &> server_log.txt &
             echo $! > server_pid.txt
