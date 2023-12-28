@@ -16,8 +16,6 @@ router.use("/src",express.static(__dirname + "/src"));
 
 
 router.get('/', (req, res) => {
-    // absolutePath = __dirname + '/views/index.html';
-    // res.sendFile(absolutePath);
     res.render('index');
 });
 
@@ -40,11 +38,8 @@ router.get('/build/:id', async (req, res) => {
             console.log(error);
         });
 
-    // EJS templates are in /templates
-    let templatePath = __dirname + '/templates/build.ejs';
-
     // Render template with data
-    res.render(templatePath, { build: buildData });
+    res.render("build", { build: buildData });
 });
 
 
@@ -62,36 +57,25 @@ router.get('/builds', async (req, res) => {
             console.log(error);
         });
 
-    // EJS templates are in /templates
-    let templatePath = __dirname + '/templates/builds.ejs';
-
     // Render template with data
-    res.render(templatePath, { builds: buildsData });
+    res.render("builds", { builds: buildsData });
         
 });
 
 
 router.get('/components', (req, res) => {
-    // absolutePath = __dirname + '/views/components.html';
-    // res.sendFile(absolutePath);
     res.render('components');
 });
 
 router.get('/login', (req, res) => {
-    // absolutePath = __dirname + '/views/login.html';
-    // res.sendFile(absolutePath);
     res.render('login');
 });
 
 router.get('/register', (req, res) => {
-    // absolutePath = __dirname + '/views/register.html';
-    // res.sendFile(absolutePath);
     res.render('register');
 });
 
 router.get('/builder', (req, res) => {
-    // absolutePath = __dirname + '/views/builder.html';
-    // res.sendFile(absolutePath);
     res.render('builder');
 });
 
