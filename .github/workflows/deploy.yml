@@ -39,5 +39,6 @@ jobs:
             echo $! > server_pid.txt
 
             cd ~/pc-components/frontend
-            python -m http.server 80 &> server_log.txt &
+            npm install
+            node server.js &> server_log.txt &
             echo $! > server_pid.txt
