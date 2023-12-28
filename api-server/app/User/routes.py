@@ -18,12 +18,16 @@ def post_user():
     new_user = User.post(db_connection, request.json)
     return new_user if new_user else (jsonify({"error": "Username already taken"}), 409)
 
-# Delete user
-@user_bp.route('/user/<string:username>', methods=['DELETE'])
-def delete_user(username):
-    db_connection = database.ensure_app_connection(current_app)
-    deleted_user = User.delete(db_connection, username)
-    return deleted_user if deleted_user else (jsonify({"error": "User not found"}), 404)
+# The following DELETE endpoint is ommitted on purpose, we would really prefer a "soft delete"
+# for users, so that we can still keep the build and rating data, but we cannot do that
+# with the current database design.
+
+# # Delete user
+# @user_bp.route('/user/<string:username>', methods=['DELETE'])
+# def delete_user(username):
+#     db_connection = database.ensure_app_connection(current_app)
+#     deleted_user = User.delete(db_connection, username)
+#     return deleted_user if deleted_user else (jsonify({"error": "User not found"}), 404)
 
 # Get all favorites of a user
 @user_bp.route('/user/<string:username>/favorites')

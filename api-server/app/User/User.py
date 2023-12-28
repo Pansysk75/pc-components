@@ -20,10 +20,11 @@ class User:
         cursor.execute(sql, (username))
         build_ids = cursor.fetchall()
         result = user
-        result["build_ids"] = [build_id["Build_id"] for build_id in build_ids]
+        result["builds_created"] = [build_id["Build_id"]
+                                    for build_id in build_ids]
         # Get all favorites of user
-        favorites = UserFavorite.get(db, username)
-        result["favorites"] = favorites    
+        favorite_builds = UserFavorite.get(db, username)
+        result["favorite_builds"] = favorite_builds
         return result
 
     @staticmethod
@@ -43,16 +44,39 @@ class User:
         cursor.execute(sql, (new_user["Username"], new_user["email"]))
         db.commit()
         return new_user
-    
+
     @staticmethod
     def delete(db, username):
-        cursor = db.cursor()
-        sql = '''
-        DELETE FROM user WHERE Username = %s;
-        '''
-        cursor.execute(sql, (username))
-        db.commit()
-        return username
+        # Note: This method is not used, because with the current database design,
+        # deleting a user would require deleting all builds created by that user,
+        # and all ratings and favorites associated with those builds.
+        # Ideally we would have a "soft delete" where the user is not actually deleted,
+        # so that we can still keep the build and rating data.
+        # But it's too late to change the database design now.
+        raise NotImplementedError
+
+        # cursor = db.cursor()
+        # # First, entries in user_has_favorite_build and user_rates_build must be deleted
+        # del_fav_sql = '''
+        # DELETE FROM user_has_favorite_build WHERE Username = %s;
+        # '''
+        # cursor.execute(del_fav_sql, (username))
+        # del_rates_sql = '''
+        # DELETE FROM user_rates_build WHERE Username = %s;
+        # '''
+        # cursor.execute(del_rates_sql, (username))
+        # # Then, all builds created by the user must be deleted
+        # del_builds_sql = '''
+        # DELETE FROM build WHERE Username = %s;
+        # '''
+        # cursor.execute(del_builds_sql, (username))
+        # # Now we can delete the user
+        # sql = '''
+        # DELETE FROM user WHERE Username = %s;
+        # '''
+        # cursor.execute(sql, (username))
+        # db.commit()
+        # return username
 
 
 class UserFavorite:
@@ -62,10 +86,11 @@ class UserFavorite:
     def get(db, username):
         cursor = db.cursor()
         sql = '''
-        SELECT Username, Build_id FROM user_has_favorite_build WHERE Username = %s;
+        SELECT Build_id FROM user_has_favorite_build WHERE Username = %s;
         '''
         cursor.execute(sql, (username))
         favorites = cursor.fetchall()
+        favorites = [favorite["Build_id"] for favorite in favorites]
         return favorites
 
     # Add a favorite to a user

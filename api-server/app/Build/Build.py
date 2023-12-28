@@ -6,7 +6,6 @@ class Build:
     # Get specific build
     @staticmethod
     def get(db, build_id):
-        print(f"Getting build {build_id}")
         cursor = db.cursor()
         # Note: The word "case" is a reserved keyword in MySQL, so we have escape it with backticks
         sql = '''
@@ -29,7 +28,6 @@ class Build:
         '''
         cursor.execute(sql, (build_id))
         build = cursor.fetchone()
-        print(build)
         if not build:
             return None
         sql_storage = '''
@@ -41,16 +39,6 @@ class Build:
         cursor.execute(sql_storage, (build_id))
         storage = cursor.fetchall()
         build["storage"] = storage
-        sql_ratings = '''
-        SELECT Username, Build_id, rating, date, comment
-        FROM user_rates_build
-        WHERE Build_id = %s
-        ORDER BY date DESC;
-        '''
-        cursor.execute(sql_ratings, (build_id))
-        ratings = cursor.fetchall()
-        build["ratings"] = ratings
-        print(build)
         return build
 
     def post(db, new_build):
