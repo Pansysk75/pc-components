@@ -1,0 +1,19 @@
+{
+    "name": "pc-somponents-app",
+    "version": "0.1",
+    "description": "Project for the Databases course - AUTH",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "body-parser": "^1.20.1",
+        "ejs": "^3.1.9",
+        "express": "^4.18.2"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Pansysk75/pc-components.git"
+    },
+    "license": "MIT"
+}

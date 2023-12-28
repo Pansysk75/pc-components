@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Builds</title>
+  <link rel="stylesheet" href="../public/styles.css" />
+  <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+</head>
+
+<body>
+  <%-include('partials/header')-%>
+  <%-include('partials/navbar')-%>
+  <div class="main-body">
+    <h3>All Builds</h3>
+    <div id="builds" class='results'>
+      <% for (let i=0; i < builds.length; i++) { %>
+        <div class="build">
+          <h4>
+            <%= builds[i].name %>
+          </h4>
+          <p><strong>Build ID:</strong>
+            <%= builds[i].Build_id %>
+          </p>
+          <p><strong>User:</strong>
+            <%= builds[i].Username %>
+          </p>
+          <p><strong>CPU:</strong>
+            <%= builds[i].CPU_name %>
+          </p>
+          <p><strong>Motherboard:</strong>
+            <%= builds[i].MOBO_name %>
+          </p>
+          <p><strong>Case:</strong>
+            <%= builds[i].Case_name %>
+          </p>
+          <p><strong>Power Supply:</strong>
+            <%= builds[i].PSU_name %>
+          </p>
+          <p><strong>RAM:</strong>
+            <%= builds[i].RAM_name %>
+          </p>
+          <p><strong>GPU:</strong>
+            <%= builds[i].GPU_name %>
+          </p>
+          <!-- Storage is an array -->
+          <p><strong>Storage:</strong></p>
+          <ul>
+            <% for (let j=0; j < builds[i].storage.length; j++) { %>
+              <li>
+                <%= builds[i].storage[j].Storage_name %>
+              </li>
+              <% } %>
+          </ul>
+          <button class="button" type="button">
+            <a id="view-build-button" class="buttton" target="_top" href="build/<%= builds[i].Build_id %>"
+              text-decoration: none;>View Build</a>
+          </button>
+        </div>
+        <% } %>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Build Viewer</title>
+    <link rel="stylesheet" href="../public/styles.css" />
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+</head>
+<body>
+    <%-include('partials/header')-%>
+    <%-include('partials/navbar')-%>
+
+    <div class="main-body">
+      <h3>PC Build Viewer</h3>
+      
+      <div id="buildDetails" class='results'>
+        <h4>Build Details:</h4>
+        <p><strong>Build ID:</strong> <%= build.Build_id %></p>
+        <p><strong>User:</strong> <%= build.Username %></p>
+        <p><strong>Build Name:</strong> <%= build.name %></p>
+        <p><strong>CPU:</strong> <%= build.CPU_name %></p>
+        <p><strong>Motherboard:</strong> <%= build.MOBO_name %></p>
+        <p><strong>Case:</strong> <%= build.Case_name %></p>
+        <p><strong>Power Supply:</strong> <%= build.PSU_name %></p>
+        <p><strong>RAM:</strong> <%= build.RAM_name %></p>
+        <p><strong>GPU:</strong> <%= build.GPU_name %></p>
+        <!-- Storage is an array -->
+        <p><strong>Storage:</strong></p>
+        <ul>
+          <% for (let i = 0; i < build.storage.length; i++) { %>
+            <li><%= build.storage[i].Storage_name %></li>
+          <% } %>
+      </div>
+    </div>
+
+
+</body>
+</html>
