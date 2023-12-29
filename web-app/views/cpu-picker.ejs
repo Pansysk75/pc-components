@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Build Viewer</title>
+    <link rel="stylesheet" href="../public/styles.css" />
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+</head>
+<body>
+    <%-include('partials/header')-%>
+    <%-include('partials/navbar')-%>
+
+    <div class="main-body">
+      <h3>Choose A CPU</h3>
+        <div class='components'>
+            <% for (let i=0; i < components.length; i++) { %>
+                <div class="components-element">
+                    <div class="components-element-title">
+                        <div class="components-element-title">
+                            <h3><%= components[i].name %></h3> 
+                        </div>
+                    </div>
+                    <div class="components-element-details">
+                        <% for (var key in components[i]) { %>
+                            <div><strong><%= key %>:</strong>
+                                <%= components[i][key] %>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>      
+            <% } %>
+        </div>       
+    </div>
+
+            
+    <script src="../src/builder.js"></script>
+
+</body>
+</html>

@@ -1,6 +1,6 @@
 
 var config = {
-    backendUrl: 'http://159.89.215.209:81'
+    backendUrl: 'http://64.226.122.251:81'
 };
 
 export {config};

@@ -13,10 +13,10 @@ router.use(session({
     secret: 'your_secret_key',
     resave: false,
     saveUninitialized: true,
-  }));
+}));
   
   // This is used only for session management (its a POST so it doesn't need to serve a page)
-  router.post('/login', async (req, res) => {
+router.post('/login', async (req, res) => {
     console.log(req.body);
     let username = req.body.Username;
     const backendUrl = "http://64.226.122.251:81/user/" + username;
@@ -36,19 +36,17 @@ router.use(session({
     } else {
         res.redirect('/login');
     }
+});
 
-  });
-
-  router.get('/logout', (req, res) => {
+router.get('/logout', (req, res) => {
     req.session.destroy();
     res.redirect('/');
-  });
+});
 
 router.get('/', (req, res) => {
     console.log(req.session);
     res.render('index', { session: req.session });
 });
-
 
 // Create html for build, based on id
 router.get('/build/:id', async (req, res) => {
@@ -105,30 +103,6 @@ router.get('/components/:type', async (req, res) => {
     // Render template with data
     res.render("components-list", {session: req.session, components: componentsList });
 });
-
-// router.get('/components/cpus', async (req, res) => {
-
-    // Get id from url
-    // let type = req.params.type;
-
-    // Fetch components from backend
-    // const backendUrl = "http://64.226.122.251:81/components/cpus" 
-    // // + type;
-    // let components = await fetch(backendUrl)
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         console.log(data);
-    //         return data;
-    //     })
-    //     .catch(error => {
-    //         console.log(error);
-    //     });
-
-    // Render template with data
-    // res.render("components-list", { componentType: components });
-    // res.render("components-list");
-// });
-
 
 router.get('/builds', async (req, res) => {
 

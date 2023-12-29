@@ -4,11 +4,69 @@
 <head>
     <meta charset="UTF-8">
     <title>Index</title>
-    <link rel="stylesheet" href="../public/styles.css">
+    <link rel="stylesheet" href="../public/builder.css">
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
 </head>
 
 <body>
     <%-include('partials/header')-%>
     <%-include('partials/navbar')-%>
+
+
+    <div class="main-body">
+        <h3>Choose Your Parts</h3>
+        <div class="componentContainer" id="cpuContainer">
+            <h3>Choose a CPU</h3>
+            <label class="filterLabel">Manufacturer:</label>
+            <div class="filterOptions">
+                <input type="radio" id="cpuManufacturerAll" name="cpuManufacturerFilter" value="all" checked>
+                <label for="cpuManufacturerAll" class="filterLabel2">All</label>
+                <input type="radio" id="cpuManufacturerAMD" name="cpuManufacturerFilter" value="AMD">
+                <label for="cpuManufacturerAMD" class="filterLabel2">AMD</label>
+                <input type="radio" id="cpuManufacturerINTEL" name="cpuManufacturerFilter" value="INTEL">
+                <label for="cpuManufacturerINTEL" class="filterLabel2">INTEL</label>
+            </div>
+
+            <label class="filterLabel">Integrated Graphics:</label>
+            <div>
+                <input type="radio" id="cpuIntegratedAll" name="cpuIntegratedFilter" value="all" checked>
+                <label for="cpuIntegratedAll">All</label>
+                <input type="radio" id="cpuIntegratedYes" name="cpuIntegratedFilter" value="true">
+                <label for="cpuIntegratedTrue">Yes</label>
+                <input type="radio" id="cpuIntegratedFalse" name="cpuIntegratedFilter" value="false">
+                <label for="cpuIntegratedFalse">No</label>
+            </div>
+            
+            <label class="filterLabel">Number of Physical Cores:</label>
+            <div>
+                <input type="radio" id="cpuCoresAll" name="cpuCoresFilter" value="all" checked>
+                <label for="cpuCoresAll">All</label>
+                <input type="radio" id="cpuCores4" name="cpuCoresFilter" value="4">
+                <label for="cpuCoresAll">4</label>
+                <input type="radio" id="cpuCores6" name="cpuCoresFilter" value="6">
+                <label for="cpuCoresAll">6</label>
+                <input type="radio" id="cpuCores8" name="cpuCoresFilter" value="8">
+                <label for="cpuCoresAll">8</label>
+                <input type="radio" id="moreThanEightCoresFilter" name="cpuCoresFilter" value="moreThan8">
+                <label for="moreThanEightCoresFilter">More than 8</label>
+            </div>
+
+            <label class="filterLabel">Socket Type:</label>
+            <div id="socketFilter">
+                <!-- Socket filter radio buttons will be dynamically added here -->
+            </div>
+
+            
+            <label for="dropdown">Select a CPU:</label>
+            <select id="selectCPU" name="selectCPU">
+                <!-- Options will be dynamically added here -->
+            </select>
+
+        </div>
+
+
+
+    </div>
+    <script src="../src/builder-cpu.js" type="module"></script>
+    
 </body>
