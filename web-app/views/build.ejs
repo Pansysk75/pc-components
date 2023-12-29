@@ -11,10 +11,10 @@
     <%-include('partials/header')-%>
     <%-include('partials/navbar')-%>
 
-    <div class="main-body">
+    <div class="build-details">
       <h3>PC Build Viewer</h3>
       
-      <div id="buildDetails" class='results'>
+      <div>
         <h4>Build Details:</h4>
         <p><strong>Build ID:</strong> <%= build.Build_id %></p>
         <p><strong>User:</strong> <%= build.Username %></p>
@@ -32,8 +32,51 @@
             <li><%= build.storage[i].Storage_name %></li>
           <% } %>
       </div>
-    </div>
 
+
+    <div class="build-details-ratings">
+
+      <h3>Comments</h3>
+      <% for (let i = 0; i < ratings.length; i++) { %>
+        <div class="build-details-rating">
+          <div class="build-details-rating-comment">
+            <!-- link to user/{username} -->
+            <h4><a href="/user/<%= ratings[i].Username %>"><%= ratings[i].Username %>:</a></h4>
+            <p> <%= ratings[i].comment %></p>
+          </div>
+          <div class="build-details-rating-score">
+            <p> Rating: <strong><%= ratings[i].rating %>/5</strong> </p>
+          </div>
+        </div>
+      <% } %>
+
+      <div class="build-details-submit-rating">
+        <h4>Submit a Rating</h4>
+        <form>
+          <input type="hidden" id="buildId" value="<%= build.Build_id %>">
+          <div class="build-details-submit-rating-left-col">
+            <div class="build-details-submission-field">
+              <label for="username">Your username:</label>
+              <input type="text" name="username" id="username" required>
+            </div>
+            <div class="build-details-submission-field">
+              <label for="rating">Your rating:</label>
+              <input type="number" name="rating" id="rating" min="1" max="5" required>
+            </div>
+          </div>
+
+          <div class="build-details-submission-field">
+            <label for="comment">Your Comment:</label>
+            <textarea name="comment" id="comment" cols="30" rows="10" required></textarea>
+          </div>
+          <input type="button" id="submitRating" value="Submit">
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <script type="module" src="../src/build.js"></script>
 
 </body>
 </html>

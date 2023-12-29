@@ -31,9 +31,21 @@ router.get('/build/:id', async (req, res) => {
         .catch(error => {
             console.log(error);
         });
+    
+    // Fetch build ratings
+    const backendUrl2 = "http://64.226.122.251:81/build/" + id + "/ratings";
+    let ratingsData = await fetch(backendUrl2)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            return data;
+        })
+        .catch(error => {
+            console.log(error);
+        });
 
     // Render template with data
-    res.render("build", { build: buildData });
+    res.render("build", { build: buildData, ratings: ratingsData });
 });
 
 // Create html for components, based on component type

@@ -9,6 +9,7 @@ body {
 }
 
 p, h1, h2, h3, h4, h5, h6, li, a, input, button, label, select, textarea {
+    text-decoration: none;
     color: #182532;
 }
 
@@ -173,6 +174,76 @@ p, h1 {
     border: #182532 2px solid;
     height: 100%;
     border-radius: 5px;
+}
+
+.build-details-ratings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.build-details-rating {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    width: 60%;
+    margin: 10px 0;
+    padding: 0 20px;
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.build-details-rating-comment {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    margin: 0px 0;
+    width: 100%;
+}
+
+.build-details-rating-comment p {
+    margin: 0 10px;
+}
+
+.build-details-rating-score > * {
+    font-size: 14px;
+    margin: 0, 10px;
+}
+
+.build-details-submit-rating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0;
+    padding: 0 20px;
+    background-color: rgba(0, 0, 0, 0.04);
+    font-size: large;
+    width: 60%;
+}
+
+.build-details-submit-rating > form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.build-details-submit-rating * {
+    padding: 5px;
+}
+
+
+.build-details-submit-rating-left-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.build-details-submission-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .componentButtonsContainer {
