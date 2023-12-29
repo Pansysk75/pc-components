@@ -34,16 +34,19 @@ def get_build_ratings(build_id):
     return jsonify(ratings)
 
 # Post new build rating
-@build_bp.route('/build/rating', methods=['POST'])
-def post_build_rating():
+@build_bp.route('/build/<int:build_id>/ratings', methods=['POST'])
+def post_build_rating(build_id):
     db_connection = database.ensure_app_connection(current_app)
     new_rating = request.get_json()
-    rating_id = BuildRating.post(db_connection, new_rating)
-    return jsonify(rating_id)
+    new_rating["Build_id"] = build_id
+    result = BuildRating.post(db_connection, new_rating)
+    return jsonify(result)
 
 # Delete build rating
-@build_bp.route('/build/rating', methods=['DELETE'])
-def delete_build_rating():
+@build_bp.route('/build/<int:build_id>/ratings', methods=['DELETE'])
+def delete_build_rating(build_id):
     db_connection = database.ensure_app_connection(current_app)
-    rating_id = BuildRating.delete(db_connection, request.json)
-    return jsonify(rating_id)
+    Username_and_Build_id = request.get_json()
+    Username_and_Build_id["Build_id"] = build_id
+    result = BuildRating.delete(db_connection, Username_and_Build_id)
+    return jsonify(result)

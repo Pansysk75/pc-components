@@ -65,12 +65,11 @@ class TestBuild(unittest.TestCase):
 
     def test_post_build_rating(self):
         new_rating = {
-            "Build_id": 2,
             "Username": "TechEnthusiast42",
             "rating": 5,
             "comment": "Wow, what an amazing build!, I wish I could afford it!"
         }
-        response = client.post('/build/rating', json=new_rating)
+        response = client.post('/build/2/ratings', json=new_rating)
         self.assertEqual(response.status_code, 200)
         # Returns True if successful
         self.assertEqual(response.json, True)
@@ -79,15 +78,15 @@ class TestBuild(unittest.TestCase):
         ratings = response.json
         new_rating["date"] = datetime.today().strftime(
             '%a, %d %b %Y 00:00:00 GMT')
+        new_rating["Build_id"] = 2
         self.assertIn(new_rating, ratings)
 
     def test_delete_build_rating(self):
         # This rating exists in the test database
         rating = {
-            "Build_id": 3,
             "Username": "ByteBuster99"
         }
-        response = client.delete('/build/rating', json=rating)
+        response = client.delete('/build/3/ratings', json=rating)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.json)
 
