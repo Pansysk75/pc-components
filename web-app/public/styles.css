@@ -53,11 +53,29 @@ header a {
     text-decoration: none;
 }
 
-.tabs a {
-    color: #000000;
+.session {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    margin: 0;
+}
+.session-welcome {
+    margin: 10px
+}
+.session-x {
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-around;
+    width: 100%;
+}
+
+.session-x *{
     font-size: 16px;
     font-family: Arial;
-    font-weight: bold;
 }
 
 p, h1 {

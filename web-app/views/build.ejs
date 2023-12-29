@@ -50,28 +50,40 @@
         </div>
       <% } %>
 
-      <div class="build-details-submit-rating">
-        <h4>Submit a Rating</h4>
-        <form>
-          <input type="hidden" id="buildId" value="<%= build.Build_id %>">
-          <div class="build-details-submit-rating-left-col">
-            <div class="build-details-submission-field">
-              <label for="username">Your username:</label>
-              <input type="text" name="username" id="username" required>
-            </div>
-            <div class="build-details-submission-field">
-              <label for="rating">Your rating:</label>
-              <input type="number" name="rating" id="rating" min="1" max="5" required>
-            </div>
-          </div>
+      <!-- If session.Username, can comment -->
+      <% if(session.Username) { %>
 
-          <div class="build-details-submission-field">
-            <label for="comment">Your Comment:</label>
-            <textarea name="comment" id="comment" cols="30" rows="10" required></textarea>
-          </div>
-          <input type="button" id="submitRating" value="Submit">
-        </form>
-      </div>
+        <div class="build-details-submit-rating">
+          <h4>Submit a Rating</h4>
+          <form>
+            <input type="hidden" id="buildId" value="<%= build.Build_id %>">
+            <input type="hidden" id="username" value="<%= session.Username %>">
+            <div class="build-details-submit-rating-left-col">
+              <div class="build-details-submission-field">
+                <label for="rating">Your rating:</label>
+                <input type="number" name="rating" id="rating" min="1" max="5" required>
+              </div>
+            </div>
+  
+            <div class="build-details-submission-field">
+              <label for="comment">Your Comment:</label>
+              <textarea name="comment" id="comment" cols="30" rows="10" required></textarea>
+            </div>
+            <input type="button" id="submitRating" value="Submit">
+          </form>
+        </div>
+      <% } %>
+
+      <!-- Else, suggest log in -->
+      <% if(!session.Username) { %>
+        <div class="build-details-submit-rating">
+          <h4>Submit a Rating</h4>
+          <p>Please <a href="/login">log in</a> to submit a rating.</p>
+        </div>
+        
+      <% } %>
+
+
 
     </div>
   </div>
