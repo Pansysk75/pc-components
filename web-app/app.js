@@ -17,7 +17,6 @@ router.use(session({
   
   // This is used only for session management (its a POST so it doesn't need to serve a page)
   router.post('/login', async (req, res) => {
-    console.log(req.body);
     let username = req.body.Username;
     const backendUrl = "http://64.226.122.251:81/user/" + username;
     let userData = await fetch(backendUrl)
@@ -30,13 +29,12 @@ router.use(session({
             console.log(error);
         });
 
-    if (userData) {
+    if (!userData.error) {
         req.session.Username = username;
         res.redirect('/');
     } else {
         res.redirect('/login');
     }
-
   });
 
   router.get('/logout', (req, res) => {
