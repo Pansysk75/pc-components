@@ -87,18 +87,20 @@ class BuildRating:
         cursor.execute(sql, (new_rating["Username"], new_rating["Build_id"],
                        new_rating["rating"], date, new_rating["comment"]))
         db.commit()
-        return cursor.lastrowid
+        return True
 
     @staticmethod
-    def delete(db, rating_id):
+    def delete(db, Username_and_Build_id):
+        Username = Username_and_Build_id["Username"]
+        Build_id = Username_and_Build_id["Build_id"]
         cursor = db.cursor()
         sql = '''
         DELETE FROM user_rates_build
-        WHERE Rating_id = %s;
+        WHERE Username = %s AND Build_id = %s;
         '''
-        cursor.execute(sql, (rating_id))
+        cursor.execute(sql, (Username, Build_id))
         db.commit()
-        return cursor.lastrowid
+        return True
 
 
 class Builds:

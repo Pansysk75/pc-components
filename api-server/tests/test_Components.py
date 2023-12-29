@@ -9,12 +9,6 @@ client = app.test_client()  # Test client for making requests
 
 
 class TestComponents(unittest.TestCase):
-    # Reset database before tests
-    def setUpClass():
-        # Only gets, so no need to reset the database for now
-        # from .database import reset_test_db
-        # reset_test_db()
-        pass
 
     def test_get_gpus(self):
         response = client.get('/components/gpus')
@@ -85,3 +79,8 @@ class TestComponents(unittest.TestCase):
         expected = {'Manufacturer_name': 'Samsung', 'Storage_id': 0, 'capacity': 1024, 'connectivity': 'PCI Express 3.0',
                     'form_factor': 'M.2 2280', 'name': 'Samsung 970 Evo Plus SSD', 'type': 'SSD'}
         self.assertEqual(storage, expected)
+
+if __name__ == '__main__':
+    from .database import reset_test_db
+    reset_test_db()
+    unittest.main()

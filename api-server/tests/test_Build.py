@@ -2,16 +2,14 @@ import unittest
 # These imports work only if running python -m unittest from the root directory
 from app import create_app
 from config import get_config
+from datetime import datetime
 
 config = get_config('test')  # Get test configuration
 app = create_app(config)  # Create an instance with test configurations
 client = app.test_client()  # Test client for making requests
 
+
 class TestBuild(unittest.TestCase):
-    # Reset database before tests
-    def setUpClass():
-        from .database import reset_test_db
-        reset_test_db()
 
     def test_get_build(self):
         response = client.get('/build/1')
@@ -39,7 +37,9 @@ class TestBuild(unittest.TestCase):
         response = client.get(f'/build/{response.json}')
         build = response.json
         expected = {'Build_id': 45, 'CPU_id': 1, 'CPU_name': 'AMD Ryzen 5 5600X', 'Case_id': 1, 'Case_name': 'Be Quiet Pure Base 500DX Gaming Midi Tower', 'GPU_id': None, 'GPU_name': None, 'MOBO_id': 1,
-                    'MOBO_name': 'Gigabyte Z790 Gaming X AX (rev. 1.0) Wi-Fi Motherboard', 'PSU_id': 1, 'PSU_name': 'Corsair RMx Series RM850x', 'RAM_id': 1, 'RAM_name': 'G.Skill Trident Z5 RGB', 'Username': 'ByteBuster99', 'date_created': 'Fri, 29 Dec 2023 00:00:00 GMT', 'name': 'ChristmasBuild', 'storage': [{'Storage_id': 1, 'Storage_name': 'Samsung 870 Evo SSD'}, {'Storage_id': 2, 'Storage_name': 'Western Digital Blue'}]}
+                    'MOBO_name': 'Gigabyte Z790 Gaming X AX (rev. 1.0) Wi-Fi Motherboard', 'PSU_id': 1, 'PSU_name': 'Corsair RMx Series RM850x', 'RAM_id': 1, 'RAM_name': 'G.Skill Trident Z5 RGB', 'Username': 'ByteBuster99', 'name': 'ChristmasBuild', 'storage': [{'Storage_id': 1, 'Storage_name': 'Samsung 870 Evo SSD'}, {'Storage_id': 2, 'Storage_name': 'Western Digital Blue'}]}
+        expected["date_created"] = datetime.today().strftime(
+            '%a, %d %b %Y 00:00:00 GMT')
         self.assertEqual(build, expected)
 
     def test_get_builds(self):
@@ -53,5 +53,53 @@ class TestBuild(unittest.TestCase):
                     'RAM_name': 'Corsair Vengeance RGB Pro', 'Username': 'TechEnthusiast42', 'date_created': 'Mon, 23 Nov 2015 00:00:00 GMT', 'name': 'QuantumDream', 'storage': [{'Build_id': 0, 'Storage_id': 0, 'Storage_name': 'Samsung 970 Evo Plus SSD'}, {'Build_id': 0, 'Storage_id': 2, 'Storage_name': 'Western Digital Blue'}]}
         self.assertEqual(build, expected)
 
+    def test_get_build_rating(self):
+        response = client.get('/build/1/ratings')
+        self.assertEqual(response.status_code, 200)
+        self.assertIsInstance(response.json, list)
+        # Check that the first rating has the expected values
+        ratings = response.json
+        expected = [{'Build_id': 1, 'Username': 'GamerGeek88', 'comment': ' Good value for gaming on a budget ', 'date': 'Mon, 23 Dec 2019 00:00:00 GMT', 'rating': 3}, {
+            'Build_id': 1, 'Username': 'CircuitWizard23', 'comment': 'Smooth multitasking and quick application load', 'date': 'Sat, 23 Dec 2017 00:00:00 GMT', 'rating': 3}]
+        self.assertEqual(ratings, expected)
+
+    def test_post_build_rating(self):
+        new_rating = {
+            "Build_id": 2,
+            "Username": "TechEnthusiast42",
+            "rating": 5,
+            "comment": "Wow, what an amazing build!, I wish I could afford it!"
+        }
+        response = client.post('/build/rating', json=new_rating)
+        self.assertEqual(response.status_code, 200)
+        # Returns True if successful
+        self.assertEqual(response.json, True)
+        # Check that the rating was added
+        response = client.get(f'/build/2/ratings')
+        ratings = response.json
+        new_rating["date"] = datetime.today().strftime(
+            '%a, %d %b %Y 00:00:00 GMT')
+        self.assertIn(new_rating, ratings)
+
+    def test_delete_build_rating(self):
+        # This rating exists in the test database
+        rating = {
+            "Build_id": 3,
+            "Username": "ByteBuster99"
+        }
+        response = client.delete('/build/rating', json=rating)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.json)
+
+        # Check that the rating is no longer in the database
+        response = client.get('/build/3/ratings')
+        ratings = response.json
+        expected = [{'Build_id': 3, 'Username': 'ComponentExplorer', 'comment': 'Budget-friendly option for casual gamers       ',
+                     'date': 'Wed, 24 Jan 2007 00:00:00 GMT', 'rating': 5}]
+        self.assertEqual(ratings, expected)
+
+
 if __name__ == '__main__':
+    from .database import reset_test_db
+    reset_test_db()
     unittest.main()

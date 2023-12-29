@@ -94,20 +94,18 @@ class UserFavorite:
         return favorites
 
     # Add a favorite to a user
-    # Returns dict{Username, Build_id}
     @staticmethod
-    def post(db, new_favorite):
+    def post(db, username, new_favorite_build_id):
         cursor = db.cursor()
         sql = '''
         INSERT INTO user_has_favorite_build (Username, Build_id) VALUES (%s, %s);
         '''
         cursor.execute(
-            sql, (new_favorite["Username"], new_favorite["Build_id"]))
+            sql, (username, new_favorite_build_id))
         db.commit()
-        return new_favorite
+        return True
 
     # Delete a favorite from a user
-    # Returns dict{Username, Build_id}
     @staticmethod
     def delete(db, username, build_id):
         cursor = db.cursor()
@@ -116,4 +114,4 @@ class UserFavorite:
         '''
         cursor.execute(sql, (username, build_id))
         db.commit()
-        return {"Username": username, "Build_id": build_id}
+        return True

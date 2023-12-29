@@ -40,12 +40,12 @@ def get_user_favorites(username):
 @user_bp.route('/user/<string:username>/favorites', methods=['POST'])
 def post_user_favorite(username):
     db_connection = database.ensure_app_connection(current_app)
-    new_favorite = UserFavorite.post(db_connection, request.json)
-    return new_favorite if new_favorite else (jsonify({"error": "Favorite already exists"}), 409)
+    result = UserFavorite.post(db_connection, username, request.json["Build_id"])
+    return jsonify(result) if result else (jsonify({"error": "Favorite already exists"}), 409)
 
 # Delete build from user favorites
 @user_bp.route('/user/<string:username>/favorites', methods=['DELETE'])
 def delete_user_favorite(username):
     db_connection = database.ensure_app_connection(current_app)
-    deleted_favorite = UserFavorite.delete(db_connection, request.json)
-    return deleted_favorite if deleted_favorite else (jsonify({"error": "Favorite not found"}), 404)
+    result = UserFavorite.delete(db_connection, username, request.json["Build_id"])
+    return jsonify(result) if result else (jsonify({"error": "Favorite not found"}), 404)
