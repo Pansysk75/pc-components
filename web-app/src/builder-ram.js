@@ -1,0 +1,137 @@
+import {config} from './config.js';
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Get the dropdown element
+    const dropdown = document.getElementById('selectRAM');
+    const filterRadiosDDR = document.querySelectorAll('input[name="ramDDRFilter"]');
+    const filterRadiosModules = document.querySelectorAll('input[name="ramModulesFilter"]');
+    const filterRadiosCapacity = document.querySelectorAll('input[name="ramCapacityFilter"]');
+
+    // Fetch data from the API endpoint
+    var url = config.backendUrl + '/components/rams';
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            // Populate the dropdown with all options
+            populateDropdown(data);
+
+            filterRadiosDDR.forEach(radio => { // Updated this line
+                radio.addEventListener('change', updateDropdown);
+            });
+
+            filterRadiosModules.forEach(radio => { // Updated this line
+                radio.addEventListener('change', updateDropdown);
+            });
+
+            filterRadiosCapacity.forEach(radio => { // Updated this line
+                radio.addEventListener('change', updateDropdown);
+            });
+            
+            // Create filters dynamically
+            //createSocketFilter(data);
+            createManufacturerFilter(data)
+
+            function updateDropdown() {
+                // Get the selected values from all filters
+                const selectedManufacturer = document.querySelector('input[name="ramManufacturerFilter"]:checked').value;
+                const selectedDDR = document.querySelector('input[name="ramDDRFilter"]:checked').value;
+                const selectedModules = document.querySelector('input[name="ramModulesFilter"]:checked').value;
+                const selectedCapacity = document.querySelector('input[name="ramCapacityFilter"]:checked').value;
+            
+                // Filter the options based on the selected filters
+                const filteredOptions = data.filter(item =>
+                    ((selectedManufacturer === 'all' || item.Manufacturer_name === selectedManufacturer)) && (selectedDDR === 'all' || item.ddr_generation === selectedDDR) && (selectedModules === 'all' || item.num_modules === parseInt(selectedModules, 10)) && (selectedCapacity === 'all' || item.total_capacity === parseInt(selectedCapacity, 10))
+                );
+            
+                populateDropdown(filteredOptions);
+            }
+
+            
+            function createManufacturerFilter(data) {
+                // Check if data is an array and not empty
+                if (!Array.isArray(data) || data.length === 0) {
+                    console.error('Invalid or empty data array.');
+                    return;
+                }
+        
+                // Check if each item in data has the "Manufacturer_name" property
+                if (!data.every(item => 'Manufacturer_name' in item)) {
+                    console.error('Data items should have a "Manufacturer_name" property.');
+                    return;
+                }
+        
+                // Extract unique values for the Manufacturer_name property
+                const uniqueManufacturers = [...new Set(data.map(item => item.Manufacturer_name))];
+        
+                // Assuming filterRadiosManufacturer is an existing container element
+                const filterRadiosManufacturer = document.getElementById('ramManufacturerFilter');
+        
+                // Check if the container element exists
+                if (!filterRadiosManufacturer) {
+                    console.error('Container element not found.');
+                    return;
+                }
+        
+                // Create "All" option
+                const allInput = document.createElement('input');
+                allInput.type = 'radio';
+                allInput.id = 'ramManufacturerFilter_all';
+                allInput.name = 'ramManufacturerFilter';
+                allInput.value = 'all';
+                allInput.checked = true; // default to "All" selected
+        
+                const allLabel = document.createElement('label');
+                allLabel.htmlFor = 'ramManufacturerFilter_all';
+                allLabel.textContent = 'All';
+        
+                filterRadiosManufacturer.appendChild(allInput);
+                filterRadiosManufacturer.appendChild(allLabel);
+        
+                // Create radio buttons dynamically
+                uniqueManufacturers.forEach(manufacturer => {
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.id = `ramManufacturerFilter_${manufacturer}`;
+                    input.name = 'ramManufacturerFilter';
+                    input.value = manufacturer;
+        
+                    const label = document.createElement('label');
+                    label.htmlFor = `ramManufacturerFilter_${manufacturer}`;
+                    label.textContent = manufacturer;
+        
+                    filterRadiosManufacturer.appendChild(input);
+                    filterRadiosManufacturer.appendChild(label);
+        
+                    // Attach event listener to each radio button
+                    input.addEventListener('change', function () {
+                        const selectedManufacturer = document.querySelector('input[name="ramManufacturerFilter"]:checked');
+                        if (selectedManufacturer) {
+                            const filteredOptions = data.filter(item => selectedManufacturer.value === 'all' || item.Manufacturer_name === selectedManufacturer.value);
+                            populateDropdown(filteredOptions);
+                        } else {
+                            // Handle case when no manufacturer is selected
+                            populateDropdown(data);
+                        }
+                    });
+                });
+            }
+            
+
+        })
+        .catch(error => console.error('Error fetching data:', error));
+        
+
+    function populateDropdown(options) {
+        // Clear existing options
+        dropdown.innerHTML = '';
+
+        // Populate the dropdown with values from the "name" key
+        options.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.name;
+            option.textContent = item.name;
+            dropdown.appendChild(option);
+        });
+    }
+    
+});

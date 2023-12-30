@@ -15,6 +15,7 @@
 
     <div class="main-body">
         <h3>Choose Your Parts</h3>
+        <!--------------------------------------------------------------------->
         <div class="componentContainer" id="cpuContainer">
             <h3>Choose a CPU</h3>
             <label class="filterLabel">Manufacturer:</label>
@@ -85,7 +86,7 @@
                 <label for="moboMemorySlots2">2</label>
                 <input type="radio" id="moboMemorySlots4" name="moboSlotsFilter" value="4">
                 <label for="moboMemorySlots4">4</label>
-                <input type="radio" id="moboMemorySlots6" name="moboSlotsFilter" value="8">
+                <input type="radio" id="moboMemorySlots8" name="moboSlotsFilter" value="8">
                 <label for="moboMemorySlots8">8</label>
             </div>
 
@@ -123,14 +124,76 @@
             </select>
 
         </div>
+        <!--------------------------------------------------------------------->
+
+
+        <div class="componentContainer" id="ramContainer">
+            <h3>Choose a Memory</h3>
+            <label class="filterLabel">Manufacturer:</label>
+            <div id="ramManufacturerFilter"> 
+                <!-- Dynamically added here -->
+            </div>
+
+            <label class="filterLabel">DDR Generation:</label>
+            <div>
+                <input type="radio" id="ramDDRAll" name="ramDDRFilter" value="all" checked>
+                <label for="ramDDRAll">All</label>
+                <input type="radio" id="ramDDR3" name="ramDDRFilter" value="DDR3">
+                <label for="ramDDR3">DDR3</label>
+                <input type="radio" id="ramDDR4" name="ramDDRFilter" value="DDR4">
+                <label for="ramDDR4">DDR4</label>
+                <input type="radio" id="ramDDR5" name="ramDDRFilter" value="DDR5">
+                <label for="ramDDR5">DDR5</label>
+            </div>
+
+            <label class="filterLabel">Number of Modules:</label>
+            <div>
+                <input type="radio" id="ramModulesAll" name="ramModulesFilter" value="all" checked>
+                <label for="ramModulesAll">All</label>
+                <input type="radio" id="ramModules2" name="ramModulesFilter" value="2">
+                <label for="ramModules2">2</label>
+                <input type="radio" id="ramModules4" name="ramModulesFilter" value="4">
+                <label for="ramModules4">4</label>
+                <input type="radio" id="ramModules8" name="ramModulesFilter" value="8">
+                <label for="ramModules8">8</label>
+            </div>
+
+            <label class="filterLabel">Capacity:</label>
+            <div>
+                <input type="radio" id="ramCapacityAll" name="ramCapacityFilter" value="all" checked>
+                <label for="ramCapacityAll">All</label>
+                <input type="radio" id="ramCapacity8" name="ramCapacityFilter" value="8">
+                <label for="ramCapacity8">8GHz</label>
+                <input type="radio" id="ramCapacity16" name="ramCapacityFilter" value="16">
+                <label for="ramCapacity8">16Hz</label>
+                <label for="ramCapacityAll">All</label>
+                <input type="radio" id="ramCapacity32" name="ramCapacityFilter" value="32">
+                <label for="ramCapacity8">32GHz</label>
+                <label for="ramCapacityAll">All</label>
+                <input type="radio" id="ramCapacity64" name="ramCapacityFilter" value="64">
+                <label for="ramCapacity8">64GHz</label>
+            </div>
+
+            
+
+            
+            <label for="dropdownRAM">Select a Memory:</label>
+            <select id="selectRAM" name="selecRAM">
+                <!-- Options will be dynamically added here -->
+            </select> 
+
+        </div>
+
 
 
 
 
         <!--------------------------------------------------------------------->
+
     </div>
     <script src="../src/builder-cpu.js" type="module"></script>
     <script src="../src/builder-mobo.js" type="module"></script>
+    <script src="../src/builder-ram.js" type="module"></script>
     <link rel="stylesheet" href="../public/builder.css">
 
 </body>
