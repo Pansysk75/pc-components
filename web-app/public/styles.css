@@ -4,7 +4,6 @@ body {
     margin: 0;
     background-color: #e5e5e5;
     color: #182532;
-    color: #1421ed;
     font-size: 20px;
 }
 
@@ -383,3 +382,21 @@ p, h1 {
     display: block;
 }
 
+
+.user-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.user-profile > .builds-created, .favorite-builds {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 10px 0;
+}
+    
