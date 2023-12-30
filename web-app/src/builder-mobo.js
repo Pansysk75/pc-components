@@ -118,6 +118,21 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     });
                 });
+
+                // Find the "All" radio button
+                const allManufacturerRadio = document.getElementById('MoboManufacturerFilter_all');
+
+                // Add a click event listener to the "All" radio button
+                allManufacturerRadio.addEventListener('click', function () {
+                    const selectedManufacturer = document.querySelector('input[name="MoboManufacturerFilter"]:checked');
+                    if (selectedManufacturer) {
+                        const filteredOptions = data.filter(item => selectedManufacturer.value === 'all' || item.Manufacturer_name === selectedManufacturer.value);
+                        populateDropdown(filteredOptions);
+                    } else {
+                        // Handle case when no manufacturer is selected
+                        populateDropdown(data);
+                    }
+                });
             }
             
             function createSocketFilter(data) {
