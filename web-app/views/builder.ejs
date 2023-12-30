@@ -58,7 +58,7 @@
             </div>
 
             
-            <label for="dropdownCPU">Select a CPU:</label>
+            <label for="selectCPU">Select a CPU:</label>
             <select id="selectCPU" name="selectCPU">
                 <!-- Options will be dynamically added here -->
             </select> 
@@ -119,7 +119,7 @@
             </div>
             
 
-            <label for="dropdownMOBO">Select a Motherboard:</label>
+            <label for="selectMOBO">Select a Motherboard:</label>
             <select id="selectMOBO" name="selectMONO">
                 <!-- Options will be dynamically added here -->
             </select>
@@ -173,7 +173,7 @@
             </div>
             
 
-            <label for="dropdownRAM">Select a Memory:</label>
+            <label for="selectRAM">Select a Memory:</label>
             <select id="selectRAM" name="selecRAM">
                 <!-- Options will be dynamically added here -->
             </select> 
@@ -220,7 +220,7 @@
             </div>
 
 
-            <label for="dropdownGPU">Select a Graphics Card:</label>
+            <label for="selectGPU">Select a Graphics Card:</label>
             <select id="selectGPU" name="selecGPU">
                 <!-- Options will be dynamically added here -->
             </select>
@@ -285,8 +285,69 @@
             </div>
 
 
-            <label for="dropdownstorage">Select Storage:</label>
-            <select id="selectStorage" name="selecStorage">
+            <label for="selectStorage">Select Storage:</label>
+            <select id="selectStorage" name="selectStorage">
+                <!-- Options will be dynamically added here -->
+            </select>
+
+        </div>
+
+        <!--------------------------------------------------------------------->
+        <div class="componentContainer" id="psuContainer">
+            <h3>Choose Power Supply</h3>
+            <label class="filterLabel">Manufacturer:</label>
+            <div id="psuManufacturerFilter"> 
+                <!-- Dynamically added here -->
+            </div>
+
+            <label class="filterLabel">Wattage:</label>
+            <div id="psuWattageFilter"> 
+                <!-- Dynamically added here -->
+            </div>
+
+            <label class="filterLabel">Modularity:</label>
+            <div>
+                <input type="radio" id="psuModularityAll" name="psuModularityFilter" value="all" checked>
+                <label for="psuModularityAll">All</label>
+                <input type="radio" id="psuModularityFull" name="psuModularityFilter" value="Modular">
+                <label for="psuModularityFull">Modular</label>
+                <input type="radio" id="psuModularitySemi" name="psuModularityFilter" value="Semi-Modular">
+                <label for="psuModularitySemi">Semi Modular</label>
+                <input type="radio" id="psuModularityNon" name="psuModularityFilter" value="Non-Modular">
+                <label for="psuModularityNon">Non Modular</label>
+            </div>
+
+            <label class="filterLabel">Form Factor:</label>
+            <div>
+                <input type="radio" id="psuFormFactorAll" name="psuFormFactorFilter" value="all" checked>
+                <label for="psuFormFactorAll">All</label>
+                <input type="radio" id="psuFormFactorATX" name="psuFormFactorFilter" value="ATX">
+                <label for="psuFormFactorATX">ATX</label>
+                <input type="radio" id="psuFormFactorEPS" name="psuFormFactorFilter" value="EPS">
+                <label for="psuFormFactorEPS">EPS</label>
+            </div>
+
+            <label class="filterLabel">Efficiency Certification:</label>
+            <div>
+                <input type="radio" id="psuEfficiencyAll" name="psuEfficiencyFilter" value="all" checked>
+                <label for="psuEfficiencyAll">All</label>
+                <input type="radio" id="psuEfficiencyStandard" name="psuEfficiencyFilter" value="80 PLUS Standard">
+                <label for="psuEfficiencyStandard">80 PLUS Standard</label>
+                <input type="radio" id="psuEfficiencyBronze" name="psuEfficiencyFilter" value="80 PLUS Bronze">
+                <label for="psuEfficiencyBronze">80 PLUS Bronze</label>
+                <input type="radio" id="psuEfficiencySilver" name="psuEfficiencyFilter" value="80 PLUS Silver">
+                <label for="psuEfficiencySilver">80 PLUS Silver</label>
+                <input type="radio" id="psuEfficiencyGold" name="psuEfficiencyFilter" value="80 PLUS Gold">
+                <label for="psuEfficiencyGold">80 PLUS Gold</label>
+                <input type="radio" id="psuEfficiencyPlatinum" name="psuEfficiencyFilter" value="80 PLUS Platinum">
+                <label for="psuEfficiencyPlatinum">80 PLUS Platinum</label>  
+                <input type="radio" id="psuEfficiencyTitanium" name="psuEfficiencyFilter" value="80 PLUS Titanium">
+                <label for="psuEfficiencyTitanium">80 PLUS Titanium</label>   
+            </div>
+
+
+            <label for="selectPSU">Select Power Supply:</label>
+            <select id="selectPSU" name="selectPSU">
                 <!-- Options will be dynamically added here -->
             </select>
 
@@ -301,6 +362,7 @@
     <script src="../src/builder-ram.js" type="module"></script>
     <script src="../src/builder-gpu.js" type="module"></script>
     <script src="../src/builder-storage.js" type="module"></script>
+    <script src="../src/builder-psu.js" type="module"></script>
     <link rel="stylesheet" href="../public/builder.css">
 
 </body>

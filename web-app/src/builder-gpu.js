@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
             
             // Create filters dynamically
             createWattageFilter(data);
-            createManufacturerFilter(data)
+            createManufacturerFilter(data);
 
             function updateDropdown() {
                 // Get the selected values from all filters
