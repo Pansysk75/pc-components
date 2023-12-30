@@ -12,7 +12,9 @@ class TestUser(unittest.TestCase):
     def test_get_user(self):
         response = client.get('/user/TechEnthusiast42')
         self.assertEqual(response.status_code, 200)
-        expected = {'Username': 'TechEnthusiast42', 'builds_created': [0, 8], 'email': 'tech42@email.com', 'favorite_builds': [0, 2]}
+        expected = {'Username': 'TechEnthusiast42', 'builds_created': [
+            {"Build_id": 0, "name": "QuantumDream"}, {"Build_id": 8, "name": "EliteDominance2"}], 'email': 'tech42@email.com', 
+            'favorite_builds': [ {"Build_id": 0, "name": "QuantumDream"}, {"Build_id": 2, "name": "TurboGamingBeast"}]}
         self.assertEqual(response.json, expected)
 
     def test_post_user(self):
@@ -37,7 +39,8 @@ class TestUser(unittest.TestCase):
         response = client.get('/user/GamerGeek88/favorites')
         self.assertEqual(response.status_code, 200)
         self.assertIsInstance(response.json, list)
-        self.assertEqual(response.json, [3, 5])
+        expected = [{'Build_id': 3, 'name': 'MegaRigX'}, {'Build_id': 5, 'name': 'FutureTechWorkstation'}]
+        self.assertEqual(response.json, expected)
         
     def test_post_favorite(self):
         username = "TechEnthusiast42"
@@ -51,7 +54,8 @@ class TestUser(unittest.TestCase):
         response = client.get(f'/user/{username}/favorites')
         self.assertEqual(response.status_code, 200)
         self.assertIsInstance(response.json, list)
-        self.assertEqual(response.json, [0, 1, 2])
+        expected = [{'Build_id': 0, 'name': 'QuantumDream'}, {'Build_id': 1, 'name': 'EliteDominance'}, {'Build_id': 2, 'name': 'TurboGamingBeast'}]
+        self.assertEqual(response.json, expected)
         
     def test_delete_favorite(self):
         username = "SystemBuilderPro"
@@ -65,7 +69,8 @@ class TestUser(unittest.TestCase):
         response = client.get(f'/user/{username}/favorites')
         self.assertEqual(response.status_code, 200)
         self.assertIsInstance(response.json, list)
-        self.assertEqual(response.json, [7])
+        expected = [{'Build_id': 7, 'name': 'TechExplorerPro'}]
+        self.assertEqual(response.json, expected)
 
 if __name__ == '__main__':
     from .database import reset_test_db
