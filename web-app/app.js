@@ -157,8 +157,47 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/register', (req, res) => {
-    res.render('register', {session: req.session});
+    res.render('register', { session: req.session });
 });
+
+router.post('/register', async (req, res) => {
+    console.log(req.body);
+    let username = req.body.Username;
+    let email = req.body.email;
+
+    const backendUrl = "http://64.226.122.251:81/user";
+
+    let userData = await fetch(backendUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ Username: username, email: email }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            return data;
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
+    console.log("User data:");
+    console.log(userData);
+
+    if (!userData.error) {
+        req.session.Username = username;
+        res.redirect('/');
+    }
+    else if (userData.error == "Username already taken") {
+        res.send("Username already taken");
+    }
+    else {
+        res.send("There was an error with your registration");
+    }
+});
+
 
 router.get('/builder', (req, res) => {
     res.render('builder', {session: req.session});

@@ -11,14 +11,12 @@
     <%-include('partials/navbar')-%>
     <h1 class="paragraph">Sign Up</h1>
     <p>Please fill out this form with the required information</p>
-    <form method="post" action='https://register-demo.freecodecamp.org'>     <!-- Set this!!! -->
-    <!--<form action="/submit" method="post" id="myForm" onsubmit="return validateForm()">-->
+    <form method="post" action="/register">
       <fieldset>
-        <label for="first-name">Enter Your username: <input type="text" id="username" name="username" required/></label>
+        <label for="Username">Enter Your username: <input type="text" id="username" name="Username" required /></label>
         <label for="email">Enter Your Email: <input id="email" name="email" type="email" required /></label>
-        <!-- <label for="new-password">Create a New Password: <input id="new-password" name="new-password" type="password" pattern="[a-z0-5]{8,}" required /></label> -->
       </fieldset>
-      <input type="submit" value="Sign Up"/>
+      <input type="submit" value="Sign Up" />
     </form>
     <p>Already have an account? <a href="login">Log in</a> </p>
   </body>
