@@ -229,7 +229,7 @@
 
         <!--------------------------------------------------------------------->
         <div class="componentContainer" id="storageContainer">
-            <h3>Choose Sorage</h3>
+            <h3>Choose Storage</h3>
             <label class="filterLabel">Manufacturer:</label>
             <div id="storageManufacturerFilter"> 
                 <!-- Dynamically added here -->
@@ -353,6 +353,36 @@
 
         </div>
 
+        <!--------------------------------------------------------------------->
+        <div class="componentContainer" id="psuContainer">
+            <h3>Choose Case</h3>
+            <label class="filterLabel">Manufacturer:</label>
+            <div id="caseManufacturerFilter"> 
+                <!-- Dynamically added here -->
+            </div>
+
+            <label class="filterLabel">Motherboard Form Factor:</label>
+            <div>
+                <input type="radio" id="caseFormFactorAll" name="caseFormFactorFilter" value="all" checked>
+                <label for="caseFormFactorAll">All</label>
+                <input type="radio" id="caseFormFactorATX" name="caseFormFactorFilter" value="ATX">
+                <label for="caseFormFactorATX">ATX</label>
+                <input type="radio" id="caseFormFactorMicroATX" name="caseFormFactorFilter" value="Micro ATX">
+                <label for="caseFormFactorMicroATX">Micro ATX</label>
+                <input type="radio" id="caseFormFactorMiniITX" name="caseFormFactorFilter" value="Mini ITX">
+                <label for="caseFormFactorMiniITX">Mini ITX</label>
+                <input type="radio" id="caseFormFactorExtendedATX" name="caseFormFactorFilter" value="Extended ATX">
+                <label for="caseFormFactorExtendedATX">Extended ATX</label>
+                <input type="radio" id="caseFormFactorSSI" name="caseFormFactorFilter" value="SSI">
+                <label for="caseFormFactorSSI">SSI</label>
+            </div>
+
+            <label for="selectCase">Select Case:</label>
+            <select id="selectCase" name="selectCase">
+                <!-- Options will be dynamically added here -->
+            </select>
+
+        </div>
 
         <!--------------------------------------------------------------------->
 
@@ -363,6 +393,7 @@
     <script src="../src/builder-gpu.js" type="module"></script>
     <script src="../src/builder-storage.js" type="module"></script>
     <script src="../src/builder-psu.js" type="module"></script>
+    <script src="../src/builder-case.js" type="module"></script>
     <link rel="stylesheet" href="../public/builder.css">
 
 </body>
