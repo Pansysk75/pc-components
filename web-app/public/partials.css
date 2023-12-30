@@ -1,0 +1,129 @@
+header {
+    background-color: #fca311;
+    color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: end;
+    padding: 10px 40px;
+    border-bottom: 2px solid #17171c;
+}
+
+header img {
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+}
+
+header h1 {
+    margin: 0;
+    padding: 0 0 0 10px;
+    color: #182532;
+    font-family: Impact;
+    font-size: 30px;
+    font-weight: normal;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-grow: 1;
+}
+
+header a {
+    text-decoration: none;
+}
+
+.menu {
+    height: 30px;
+    background-color: #ffc76c;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    padding: 0 60px;
+}
+
+.menu a {
+    color: #000000;
+    text-decoration: none;
+    font-family: Arial;
+    font-weight: bold;
+    padding: 0 20px;
+}
+
+
+.menuButton {
+    position: relative;
+    display: inline-block;
+    text-align: center; 
+}
+
+.dropbtn {
+    text-decoration: none; 
+    background-color: transparent;
+    border: none;
+    text-align: center; /* Adjust text alignment as needed */
+    box-sizing: border-box;  
+    color: #000000;
+    font-weight: bold;
+    font-family: Arial;
+    padding: 0 20px; 
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #e5e5e5;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+  
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+  
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+ 
+.show {
+    display: block;
+}
+
+
+.session {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    margin: 0;
+}
+
+.session-welcome {
+    margin: 10px
+}
+
+.session-x {
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-around;
+    width: 100%;
+}
+
+.session-x *{
+    font-size: 16px;
+    font-family: Arial;
+}
