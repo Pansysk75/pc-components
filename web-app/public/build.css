@@ -1,8 +1,33 @@
+.build-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.build-details-body {
+    margin: 20px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.build-details-body > * {
+    margin: 10px 0;
+    padding: 0px;
+    font-size: 18px;
+}
+
 .build-details-ratings {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
 }
 
 .build-details-rating {
