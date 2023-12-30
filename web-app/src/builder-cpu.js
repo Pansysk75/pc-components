@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const selectedManufacturer = document.querySelector('input[name="cpuManufacturerFilter"]:checked').value;
                 const selectedIntegrated = document.querySelector('input[name="cpuIntegratedFilter"]:checked').value;
                 const selectedCores = document.querySelector('input[name="cpuCoresFilter"]:checked').value;
-                const selectedSocket = document.querySelector('input[name="socketFilter"]:checked').value;
+                const selectedSocket = document.querySelector('input[name="cpuSocketFilter"]:checked').value;
 
                 console.log(selectedSocket)
                 // Filter the options based on the selected filters
@@ -71,10 +71,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log(uniqueSockets);
             
                 // Assuming filterRadiosSocket is an existing container element
-                const filterRadiosSocket = document.getElementById('socketFilter');
+                const filterRadiosSocket = document.getElementById('cpuSocketFilter');
 
                 filterRadiosSocket.addEventListener('change', function (event) {
-                    const selectedSocket = document.querySelector('input[name="socketFilter"]:checked');
+                    const selectedSocket = document.querySelector('input[name="cpuSocketFilter"]:checked');
             
                     if (selectedSocket) {
                         const filteredOptions = data.filter(item => selectedSocket.value === 'all' || item.socket === selectedSocket.value);
@@ -94,13 +94,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Create "All" option
                 const allInput = document.createElement('input');
                 allInput.type = 'radio';
-                allInput.id = 'socketFilter_all';
-                allInput.name = 'socketFilter';
+                allInput.id = 'cpuSocketFilter_all';
+                allInput.name = 'cpuSocketFilter';
                 allInput.value = 'all';
                 allInput.checked = true; // default to "All" selected
             
                 const allLabel = document.createElement('label');
-                allLabel.htmlFor = 'socketFilter_all';
+                allLabel.htmlFor = 'cpuSocketFilter_all';
                 allLabel.textContent = 'All';
             
                 filterRadiosSocket.appendChild(allInput);
@@ -110,12 +110,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 uniqueSockets.forEach(socket => {
                     const input = document.createElement('input');
                     input.type = 'radio';
-                    input.id = `socketFilter_${socket}`;
-                    input.name = 'socketFilter';
+                    input.id = `cpuSocketFilter_${socket}`;
+                    input.name = 'cpuSocketFilter';
                     input.value = socket;
             
                     const label = document.createElement('label');
-                    label.htmlFor = `socketFilter_${socket}`;
+                    label.htmlFor = `cpuSocketFilter_${socket}`;
                     label.textContent = socket;
             
                     filterRadiosSocket.appendChild(input);

@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
-    <link rel="stylesheet" href="../public/builder.css">
+    <title>Builder</title>
+    <link rel="stylesheet" href="../public/styles.css" />
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
 </head>
 
@@ -52,13 +52,73 @@
             </div>
 
             <label class="filterLabel">Socket Type:</label>
-            <div id="socketFilter">
+            <div id="cpuSocketFilter">
                 <!-- Socket filter radio buttons will be dynamically added here -->
             </div>
 
             
-            <label for="dropdown">Select a CPU:</label>
+            <label for="dropdownCPU">Select a CPU:</label>
             <select id="selectCPU" name="selectCPU">
+                <!-- Options will be dynamically added here -->
+            </select> 
+
+        </div>
+
+        <!--------------------------------------------------------------------->
+        <div class="componentContainer" id="moboContainer">
+            <h3>Choose a Motherboard</h3>
+            <label class="filterLabel">Manufacturer:</label>
+            <div id="moboManufacturerFilter">
+                <!-- Socket filter radio buttons will be dynamically added here -->
+            </div>
+
+            <label class="filterLabel">Socket Type:</label>
+            <div id="MoboSocketFilter">
+                <!-- Socket filter radio buttons will be dynamically added here -->
+            </div>
+
+            <label class="filterLabel">Number of Memory Slots:</label>
+            <div>
+                <input type="radio" id="moboMemorySlotsAll" name="moboSlotsFilter" value="all" checked>
+                <label for="moboMemorySlotsAll">All</label>
+                <input type="radio" id="moboMemorySlots2" name="moboSlotsFilter" value="2">
+                <label for="moboMemorySlots2">2</label>
+                <input type="radio" id="moboMemorySlots4" name="moboSlotsFilter" value="4">
+                <label for="moboMemorySlots4">4</label>
+                <input type="radio" id="moboMemorySlots6" name="moboSlotsFilter" value="8">
+                <label for="moboMemorySlots8">8</label>
+            </div>
+
+            <label class="filterLabel">Supported DDR Generation:</label>
+            <div>
+                <input type="radio" id="moboDDRAll" name="moboDDRFilter" value="all" checked>
+                <label for="moboDDRAll">All</label>
+                <input type="radio" id="moboDDR3" name="moboDDRFilter" value="DDR3">
+                <label for="moboDDR3">DDR3</label>
+                <input type="radio" id="moboDDR4" name="moboDDRFilter" value="DDR4">
+                <label for="moboDDR4">DDR4</label>
+                <input type="radio" id="moboDDR5" name="moboDDRFilter" value="DDR5">
+                <label for="moboDDR5">DDR5</label>
+            </div>
+
+            <label class="filterLabel">Form Factor:</label>
+            <div>
+                <input type="radio" id="moboFormFactorAll" name="moboFormFactorFilter" value="all" checked>
+                <label for="moboFormFactorAll">All</label>
+                <input type="radio" id="moboFormFactorATX" name="moboFormFactorFilter" value="ATX">
+                <label for="moboFormFactorATX">ATX</label>
+                <input type="radio" id="moboFormFactorMicroATX" name="moboFormFactorFilter" value="Micro ATX">
+                <label for="moboFormFactorMicroATX">Micro ATX</label>
+                <input type="radio" id="moboFormFactorMiniITX" name="moboFormFactorFilter" value="Mini ITX">
+                <label for="moboFormFactorMiniITX">Mini ITX</label>
+                <input type="radio" id="moboFormFactorExtendedATX" name="moboFormFactorFilter" value="Extended ATX">
+                <label for="moboFormFactorExtendedATX">Extended ATX</label>
+                <input type="radio" id="moboFormFactorSSI" name="moboFormFactorFilter" value="SSI">
+                <label for="moboFormFactorSSI">SSI</label>
+            </div>
+            
+            <label for="dropdownMOBO">Select a Motherboard:</label>
+            <select id="selectMOBO" name="selectMONO">
                 <!-- Options will be dynamically added here -->
             </select>
 
@@ -66,7 +126,12 @@
 
 
 
+
+        <!--------------------------------------------------------------------->
     </div>
     <script src="../src/builder-cpu.js" type="module"></script>
-    
+    <script src="../src/builder-mobo.js" type="module"></script>
+    <link rel="stylesheet" href="../public/builder.css">
+
 </body>
+</html>
