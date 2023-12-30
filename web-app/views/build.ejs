@@ -10,15 +10,14 @@
 <body>
     <%-include('partials/header')-%>
     <%-include('partials/navbar')-%>
-
+        
     <div class="build-details">
-      <h3>PC Build Viewer</h3>
-      
-      <div>
-        <h4>Build Details:</h4>
-        <p><strong>Build ID:</strong> <%= build.Build_id %></p>
-        <p><strong>User:</strong> <%= build.Username %></p>
-        <p><strong>Build Name:</strong> <%= build.name %></p>
+      <div class="build-details-header">
+        <h2> <%= build.name %> </h2>
+        <div> by <b> <a href="/user/<%= build.Username %>"> <%= build.Username %> </a> </b> </div>
+      </div>
+      <div class="build-details-body">
+        <p><strong>Build Details:</strong> </p>
         <p><strong>CPU:</strong> <%= build.CPU_name %></p>
         <p><strong>Motherboard:</strong> <%= build.MOBO_name %></p>
         <p><strong>Case:</strong> <%= build.Case_name %></p>
@@ -30,7 +29,8 @@
         <ul>
           <% for (let i = 0; i < build.storage.length; i++) { %>
             <li><%= build.storage[i].Storage_name %></li>
-          <% } %>
+            <% } %>
+        </ul>
       </div>
 
 
@@ -45,7 +45,7 @@
             <p> <%= ratings[i].comment %></p>
           </div>
           <div class="build-details-rating-score">
-            <p> Rating: <strong><%= ratings[i].rating %>/5</strong> </p>
+            <p> Rated: <strong><%= ratings[i].rating %>/5</strong> </p>
           </div>
         </div>
       <% } %>
@@ -83,9 +83,6 @@
         
       <% } %>
 
-
-
-    </div>
   </div>
 
   <script type="module" src="../src/build.js"></script>

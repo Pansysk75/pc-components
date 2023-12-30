@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="../public/styles.css" />
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+  </head>
+  <body>
+    <%-include('partials/header')-%>
+    <%-include('partials/navbar')-%>
+ 
+    <div class="user-profile">
+        <a >Profile of user <b> <%= user.Username %> </b> </a>
+        <p>Email: <%= user.email %></p>
+        <div class="builds-created">
+            <strong>Builds Created: </strong>
+            <ul> 
+                <% for (let i = 0; i < user.builds_created.length; i++) { %>
+                <li><a href="/build/<%=  user.builds_created[i].Build_id %>"><%=  user.builds_created[i].name %></a></li>
+                <% } %>
+            </ul>
+        </div>
+        <div class="favorite-builds">
+            <strong>Favorite Builds: </strong>
+            <ul> 
+                <% for (let i = 0; i < user.favorite_builds.length; i++) { %>
+                <li><a href="/build/<%=  user.favorite_builds[i].Build_id %>"><%=  user.favorite_builds[i].name %></a></li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+
+  </body>
+</html>

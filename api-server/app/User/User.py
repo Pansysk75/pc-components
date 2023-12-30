@@ -15,13 +15,12 @@ class User:
             return None
         # Get all build_ids of builds associated with user
         sql = '''
-        SELECT build.Build_id FROM build WHERE build.Username = %s;
+        SELECT build.name, build.Build_id FROM build WHERE build.Username = %s;
         '''
         cursor.execute(sql, (username))
-        build_ids = cursor.fetchall()
+        builds = cursor.fetchall()
         result = user
-        result["builds_created"] = [build_id["Build_id"]
-                                    for build_id in build_ids]
+        result["builds_created"] = builds
         # Get all favorites of user
         favorite_builds = UserFavorite.get(db, username)
         result["favorite_builds"] = favorite_builds
@@ -86,11 +85,13 @@ class UserFavorite:
     def get(db, username):
         cursor = db.cursor()
         sql = '''
-        SELECT Build_id FROM user_has_favorite_build WHERE Username = %s;
+        SELECT build.name, build.Build_id 
+        FROM user_has_favorite_build
+        JOIN build ON user_has_favorite_build.Build_id = build.Build_id
+        WHERE user_has_favorite_build.Username = %s;
         '''
         cursor.execute(sql, (username))
         favorites = cursor.fetchall()
-        favorites = [favorite["Build_id"] for favorite in favorites]
         return favorites
 
     # Add a favorite to a user

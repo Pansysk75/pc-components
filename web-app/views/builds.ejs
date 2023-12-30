@@ -17,22 +17,17 @@
     <div class='builds'>
       <% for (let i=0; i < builds.length; i++) { %>
         <div class="builds-element">
-          <div class="builds-element-title-bar">
-            <div class="builds-element-title">
-              <h3>
-                <%= builds[i].name %>
-              </h3> <a> by user <%= builds[i].Username %> </a>
+          <div class="title-bar">
+            <div class="title">
+              <h2> <%= builds[i].name %> </h2> 
+              <div> by <b> <a href="user/<%= builds[i].Username %>"> <%= builds[i].Username %> </a> </b> </div>
             </div>
-            <button class="builds-element-view-button" type="button">
+            <button class="view-button" type="button">
               <a target="_top" href="build/<%= builds[i].Build_id %>" text-decoration: none;>View Build</a>
             </button>
           </div>
-          <div class="builds-element-details">
+          <div class="details">
         
-            <!-- <p><strong>Build ID:</strong>
-              <%= builds[i].Build_id %>
-            </p> -->
-
             <div><strong>CPU:</strong>
               <%= builds[i].CPU_name %>
             </div>
@@ -62,6 +57,13 @@
                   <% } %>
               </ul>
             </div>
+          </div>
+
+          <div>
+            <strong>Average Rating: 
+              <%= builds[i].average_rating %>
+            </strong>
+            (out of <%= builds[i].number_of_ratings %> ratings)
           </div>
         
         </div>

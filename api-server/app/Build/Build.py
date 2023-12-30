@@ -16,7 +16,8 @@ class Build:
                build.PSU_id,  psu.name AS PSU_name,     
                build.Case_id, `case`.name AS Case_name,
                build.GPU_id, gpu.name AS GPU_name,
-               build.date_created
+               build.date_created,
+               average_rating, number_of_ratings, times_added_to_favorites
         FROM build
             JOIN cpu ON build.CPU_id = cpu.CPU_id
             JOIN mobo ON build.MOBO_id = mobo.MOBO_id
@@ -24,10 +25,13 @@ class Build:
             JOIN psu ON build.PSU_id = psu.PSU_id
             JOIN `case` ON build.Case_id = `case`.Case_id
             LEFT JOIN gpu ON build.GPU_id = gpu.GPU_id
+            JOIN view_build_stats ON build.Build_id = view_build_stats.Build_id
         WHERE build.Build_id = %s;
         '''
         cursor.execute(sql, (build_id))
         build = cursor.fetchone()
+        # Convert average_rating to numeric
+        build["average_rating"] = float(build["average_rating"])
         if not build:
             return None
         sql_storage = '''
@@ -116,7 +120,8 @@ class Builds:
                build.PSU_id,  psu.name AS PSU_name,     
                build.Case_id, `case`.name AS Case_name,
                build.GPU_id, gpu.name AS GPU_name,
-               build.date_created
+               build.date_created,
+               average_rating, number_of_ratings, times_added_to_favorites
         FROM build
             JOIN cpu ON build.CPU_id = cpu.CPU_id
             JOIN mobo ON build.MOBO_id = mobo.MOBO_id
@@ -124,10 +129,14 @@ class Builds:
             JOIN psu ON build.PSU_id = psu.PSU_id
             JOIN `case` ON build.Case_id = `case`.Case_id
             LEFT JOIN gpu ON build.GPU_id = gpu.GPU_id
+            JOIN view_build_stats ON build.Build_id = view_build_stats.Build_id
         ORDER BY build.Build_id;
         '''
         cursor.execute(sql)
         builds = cursor.fetchall()
+        # Convert average_rating to numeric
+        for build in builds:
+            build["average_rating"] = float(build["average_rating"])
         # Get storage for all builds in a single query
         sql_storage = '''
         SELECT build_has_storage.Build_id, storage.Storage_id, storage.name AS Storage_name
