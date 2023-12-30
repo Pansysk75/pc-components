@@ -184,6 +184,53 @@
 
         </div>
 
+        <div class="componentContainer" id="gpuContainer">
+            <h3>Choose a Graphics Card</h3>
+            <label class="filterLabel">Manufacturer:</label>
+            <div id="gpuManufacturerFilter"> 
+                <!-- Dynamically added here -->
+            </div>
+
+            <label class="filterLabel">Minimum required PSU Wattage:</label>
+            <div id="gpuWattageFilter"> 
+                <!-- Dynamically added here -->
+            </div>
+
+            <label class="filterLabel">GDDR Generation:</label>
+            <div>
+                <input type="radio" id="gpuGDDRAll" name="gpuGDDRFilter" value="all" checked>
+                <label for="gpuGDDRAll">All</label>
+                <input type="radio" id="gpuGDDR5" name="gpuGDDRFilter" value="GDDR5">
+                <label for="ramDDR3">GDDR5</label>
+                <input type="radio" id="gpuGDDR6" name="gpuGDDRFilter" value="GDDR6">
+                <label for="ramDDR4">GDDR6</label>
+                <input type="radio" id="gpuGDDR6X" name="gpuGDDRFilter" value="GDDR6X">
+                <label for="ramDDR5">GDDR6X</label>
+            </div>
+
+            <label class="filterLabel">PCIE Generation:</label>
+            <div>
+                <input type="radio" id="gpuPCIEAll" name="gpuPCIEFilter" value="all" checked>
+                <label for="gpuPCIEAll">All</label>
+                <input type="radio" id="gpuPCIE83" name="gpuPCIEFilter" value="PCI Express x8 3.0">
+                <label for="gpuPCIE83">PCI Express x8 3.0</label>
+                <input type="radio" id="gpuPCIE163" name="gpuPCIEFilter" value="PCI Express x16 3.0">
+                <label for="gpuPCIE163">PCI Express x16 3.0</label>
+                <input type="radio" id="gpuPCIE84" name="gpuPCIEFilter" value="PCI Express x8 4.0">
+                <label for="gpuPCIE84">PCI Express x8 4.0</label>
+                <input type="radio" id="gpuPCIE164" name="gpuPCIEFilter" value="PCI Express x16 4.0">
+                <label for="gpuPCIE164">PCI Express x16 4.0</label>
+            </div>
+
+
+
+
+            <label for="dropdownGPU">Select a Graphics Card:</label>
+            <select id="selectGPU" name="selecGPU">
+                <!-- Options will be dynamically added here -->
+            </select>
+
+        </div>
 
 
 
@@ -194,6 +241,7 @@
     <script src="../src/builder-cpu.js" type="module"></script>
     <script src="../src/builder-mobo.js" type="module"></script>
     <script src="../src/builder-ram.js" type="module"></script>
+    <script src="../src/builder-gpu.js" type="module"></script>
     <link rel="stylesheet" href="../public/builder.css">
 
 </body>
