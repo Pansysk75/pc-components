@@ -1,7 +1,7 @@
 import {config} from './config.js';
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Get the dropdown element
+    // Get the dropdown element and the static radio button elements
     const dropdown = document.getElementById('selectCPU');
     const filterRadiosManufacturers = document.querySelectorAll('input[name="cpuManufacturerFilter"]');
     const filterRadiosIntegrated = document.querySelectorAll('input[name="cpuIntegratedFilter"]');
@@ -65,10 +65,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     return;
                 }
             
-                // Extract unique values for the Socket property
+                // Extract unique values for the socket property
                 const uniqueSockets = [...new Set(data.map(item => item.socket))];
-            
-                console.log(uniqueSockets);
             
                 // Assuming filterRadiosSocket is an existing container element
                 const filterRadiosSocket = document.getElementById('cpuSocketFilter');

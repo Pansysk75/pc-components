@@ -2,52 +2,50 @@ import {config} from './config.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     // Get the dropdown element and the static radio button elements
-    const dropdown = document.getElementById('selectMOBO');
-    const filterRadiosMemory = document.querySelectorAll('input[name="moboSlotsFilter"]');
-    const filterRadiosDDR = document.querySelectorAll('input[name="moboDDRFilter"]');
-    const filterRadiosFormFactor = document.querySelectorAll('input[name="moboFormFactorFilter"]');
+    const dropdown = document.getElementById('selectStorage');
+    const filterRadiosType = document.querySelectorAll('input[name="storageTypeFilter"]');
+    const filterRadiosFormFactor = document.querySelectorAll('input[name="storageFormFactorFilter"]');
+    const filterRadiosConnectivity = document.querySelectorAll('input[name="storageConnectivityFilter"]');
+    
 
     // Fetch data from the API endpoint
-    var url = config.backendUrl + '/components/mobos';
+    var url = config.backendUrl + '/components/storages';
     fetch(url)
         .then(response => response.json())
         .then(data => {
             // Populate the dropdown with all options
             populateDropdown(data);
 
-            // Attach event listeners to the memory slots filter radios
-            filterRadiosMemory.forEach(radio => {
+            // Attach event listeners to the storage type filter radios
+            filterRadiosType.forEach(radio => {
                 radio.addEventListener('change', updateDropdown);
             });
 
-            // Attach event listeners to the ddr generation filter radios
-            filterRadiosDDR.forEach(radio => { 
+            // Attach event listeners to the storage form factor filter radios
+            filterRadiosFormFactor.forEach(radio => {
                 radio.addEventListener('change', updateDropdown);
             });
 
-            // Attach event listeners to the form factor filter radios
-            filterRadiosFormFactor.forEach(radio => { 
+            // Attach event listeners to the storage connectivity filter radios
+            filterRadiosConnectivity.forEach(radio => {
                 radio.addEventListener('change', updateDropdown);
             });
-            
             
             // Create filters dynamically
-            createSocketFilter(data);
-            createManufacturerFilter(data)
+            createManufacturerFilter(data);
+            createCapacityFilter(data);
 
             function updateDropdown() {
                 // Get the selected values from all filters
-                const selectedManufacturer = document.querySelector('input[name="MoboManufacturerFilter"]:checked').value;
-                const selectedSocket = document.querySelector('input[name="MoboSocketFilter"]:checked').value;
-                const selectedMemorySlots = document.querySelector('input[name="moboSlotsFilter"]:checked').value;
-                const selectedDDR = document.querySelector('input[name="moboDDRFilter"]:checked').value;
-                const selectedFormFactor = document.querySelector('input[name="moboFormFactorFilter"]:checked').value;
+                const selectedManufacturer = document.querySelector('input[name="storageManufacturerFilter"]:checked').value;
+                const selectedCapacity = document.querySelector('input[name="storageCapacityFilter"]:checked').value;
+                const selectedType = document.querySelector('input[name="storageTypeFilter"]:checked').value;
+                const selectedFormFactor = document.querySelector('input[name="storageFormFactorFilter"]:checked').value;
+                const selectedConnectivity = document.querySelector('input[name="storageConnectivityFilter"]:checked').value;
             
                 // Filter the options based on the selected filters
                 const filteredOptions = data.filter(item =>
-                    ((selectedManufacturer === 'all' || item.Manufacturer_name === selectedManufacturer)) &&
-                    (selectedSocket === 'all' || item.socket == selectedSocket) &&
-                    (selectedMemorySlots === 'all' || item.num_memory_slots === parseInt(selectedMemorySlots, 10)) && (selectedDDR === 'all' || item.ddr_generation === selectedDDR) && (selectedFormFactor === 'all' || item.form_factor === selectedFormFactor)
+                    (selectedManufacturer === 'all' || item.Manufacturer_name === selectedManufacturer) && (selectedCapacity === 'all' || item.capacity == selectedCapacity) && (selectedType === 'all' || item.type === selectedType) && (selectedFormFactor === 'all' || item.form_factor === selectedFormFactor) && (selectedConnectivity === 'all' || item.connectivity === selectedConnectivity) 
                 );
             
                 populateDropdown(filteredOptions);
@@ -71,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const uniqueManufacturers = [...new Set(data.map(item => item.Manufacturer_name))];
         
                 // Assuming filterRadiosManufacturer is an existing container element
-                const filterRadiosManufacturer = document.getElementById('moboManufacturerFilter');
+                const filterRadiosManufacturer = document.getElementById('storageManufacturerFilter');
         
                 // Check if the container element exists
                 if (!filterRadiosManufacturer) {
@@ -82,13 +80,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Create "All" option
                 const allInput = document.createElement('input');
                 allInput.type = 'radio';
-                allInput.id = 'MoboManufacturerFilter_all';
-                allInput.name = 'MoboManufacturerFilter';
+                allInput.id = 'storageManufacturerFilter_all';
+                allInput.name = 'storageManufacturerFilter';
                 allInput.value = 'all';
                 allInput.checked = true; // default to "All" selected
         
                 const allLabel = document.createElement('label');
-                allLabel.htmlFor = 'MoboManufacturerFilter_all';
+                allLabel.htmlFor = 'storageManufacturerFilter_all';
                 allLabel.textContent = 'All';
         
                 filterRadiosManufacturer.appendChild(allInput);
@@ -98,12 +96,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 uniqueManufacturers.forEach(manufacturer => {
                     const input = document.createElement('input');
                     input.type = 'radio';
-                    input.id = `MoboManufacturerFilter_${manufacturer}`;
-                    input.name = 'MoboManufacturerFilter';
+                    input.id = `storageManufacturerFilter_${manufacturer}`;
+                    input.name = 'storageManufacturerFilter';
                     input.value = manufacturer;
         
                     const label = document.createElement('label');
-                    label.htmlFor = `MoboManufacturerFilter_${manufacturer}`;
+                    label.htmlFor = `storageManufacturerFilter_${manufacturer}`;
                     label.textContent = manufacturer;
         
                     filterRadiosManufacturer.appendChild(input);
@@ -111,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
         
                     // Attach event listener to each radio button
                     input.addEventListener('change', function () {
-                        const selectedManufacturer = document.querySelector('input[name="MoboManufacturerFilter"]:checked');
+                        const selectedManufacturer = document.querySelector('input[name="storageManufacturerFilter"]:checked');
                         if (selectedManufacturer) {
                             const filteredOptions = data.filter(item => selectedManufacturer.value === 'all' || item.Manufacturer_name === selectedManufacturer.value);
                             populateDropdown(filteredOptions);
@@ -123,11 +121,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
 
                 // Find the "All" radio button
-                const allManufacturerRadio = document.getElementById('MoboManufacturerFilter_all');
+                const allManufacturerRadio = document.getElementById('storageManufacturerFilter_all');
 
                 // Add a click event listener to the "All" radio button
                 allManufacturerRadio.addEventListener('click', function () {
-                    const selectedManufacturer = document.querySelector('input[name="MoboManufacturerFilter"]:checked');
+                    const selectedManufacturer = document.querySelector('input[name="storageManufacturerFilter"]:checked');
                     if (selectedManufacturer) {
                         const filteredOptions = data.filter(item => selectedManufacturer.value === 'all' || item.Manufacturer_name === selectedManufacturer.value);
                         populateDropdown(filteredOptions);
@@ -137,76 +135,93 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 });
             }
-            
-            function createSocketFilter(data) {
+
+            function createCapacityFilter(data) {
                 // Check if data is an array and not empty
                 if (!Array.isArray(data) || data.length === 0) {
                     console.error('Invalid or empty data array.');
                     return;
                 }
-            
-                // Check if each item in data has the "socket" property
-                if (!data.every(item => 'socket' in item)) {
-                    console.error('Data items should have a "socket" property.');
+        
+                // Check if each item in data has the "capacity" property
+                if (!data.every(item => 'capacity' in item)) {
+                    console.error('Data items should have a "capacity" property.');
                     return;
                 }
-            
-                // Extract unique values for the socket property
-                const uniqueSockets = [...new Set(data.map(item => item.socket))];
-            
-                // Assuming filterRadiosSocket is an existing container element
-                const filterRadiosSocket = document.getElementById('MoboSocketFilter');
-
-                filterRadiosSocket.addEventListener('change', function (event) {
-                    const selectedSocket = document.querySelector('input[name="MoboSocketFilter"]:checked');
-            
-                    if (selectedSocket) {
-                        const filteredOptions = data.filter(item => selectedSocket.value === 'all' || item.socket === selectedSocket.value);
-                        populateDropdown(filteredOptions);
-                    } else {
-                        // Handle case when no socket is selected, perhaps revert to the original data
-                        populateDropdown(data);
-                    }
-                });
-                
+        
+                // Extract unique values for the capacity property
+                const uniqueCapacities = [...new Set(data.map(item => item.capacity))];
+                uniqueCapacities.sort((a, b) => a - b);
+        
+                // Assuming filterRadiosCapacity is an existing container element
+                const filterRadiosCapacity = document.getElementById('storageCapacityFilter');
+        
                 // Check if the container element exists
-                if (!filterRadiosSocket) {
+                if (!filterRadiosCapacity) {
                     console.error('Container element not found.');
                     return;
                 }
-            
+        
                 // Create "All" option
                 const allInput = document.createElement('input');
                 allInput.type = 'radio';
-                allInput.id = 'MoboSocketFilter_all';
-                allInput.name = 'MoboSocketFilter';
+                allInput.id = 'storageCapacityFilter_all';
+                allInput.name = 'storageCapacityFilter';
                 allInput.value = 'all';
                 allInput.checked = true; // default to "All" selected
-            
+        
                 const allLabel = document.createElement('label');
-                allLabel.htmlFor = 'MoboSocketFilter_all';
+                allLabel.htmlFor = 'storageCapacityFilter_all';
                 allLabel.textContent = 'All';
-            
-                filterRadiosSocket.appendChild(allInput);
-                filterRadiosSocket.appendChild(allLabel);
-            
+        
+                filterRadiosCapacity.appendChild(allInput);
+                filterRadiosCapacity.appendChild(allLabel);
+        
                 // Create radio buttons dynamically
-                uniqueSockets.forEach(socket => {
+                uniqueCapacities.forEach(capacity => {
                     const input = document.createElement('input');
                     input.type = 'radio';
-                    input.id = `MoboSocketFilter_${socket}`;
-                    input.name = 'MoboSocketFilter';
-                    input.value = socket;
-            
+                    input.id = `storageCapacityFilter_${capacity}`;
+                    input.name = 'storageCapacityFilter';
+                    input.value = capacity;
+        
                     const label = document.createElement('label');
-                    label.htmlFor = `MoboSocketFilter_${socket}`;
-                    label.textContent = socket;
-            
-                    filterRadiosSocket.appendChild(input);
-                    filterRadiosSocket.appendChild(label);
+                    label.htmlFor = `storageCapacityFilter_${capacity}`;
+                    label.textContent = capacity;
+        
+                    filterRadiosCapacity.appendChild(input);
+                    filterRadiosCapacity.appendChild(label);
+        
+                    // Attach event listener to each radio button
+                    input.addEventListener('change', function () {
+                        const selectedCapacity = document.querySelector('input[name="storageCapacityFilter"]:checked');
+                        if (selectedCapacity) {
+                            const filteredOptions = data.filter(item => selectedCapacity.value === 'all' || item.capacity == selectedCapacity.value);
+                            populateDropdown(filteredOptions);
+                        } else {
+                            // Handle case when no capacity is selected
+                            populateDropdown(data);
+                        }
+                    });
+                });
+
+                // Find the "All" radio button
+                const allCapacityRadio = document.getElementById('storageCapacityFilter_all');
+
+                // Add a click event listener to the "All" radio button
+                allCapacityRadio.addEventListener('click', function () {
+                    const selectedCapacity = document.querySelector('input[name="storageCapacityFilter"]:checked');
+                    if (selectedCapacity) {
+                        const filteredOptions = data.filter(item => selectedCapacity.value === 'all' || item.capacity === selectedCapacity.value);
+                        populateDropdown(filteredOptions);
+                    } else {
+                        // Handle case when no capacity is selected
+                        populateDropdown(data);
+                    }
                 });
             }
 
+            
         })
         .catch(error => console.error('Error fetching data:', error));
         

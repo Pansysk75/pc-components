@@ -118,15 +118,15 @@
                 <label for="moboFormFactorSSI">SSI</label>
             </div>
             
+
             <label for="dropdownMOBO">Select a Motherboard:</label>
             <select id="selectMOBO" name="selectMONO">
                 <!-- Options will be dynamically added here -->
             </select>
 
         </div>
+
         <!--------------------------------------------------------------------->
-
-
         <div class="componentContainer" id="ramContainer">
             <h3>Choose a Memory</h3>
             <label class="filterLabel">Manufacturer:</label>
@@ -166,17 +166,13 @@
                 <label for="ramCapacity8">8GHz</label>
                 <input type="radio" id="ramCapacity16" name="ramCapacityFilter" value="16">
                 <label for="ramCapacity8">16Hz</label>
-                <label for="ramCapacityAll">All</label>
                 <input type="radio" id="ramCapacity32" name="ramCapacityFilter" value="32">
                 <label for="ramCapacity8">32GHz</label>
-                <label for="ramCapacityAll">All</label>
                 <input type="radio" id="ramCapacity64" name="ramCapacityFilter" value="64">
                 <label for="ramCapacity8">64GHz</label>
             </div>
-
             
 
-            
             <label for="dropdownRAM">Select a Memory:</label>
             <select id="selectRAM" name="selecRAM">
                 <!-- Options will be dynamically added here -->
@@ -184,6 +180,7 @@
 
         </div>
 
+        <!--------------------------------------------------------------------->
         <div class="componentContainer" id="gpuContainer">
             <h3>Choose a Graphics Card</h3>
             <label class="filterLabel">Manufacturer:</label>
@@ -223,8 +220,6 @@
             </div>
 
 
-
-
             <label for="dropdownGPU">Select a Graphics Card:</label>
             <select id="selectGPU" name="selecGPU">
                 <!-- Options will be dynamically added here -->
@@ -232,7 +227,70 @@
 
         </div>
 
+        <!--------------------------------------------------------------------->
+        <div class="componentContainer" id="storageContainer">
+            <h3>Choose Sorage</h3>
+            <label class="filterLabel">Manufacturer:</label>
+            <div id="storageManufacturerFilter"> 
+                <!-- Dynamically added here -->
+            </div>
 
+            <label class="filterLabel">Capacity (in GB):</label>
+            <div id="storageCapacityFilter"> 
+                <!-- Dynamically added here -->
+            </div>
+
+            <label class="filterLabel">Type:</label>
+            <div>
+                <input type="radio" id="storageTypeAll" name="storageTypeFilter" value="all" checked>
+                <label for="storageTypeAll">All</label>
+                <input type="radio" id="storageTypeHDD" name="storageTypeFilter" value="HDD">
+                <label for="storageTypeHDD">HDD</label>
+                <input type="radio" id="storageTypeSSD" name="storageTypeFilter" value="SSD">
+                <label for="storageTypeSSD">SSD</label>
+            </div>
+
+            <label class="filterLabel">Form Factor:</label>
+            <div>
+                <input type="radio" id="storageFormFactorAll" name="storageFormFactorFilter" value="all" checked>
+                <label for="storageFormFactorAll">All</label>
+                <input type="radio" id="storageFormFactor25" name="storageFormFactorFilter" value="2.5'">
+                <label for="storageFormFactor25">2.5'</label>
+                <input type="radio" id="storageFormFactor35" name="storageFormFactorFilter" value="3.5'">
+                <label for="storageFormFactor35">3.5'</label>
+                <input type="radio" id="storageFormFactorM22242" name="storageFormFactorFilter" value="M.2 2242">
+                <label for="storageFormFactorM22242">M.2 2242</label>
+                <input type="radio" id="storageFormFactorM22260" name="storageFormFactorFilter" value="M.2 2260">
+                <label for="storageFormFactorM22260">M.2 2260</label>
+                <input type="radio" id="storageFormFactorM22280" name="storageFormFactorFilter" value="M.2 2280">
+                <label for="storageFormFactorM22280">M.2 2280</label>
+                <input type="radio" id="storageFormFactorM222110" name="storageFormFactorFilter" value="M.2 22110">
+                <label for="storageFormFactorM222110">M.2 22110</label>
+            </div>
+
+            <label class="filterLabel">Connectivity:</label>
+            <div>
+                <input type="radio" id="storageConnectivityAll" name="storageConnectivityFilter" value="all" checked>
+                <label for="storageConnectivityAll">All</label>
+                <input type="radio" id="storageConnectivityPCIE3" name="storageConnectivityFilter" value="PCI Express 3.0">
+                <label for="storageConnectivityPCIE3">PCI Express 3.0</label>
+                <input type="radio" id="storageConnectivityPCIE4" name="storageConnectivityFilter" value="PCI Express 4.0">
+                <label for="storageConnectivityPCIE4">PCI Express 4.0</label>
+                <input type="radio" id="storageConnectivityPCIE5" name="storageConnectivityFilter" value="PCI Express 5.0">
+                <label for="storageConnectivityPCIE5">PCI Express 5.0</label>
+                <input type="radio" id="storageConnectivitySAS3" name="storageConnectivityFilter" value="SAS 3.0">
+                <label for="storageConnectivitySAS3">SAS 3.0</label>
+                <input type="radio" id="storageConnectivitySataIII" name="storageConnectivityFilter" value="SATA III">
+                <label for="storageConnectivitySataIII">SATA III</label>   
+            </div>
+
+
+            <label for="dropdownstorage">Select Storage:</label>
+            <select id="selectStorage" name="selecStorage">
+                <!-- Options will be dynamically added here -->
+            </select>
+
+        </div>
 
 
         <!--------------------------------------------------------------------->
@@ -242,6 +300,7 @@
     <script src="../src/builder-mobo.js" type="module"></script>
     <script src="../src/builder-ram.js" type="module"></script>
     <script src="../src/builder-gpu.js" type="module"></script>
+    <script src="../src/builder-storage.js" type="module"></script>
     <link rel="stylesheet" href="../public/builder.css">
 
 </body>

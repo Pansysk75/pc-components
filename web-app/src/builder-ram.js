@@ -1,7 +1,7 @@
 import {config} from './config.js';
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Get the dropdown element
+    // Get the dropdown element and the static radio button elements
     const dropdown = document.getElementById('selectRAM');
     const filterRadiosDDR = document.querySelectorAll('input[name="ramDDRFilter"]');
     const filterRadiosModules = document.querySelectorAll('input[name="ramModulesFilter"]');
@@ -15,20 +15,22 @@ document.addEventListener('DOMContentLoaded', function () {
             // Populate the dropdown with all options
             populateDropdown(data);
 
-            filterRadiosDDR.forEach(radio => { // Updated this line
+            // Attach event listeners to the ddr generation filter radios
+            filterRadiosDDR.forEach(radio => { 
                 radio.addEventListener('change', updateDropdown);
             });
 
-            filterRadiosModules.forEach(radio => { // Updated this line
+            // Attach event listeners to the modules filter radios
+            filterRadiosModules.forEach(radio => { 
                 radio.addEventListener('change', updateDropdown);
             });
 
-            filterRadiosCapacity.forEach(radio => { // Updated this line
+            // Attach event listeners to the ddr generation filter radios
+            filterRadiosCapacity.forEach(radio => { 
                 radio.addEventListener('change', updateDropdown);
             });
             
             // Create filters dynamically
-            //createSocketFilter(data);
             createManufacturerFilter(data)
 
             function updateDropdown() {

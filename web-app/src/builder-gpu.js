@@ -1,7 +1,7 @@
 import {config} from './config.js';
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Get the dropdown element
+    // Get the dropdown element and the static radio button elements
     const dropdown = document.getElementById('selectGPU');
     const filterRadiosMemory = document.querySelectorAll('input[name="gpuGDDRFilter"]');
     const filterRadiosPCIE = document.querySelectorAll('input[name="gpuPCIEFilter"]');
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const uniqueWattages = [...new Set(data.map(item => item.min_psu_wattage))];
                 uniqueWattages.sort((a, b) => a - b);
         
-                // Assuming filterRadiosManufacturer is an existing container element
+                // Assuming filterRadiosWattages is an existing container element
                 const filterRadiosWattages = document.getElementById('gpuWattageFilter');
         
                 // Check if the container element exists
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             const filteredOptions = data.filter(item => selectedWattage.value === 'all' || item.min_psu_wattage == selectedWattage.value);
                             populateDropdown(filteredOptions);
                         } else {
-                            // Handle case when no manufacturer is selected
+                            // Handle case when no wattage is selected
                             populateDropdown(data);
                         }
                     });
