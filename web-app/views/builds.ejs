@@ -21,7 +21,13 @@
             <div class="builds-element-title">
               <h3>
                 <%= builds[i].name %>
-              </h3> <a> by user <%= builds[i].Username %> </a>
+              </h3> <a> by user <b><a href="user/<%= builds[i].Username %>"> <%= builds[i].Username %> </a> </b> </a>
+            </div>
+            <div>
+              <strong>Average Rating: 
+                <%= builds[i].average_rating %>
+                (out of <%= builds[i].number_of_ratings %> ratings)
+              </strong>
             </div>
             <button class="builds-element-view-button" type="button">
               <a target="_top" href="build/<%= builds[i].Build_id %>" text-decoration: none;>View Build</a>
@@ -29,10 +35,6 @@
           </div>
           <div class="builds-element-details">
         
-            <!-- <p><strong>Build ID:</strong>
-              <%= builds[i].Build_id %>
-            </p> -->
-
             <div><strong>CPU:</strong>
               <%= builds[i].CPU_name %>
             </div>
