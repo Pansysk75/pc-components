@@ -197,13 +197,13 @@
                         <input type="radio" id="ramCapacityAll" name="ramCapacityFilter" value="all" checked>
                         <label for="ramCapacityAll">All</label>
                         <input type="radio" id="ramCapacity8" name="ramCapacityFilter" value="8">
-                        <label for="ramCapacity8">8GHz</label>
+                        <label for="ramCapacity8">8GB</label>
                         <input type="radio" id="ramCapacity16" name="ramCapacityFilter" value="16">
-                        <label for="ramCapacity8">16Hz</label>
+                        <label for="ramCapacity8">16GB</label>
                         <input type="radio" id="ramCapacity32" name="ramCapacityFilter" value="32">
-                        <label for="ramCapacity8">32GHz</label>
+                        <label for="ramCapacity8">32GB</label>
                         <input type="radio" id="ramCapacity64" name="ramCapacityFilter" value="64">
-                        <label for="ramCapacity8">64GHz</label>
+                        <label for="ramCapacity8">64GB</label>
                     </div>
                 </div>
                 
@@ -458,17 +458,19 @@
 
             <!--------------------------------------------------------------------->
             <div class="componentContainer" id="nameContainer">
-                <label for="comment">Choose a name for your build:</label>
+                <h3>Pick a name</h3>
+                <!-- <label for="comment">Choose a name for your build:</label> -->
                 <textarea name="buildName" id="buildName" cols="30" rows="1" required></textarea>
             </div>
 
 
             <!--------------------------------------------------------------------->
-            <div class="builder-submit-build">
-            <h4>Save Build</h4>
-            <form>               
-                <input type="button" id="saveBuildButton" value="Save">
-            </form>
+            <!-- <div class="builder-submit-build"> -->
+            <div class="componentContainer">
+                <h3>Save Build</h3>
+                <form>               
+                    <input type="button" class="saveBuildButton" id="saveBuildButton" value="Save">
+                </form>
             </div>
         <% } %>
 
