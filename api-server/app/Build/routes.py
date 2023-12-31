@@ -19,6 +19,13 @@ def post_build():
     build_id = Build.post(db_connection, new_build)
     return jsonify(build_id)
 
+# Delete build
+@build_bp.route('/build/<int:build_id>', methods=['DELETE'])
+def delete_build(build_id):
+    db_connection = database.get_connection(current_app)
+    result = Build.delete(db_connection, build_id)
+    return jsonify(result)
+
 # Get all builds
 @build_bp.route('/builds')
 def get_builds():

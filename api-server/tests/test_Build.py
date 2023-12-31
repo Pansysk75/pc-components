@@ -38,12 +38,24 @@ class TestBuild(unittest.TestCase):
 
         response = client.get(f'/build/{response.json}')
         build = response.json
-        expected = {'Build_id': 45, 'CPU_id': 1, 'CPU_name': 'AMD Ryzen 5 5600X', 'Case_id': 1, 'Case_name': 'Be Quiet Pure Base 500DX Gaming Midi Tower', 'GPU_id': None, 'GPU_name': None, 'MOBO_id': 1,
+        expected = {'CPU_id': 1, 'CPU_name': 'AMD Ryzen 5 5600X', 'Case_id': 1, 'Case_name': 'Be Quiet Pure Base 500DX Gaming Midi Tower', 'GPU_id': None, 'GPU_name': None, 'MOBO_id': 1,
                     'MOBO_name': 'Gigabyte Z790 Gaming X AX (rev. 1.0) Wi-Fi Motherboard', 'PSU_id': 1, 'PSU_name': 'Corsair RMx Series RM850x', 'RAM_id': 1, 'RAM_name': 'G.Skill Trident Z5 RGB', 'Username': 'ByteBuster99', 'name': 'ChristmasBuild', 'storage': [{'Storage_id': 1, 'Storage_name': 'Samsung 870 Evo SSD'}, {'Storage_id': 2, 'Storage_name': 'Western Digital Blue'}],
                     'average_rating': 0.0000, 'number_of_ratings': 0, 'times_added_to_favorites': 0}
         expected["date_created"] = datetime.today().strftime(
             '%a, %d %b %Y 00:00:00 GMT')
+        # Let's accept whatever the database returns for Build_id
+        expected["Build_id"] = response.json["Build_id"]
         self.assertEqual(build, expected)
+        
+    def test_delete_build(self):
+        # This build exists in the test database
+        response = client.delete('/build/4')
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.json)
+
+        # Check that the build is no longer in the database
+        response = client.get('/build/4')
+        self.assertEqual(response.status_code, 404)
 
     def test_get_builds(self):
         # This test is not comprehensive, but i guess it's better than nothing

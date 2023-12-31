@@ -30,6 +30,8 @@ class Build:
         '''
         cursor.execute(sql, (build_id))
         build = cursor.fetchone()
+        if not build:
+            return None
         # Convert average_rating to numeric
         build["average_rating"] = float(build["average_rating"])
         if not build:
@@ -64,6 +66,34 @@ class Build:
             cursor.execute(sql, (build_id, storage_id))
         db.commit()
         return build_id
+    
+    def delete(db, build_id):
+        cursor = db.cursor()
+        
+        # Delete storages first
+        sql = '''
+        DELETE FROM build_has_storage WHERE Build_id = %s;
+        '''
+        cursor.execute(sql, (build_id))
+        
+        # Delete from user_has_favorite_build
+        sql = '''
+        DELETE FROM user_has_favorite_build WHERE Build_id = %s;
+        '''
+        cursor.execute(sql, (build_id))
+        
+        # Delete from user_rates_build
+        sql = '''
+        DELETE FROM user_rates_build WHERE Build_id = %s;
+        '''
+        cursor.execute(sql, (build_id))
+
+        sql = '''
+        DELETE FROM build WHERE Build_id = %s;
+        '''
+        cursor.execute(sql, (build_id))
+        db.commit()
+        return True
 
 
 class BuildRating:
