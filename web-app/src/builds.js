@@ -1,120 +1,165 @@
-import {config} from './config.js';
+import { config } from "./config.js";
 
-function fetchBuild() {
-    // Clear previous data
-    document.getElementById("buildDetails").innerHTML = "";
-    document.getElementById("storageDetails").innerHTML = "";
+let _favorites = {};
+let _username = "";
 
-    var buildId = document.getElementById('buildId').value;
-    var url = config.backendUrl + '/build/' + buildId;
-    console.log('Fetching build from ' + url);
-    // If response is successful, parse the JSON and display the build
-    // Else, display the error
-    fetch(url)
+function getFavorites(username) {
+    return new Promise((resolve, reject) => {
+        const backendUrl = config.backendUrl + "/user/" + username + "/favorites";
+
+        // Get favorites from api
+        console.log("Fetching favorites from " + backendUrl);
+        fetch(backendUrl)
         .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else if (response.status === 404) {
-                throw new Error('Build not found');
-            } else {
-                throw new Error('Something went wrong');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
+            return response.json();
         })
-        .then(build => displayBuild(build))
-        .catch(error => displayError(error));
+        .then(favorites => {
+            resolve(favorites); // Resolve the promise with the favorites
+        })
+        .catch(error => {
+            reject(error); // Reject the promise with the error
+        });
+    });
 }
 
-// Hook to getBuild button
-var getBuildButton = document.getElementById('getBuild');
-getBuildButton.addEventListener('click', fetchBuild);
+// Post favorite to api
+function postFavorite(username, build_id) {
+    return new Promise((resolve, reject) => {
+        const backendUrl = config.backendUrl + "/user/" + username + "/favorites";
+        let new_favorite = {
+            "Build_id": build_id
+        }
+        console.log("Posting favorite to " + backendUrl);
+        fetch(backendUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(new_favorite)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            resolve(); // Resolve the promise
+        })
+        .catch(error => {
+            reject(error); // Reject the promise with the error
+        });
+    });
+}
 
+// Delete favorite from api
+function deleteFavorite(username, build_id) {
+    return new Promise((resolve, reject) => {
+        const backendUrl = config.backendUrl + "/user/" + username + "/favorites";
+        let favorite = {
+            "Build_id": build_id
+        }
+        console.log("Deleting favorite from " + backendUrl);
+        fetch(backendUrl, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(favorite)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            resolve(); // Resolve the promise
+        })
+        .catch(error => {
+            reject(error); // Reject the promise with the error
+        });
+    });
+}
 
-function displayBuild(build) {
-    var table = document.createElement("table");
-    var tbody = document.createElement("tbody");
+// When favorite-button is clicked, add/remove build from favorites
+function toggleFavorite(build_id) {
+    return new Promise((resolve, reject) => {
+        if(build_id in _favorites) {
+            deleteFavorite(_username, build_id)
+                .then(() => {
+                    delete _favorites[build_id];
+                    console.log(_favorites);
+                    resolve();
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        }
+        else {
+            postFavorite(_username, build_id)
+                .then(() => {
+                    _favorites[build_id] = true;
+                    console.log(_favorites);
+                    resolve();
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        }
+    });    
+}
 
-    // Create header row
-    var headerRow = document.createElement("tr");
-    var th1 = document.createElement("th");
-    var th2 = document.createElement("th");
-    th1.textContent = "Component";
-    th2.textContent = "Name";
-    headerRow.appendChild(th1);
-    headerRow.appendChild(th2);
-    tbody.appendChild(headerRow);
-
-    // Create rows for each key-value pair
-    for (var key in build) {
-      var row = document.createElement("tr");
-      var td1 = document.createElement("td");
-      var td2 = document.createElement("td");
-      
-      if(key !== "storage") {
-        td1.textContent = key;
-        td2.textContent = build[key];
-      }  
-
-      
-      row.appendChild(td1);
-      row.appendChild(td2);
-      tbody.appendChild(row);
+function updateFavoriteButton(button) {
+    let build_id = button.value;
+    let icon = button.children[0];
+    if(build_id in _favorites) {
+        icon.style["font-variation-settings"] = '"FILL" 1';
+    }else{
+        icon.style["font-variation-settings"] = '"FILL" 0';
     }
-
-    // Append the tbody to the table
-    table.appendChild(tbody);
-
-    // Append the table to the specified div
-    document.getElementById("buildDetails").appendChild(table);
-
-    displayStorage(build);
-}
-
-function displayStorage(build) {
-    var table = document.createElement("table");
-    var tbody = document.createElement("tbody");
-
-    // Create header row
-    var headerRow = document.createElement("tr");
-    var th1 = document.createElement("th");
-    var th2 = document.createElement("th");
-    th1.textContent = "Storage Component";
-    th2.textContent = "Name";
-    headerRow.appendChild(th1);
-    headerRow.appendChild(th2);
-    tbody.appendChild(headerRow);
-
-    console.log("built is " + typeof(build['storage']));
-    console.log(build['storage']);
-    // Create rows for each key-value pair
-    for (let i=0 ; i<build['storage'].length ; i++){
-        for (var key in build['storage'][i]) {
-        
-            var row = document.createElement("tr");
-            var td1 = document.createElement("td");
-            var td2 = document.createElement("td");
-            
-            
-            td1.textContent = key;
-            td2.textContent = build['storage'][i][key];
-              
-      
-            
-            row.appendChild(td1);
-            row.appendChild(td2);
-            tbody.appendChild(row);
-          }
-    }
-
-    // Append the tbody to the table
-    table.appendChild(tbody);
-
-    // Append the table to the specified div
-    document.getElementById("storageDetails").appendChild(table);
 }
 
 
-function displayError(error) {
-    var buildDetails = document.getElementById('buildDetails');
-    buildDetails.innerHTML = error;
+function onFavoriteButtonClick() {
+
+    console.log("Favorite button clicked");
+    console.log(_favorites);
+    // Get build_id from favorite button
+    let build_id = this.value;
+
+    // Toggle favorite
+    toggleFavorite(build_id)
+        .then(() => {
+            // Update favorite button
+            updateFavoriteButton(this);
+            console.log(_favorites);
+        })
+        .catch(error => {
+            console.error(error);
+        });  
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    _username = document.getElementById("username").value;
+    getFavorites(_username)
+        .then(favorites => {
+            _favorites = favorites. reduce((map, obj) => {
+                map[obj.Build_id] = true;
+                return map;
+            }, {});
+            
+            // Update and add event listener to favorite buttons
+            let favoriteButtons = document.getElementsByClassName("favorite-button");
+            for (let i = 0; i < favoriteButtons.length; i++) {
+                updateFavoriteButton(favoriteButtons[i]);
+                favoriteButtons[i].addEventListener("click", onFavoriteButtonClick);
+            }
+
+            console.log(_favorites);
+
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+
+
+});

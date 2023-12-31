@@ -9,6 +9,7 @@
     background-color: rgba(0, 0, 0, 0.04);
     margin: 10px 0;
     padding: 20px 40px;
+    width: 80%;
 }
 
 .builds-element > .title-bar {
@@ -32,6 +33,7 @@
     display: flex;
     flex-direction: row;
     align-items: start;
+    justify-content: space-between;
     margin: 10px 0;
     padding: 10px;
 }
