@@ -112,3 +112,56 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Error fetching favorites:", error);
         });
 });
+
+
+class BuildManager {
+    constructor() {
+        this.username = "";
+    }
+
+    async fetchAPI(endpoint, options = {}) {
+        const url = `${config.backendUrl}/${endpoint}`;
+        try {
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error(`API request failed with status ${response.status}: ${response.statusText}`);
+            }
+            return response.json();
+        } catch (error) {
+            console.error(`Error during API request to ${url}:`, error);
+            throw error;
+        }
+    }
+
+    deleteBuild(buildId) {
+        return this.fetchAPI(`build/${buildId}`, { method: "DELETE" });
+    }
+}
+
+function onDeleteButtonClick(event) {
+    const buildId = this.value;
+
+    buildManager.deleteBuild(buildId)
+        .then(() => {
+            window.location.reload();
+        })
+        .catch(error => {
+            console.error(`Error deleting build ${buildId}:`, error);
+            alert(`Failed to delete build: ${error}`);
+        });
+}
+
+const buildManager = new BuildManager();
+
+document.addEventListener("DOMContentLoaded", () => {
+    buildManager.username = document.getElementById("username").value;
+
+    if (!buildManager.username) {
+        return;
+    }
+
+    const deleteButtons = document.getElementsByClassName("delete-button");
+    Array.from(deleteButtons).forEach(button => {
+        button.addEventListener("click", onDeleteButtonClick);
+    });
+});

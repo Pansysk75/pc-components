@@ -19,7 +19,9 @@
                 <% for (let i = 0; i < user.builds_created.length; i++) { %>
                 <li class="build-created">
                   <a href="/build/<%=  user.builds_created[i].Build_id %>"><%=  user.builds_created[i].name %></a>
-                  <button class="delete-build" value="<%= user.builds_created[i].Build_id %>">X</button>      
+                  <% if (session.Username == user.Username || session.Username == "admin" ) { %>
+                    <button class="delete-build" value="<%= user.builds_created[i].Build_id %>">X</button>
+                  <% } %>
                 </li>
                 <% } %>
             </ul>
