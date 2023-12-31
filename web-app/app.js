@@ -51,7 +51,6 @@ router.get('/user/:username', async (req, res) => {
     
     const backendUrl = "http://64.226.122.251:81/"
 
-    // Get id from url
     let username = req.params.username;
 
     // Fetch user from backend
@@ -65,7 +64,7 @@ router.get('/user/:username', async (req, res) => {
             console.log(error);
         });
 
-    if (userData.error) {
+    if(userData == undefined || userData.error != undefined) {
         res.send("User not found");
         return;
     }

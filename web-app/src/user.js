@@ -3,6 +3,7 @@ import {config} from './config.js';
 
 function deleteBuild(buildId) {
     // Send a DELETE request to the backend API
+    // This is completely unsafe bc this is client-side code and anyone can send a DELETE request to the API
     const url = `${config.backendUrl}/build/${buildId}`;
     return fetch(url, {method: 'DELETE'})
         .then(response => {
