@@ -17,7 +17,10 @@
             <strong>Builds Created: </strong>
             <ul> 
                 <% for (let i = 0; i < user.builds_created.length; i++) { %>
-                <li><a href="/build/<%=  user.builds_created[i].Build_id %>"><%=  user.builds_created[i].name %></a></li>
+                <li class="build-created">
+                  <a href="/build/<%=  user.builds_created[i].Build_id %>"><%=  user.builds_created[i].name %></a>
+                  <button class="delete-build" value="<%= user.builds_created[i].Build_id %>">X</button>      
+                </li>
                 <% } %>
             </ul>
         </div>
@@ -31,5 +34,6 @@
         </div>
     </div>
 
+  <script type="module", src="../src/user.js"></script>
   </body>
 </html>
