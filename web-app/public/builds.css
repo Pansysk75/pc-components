@@ -76,7 +76,7 @@
     padding: var(--spacing-small);
 }
 
-.view-button:hover:enabled , .view-button:focus:enabled , .favorite-button:hover:enabled, .favorite-button:focus:enabled {
+.view-button:hover:enabled , .favorite-button:hover:enabled {
     background-color: var(--primary-color);
     color: white;
 }
