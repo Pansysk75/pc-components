@@ -3,15 +3,18 @@
   <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="/public/styles.css" />
+    <link rel="stylesheet" href="../public/styles.css" />
+    <link rel="stylesheet" href="../public/login.css" />
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+
+
   </head>
   <body>
     <%-include('partials/header')-%>
     <%-include('partials/navbar')-%>
     <h1 class="paragraph">Login</h1>
     <p>Please fill out this form with the required information</p>
-    <form method="post" action="/login" >
+    <form method="post" action="/login">
       <fieldset>
         <label for="first-name">Enter Your username: <input type="text" name="Username" required/></label>
       </fieldset>
