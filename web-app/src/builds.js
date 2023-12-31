@@ -63,6 +63,19 @@ class FavoritesManager {
         const icon = button.children[0];
         icon.style["font-variation-settings"] = `"FILL" ${buildId in this.favorites ? 1 : 0}`;
     }
+
+    updateFavoriteCount(button) {
+        const build_id = button.value;
+        const parent = button.closest(".builds-element");
+        const favoriteCount = parent.querySelector(".times_added_to_favorites");
+        const current_count = favoriteCount.innerHTML;
+        // If not in users favorites, value must have been decremented
+        if (build_id in this.favorites) {
+            favoriteCount.innerHTML = parseInt(current_count) + 1;
+        } else {
+            favoriteCount.innerHTML = parseInt(current_count) - 1;
+        }
+    }
 }
 
 function onFavoriteButtonClick(event) {
@@ -71,6 +84,7 @@ function onFavoriteButtonClick(event) {
     favoritesManager.toggleFavorite(buildId)
         .then(() => {
             favoritesManager.updateFavoriteButton(this);
+            favoritesManager.updateFavoriteCount(this);
         })
         .catch(error => {
             console.error(`Error toggling favorite for buildId ${buildId}:`, error);
