@@ -30,7 +30,7 @@
             </div>
             <div class="button-container">
               <button class="view-button" type="button">
-                <span target="_top" href="build/<%= builds[i].Build_id %>">View Build</span>
+                <a target="_top" href="build/<%= builds[i].Build_id %>">View Build</a>
               </button>
               <button class="favorite-button" type="button" <%-session.Username?'':"disabled title='Login to favorite' " %> value="<%= builds[i].Build_id %>" >
                   <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;"> favorite </span>
