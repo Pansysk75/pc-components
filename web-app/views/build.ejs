@@ -10,10 +10,14 @@
 
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
 </head>
+
 <body>
+
     <%-include('partials/header')-%>
     <%-include('partials/navbar')-%>
-        
+
+    <input type="hidden" id="build_id" value="<%= build.Build_id %>">
+
     <div class="build-details">
       <div class="build-details-header">
         <h2> <%= build.name %> </h2>
@@ -39,12 +43,11 @@
       </div>
      
 
-
     <div class="ratings">
-
       <h3>Comments</h3>
       <% for (let i = 0; i < ratings.length; i++) { %>
         <div class="rating">
+          <input type="hidden" class="username" value="<%= ratings[i].Username %>">
           <div class="rating-header">  
             <div class="rating-comment">
               <h4><a href="/user/<%= ratings[i].Username %>"><%= ratings[i].Username %>:</a></h4>
