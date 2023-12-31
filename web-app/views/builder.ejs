@@ -458,17 +458,19 @@
 
             <!--------------------------------------------------------------------->
             <div class="componentContainer" id="nameContainer">
-                <label for="comment">Choose a name for your build:</label>
+                <h3>Pick a name</h3>
+                <!-- <label for="comment">Choose a name for your build:</label> -->
                 <textarea name="buildName" id="buildName" cols="30" rows="1" required></textarea>
             </div>
 
 
             <!--------------------------------------------------------------------->
-            <div class="builder-submit-build">
-            <h4>Save Build</h4>
-            <form>               
-                <input type="button" id="saveBuildButton" value="Save">
-            </form>
+            <!-- <div class="builder-submit-build"> -->
+            <div class="componentContainer">
+                <h3>Save Build</h3>
+                <form>               
+                    <input type="button" class="saveBuildButton" id="saveBuildButton" value="Save">
+                </form>
             </div>
         <% } %>
 
