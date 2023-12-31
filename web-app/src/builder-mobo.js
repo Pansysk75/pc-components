@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Add the event listener directly inside the module
 moboDropdown.addEventListener('change', function () {
     selectedMobo = moboDropdown.value;
-    console.log(selectedMobo);
+    //console.log(selectedMobo);
 });
 
 export { selectedMobo };

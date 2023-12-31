@@ -39,11 +39,6 @@ document.addEventListener('DOMContentLoaded', function () {
             createManufacturerFilter(data);
             createCapacityFilter(data);
 
-
-
-
-           
-              
             
             // Add event listener for the "Add" button
             const addButton = document.getElementById('addStorageButton');

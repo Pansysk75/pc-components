@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Add the event listener directly inside the module
 cpuDropdown.addEventListener('change', function () {
     selectedCpu = cpuDropdown.value;
-    console.log(selectedCpu);
+    //console.log(selectedCpu);
 });
 
 export { selectedCpu };

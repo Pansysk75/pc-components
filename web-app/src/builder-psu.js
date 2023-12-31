@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Add the event listener directly inside the module
 psuDropdown.addEventListener('change', function () {
     selectedPsu = psuDropdown.value;
-    console.log(selectedPsu);
+    //console.log(selectedPsu);
 });
 
 export { selectedPsu };

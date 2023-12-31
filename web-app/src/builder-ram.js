@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Add the event listener directly inside the module
 ramDropdown.addEventListener('change', function () {
     selectedRam = ramDropdown.value;
-    console.log(selectedRam);
+    //console.log(selectedRam);
 });
 
 export { selectedRam };

@@ -51,20 +51,20 @@ document.addEventListener('DOMContentLoaded', function () {
         // Make the POST request
         fetch(endpointUrl, requestOptions)
             .then(response => {
-            // Check if the request was successful (status code in the range 200-299)
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            // Parse the JSON response
-            return response.json();
+                // Check if the request was successful (status code in the range 200-299)
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                // Parse the JSON response
+                return response.json();
             })
             .then(data => {
-            // Handle the response data
-            console.log('Response data:', data);
+                // Handle the response data
+                console.log('Response data:', data);
             })
             .catch(error => {
-            // Handle errors
-            console.error('Error:', error);
+                // Handle errors
+                console.error('Error:', error);
             });
 
     });

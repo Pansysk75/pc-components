@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Add the event listener directly inside the module
 caseDropdown.addEventListener('change', function () {
     selectedCase = caseDropdown.value;
-    console.log(selectedCase);
+    //console.log(selectedCase);
 });
 
 export { selectedCase };

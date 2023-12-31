@@ -245,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Add the event listener directly inside the module
 gpuDropdown.addEventListener('change', function () {
     selectedGpu = gpuDropdown.value;
-    console.log(selectedGpu);
+    //console.log(selectedGpu);
 });
 
 export { selectedGpu };
