@@ -28,12 +28,15 @@
               <h2> <%= builds[i].name %> </h2> 
               <div> by <b> <a href="user/<%= builds[i].Username %>"> <%= builds[i].Username %> </a> </b> </div>
             </div>
-            <button class="view-button" type="button">
-              <a target="_top" href="build/<%= builds[i].Build_id %>" text-decoration: none;>View Build</a>
-            </button>
-            <button class="favorite-button" type="button" value="<%= builds[i].Build_id %>" >
-                <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;"> favorite </span>
-            </button>
+            <div class="button-container">
+              <button class="view-button" type="button">
+                <span target="_top" href="build/<%= builds[i].Build_id %>">View Build</span>
+              </button>
+              <button class="favorite-button" type="button" <%-session.Username?'':"disabled title='Login to favorite' " %> value="<%= builds[i].Build_id %>" >
+                  <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;"> favorite </span>
+              </button>
+            </div>
+         
           </div>
           <div class="details">
         
