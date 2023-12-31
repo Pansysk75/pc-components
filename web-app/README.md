@@ -7,4 +7,4 @@ This is the NodeJS backend and the frontend of the PC Components web app.
 - Install dependencies `npm install`
 - Run `node server.js`
 
-Then navigate to `localhost:8000` in your browser.
+Then navigate to `localhost:80` in your browser.
