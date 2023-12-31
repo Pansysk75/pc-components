@@ -35,6 +35,13 @@
               <button class="favorite-button" type="button" <%-session.Username?'':"disabled title='Login to favorite' " %> value="<%= builds[i].Build_id %>" >
                   <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;"> favorite </span>
               </button>
+              <% if (session.Username == builds[i].Username || session.Username == "admin") { %>
+                <button class="delete-button" type="button" value="<%= builds[i].Build_id %>">
+                  <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;"> delete </span>
+                </button>
+              <% } %>
+              
+              
             </div>
          
           </div>
