@@ -24,10 +24,13 @@ document.addEventListener('DOMContentLoaded', function () {
             "RAM_id": selectedRam,
             "PSU_id": selectedPsu,
             "Case_id": selectedCase,
-            "GPU_id": selectedGpu,
             "storage_ids": [parseInt(selectedStorage, 10)]
         };
-
+        
+        
+        if (selectedGpu !== null){
+            newBuild["GPU_id"] = selectedGpu;
+        }
 
         console.log(newBuild);
         
