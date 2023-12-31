@@ -1,3 +1,13 @@
+:root {
+    /* Define standard spacing and color variables for consistency */
+    --spacing-small: 10px;
+    --spacing-medium: 15px;
+    --spacing-large: 40px;
+    --primary-color: #182532;
+    --background-light: rgba(0, 0, 0, 0.04);
+    --border-radius: 5px;
+}
+
 .builds {
     display: flex;
     flex-direction: column;
@@ -6,52 +16,82 @@
 }
 
 .builds-element {
-    background-color: rgba(0, 0, 0, 0.04);
-    margin: 10px 0;
-    padding: 20px 40px;
+    background-color: var(--background-light);
+    margin: var(--spacing-small) 0;
+    padding: var(--spacing-medium) var(--spacing-large);
+    width: 80%;
+    max-width: 1000px;
 }
 
-.builds-element > .title-bar {
+.title-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.builds-element .title {
-    display: flex;
-    flex-direction: column;
+.title {
+    display: block;
     align-items: start;
-    margin: 10px 0;
+    margin: var(--spacing-small) 0;
 }
 
-.builds-element .title * {
-    margin: 0px;
+.title h1, .title h2 {
+    margin: 0; /* Specify exact elements instead of using universal selector */
 }
 
-.builds-element > .details {
+.details {
     display: flex;
     flex-direction: row;
     align-items: start;
-    margin: 10px 0;
-    padding: 10px;
+    justify-content: space-between;
+    margin: var(--spacing-small) 0;
+    padding: var(--spacing-small);
 }
 
-.builds-element > .details div {
-    margin: 0 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #182532;
+.details div {
+    margin: 0 var(--spacing-small);
+    display: block; /* Changed to block for simplicity */
+    color: var(--primary-color);
 }
 
-.builds-element > .details ul {
+.details ul {
     margin: 0;
     padding: 0;
+    list-style: none; /* Remove bullet points from lists */
 }
 
-.builds-element > .view-button {
+.button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin:  0;
+}
+
+.view-button, .favorite-button {
     font-weight: bold;
-    border: #182532 2px solid;
-    height: 100%;
-    border-radius: 5px;
+    border: 0px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    margin: var(--spacing-small);
+    padding: var(--spacing-small);
+}
+
+.view-button:hover:enabled, .favorite-button:hover:enabled {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.view-button:hover:enabled a{
+    color: white;
+}
+
+/* Media query for responsive adjustments */
+@media (max-width: 768px) {
+    .builds-element {
+        width: 95%; /* Adjust width for smaller screens */
+    }
+
+    .details {
+        flex-direction: column; /* Stack details vertically on small screens */
+    }
 }

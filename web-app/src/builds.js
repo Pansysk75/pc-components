@@ -1,120 +1,100 @@
-import {config} from './config.js';
+import { config } from "./config.js";
 
-function fetchBuild() {
-    // Clear previous data
-    document.getElementById("buildDetails").innerHTML = "";
-    document.getElementById("storageDetails").innerHTML = "";
+class FavoritesManager {
+    constructor() {
+        this.favorites = {};
+        this.username = "";
+    }
 
-    var buildId = document.getElementById('buildId').value;
-    var url = config.backendUrl + '/build/' + buildId;
-    console.log('Fetching build from ' + url);
-    // If response is successful, parse the JSON and display the build
-    // Else, display the error
-    fetch(url)
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else if (response.status === 404) {
-                throw new Error('Build not found');
-            } else {
-                throw new Error('Something went wrong');
+    async fetchAPI(endpoint, options = {}) {
+        const url = `${config.backendUrl}/user/${this.username}/${endpoint}`;
+        try {
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error(`API request failed with status ${response.status}: ${response.statusText}`);
             }
+            return response.json();
+        } catch (error) {
+            console.error(`Error during API request to ${url}:`, error);
+            throw error;
+        }
+    }
+
+    getFavorites() {
+        return this.fetchAPI('favorites')
+            .then(favoritesArray => {
+                this.favorites = favoritesArray.reduce((map, { Build_id }) => {
+                    map[Build_id] = true;
+                    return map;
+                }, {});
+            });
+    }
+
+    postFavorite(buildId) {
+        return this.fetchAPI('favorites', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ Build_id: buildId })
+        });
+    }
+
+    deleteFavorite(buildId) {
+        return this.fetchAPI('favorites', {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ Build_id: buildId })
+        });
+    }
+
+    toggleFavorite(buildId) {
+        const action = buildId in this.favorites ? this.deleteFavorite(buildId) : this.postFavorite(buildId);
+
+        return action.then(() => {
+            if (buildId in this.favorites) {
+                delete this.favorites[buildId];
+            } else {
+                this.favorites[buildId] = true;
+            }
+        });
+    }
+
+    updateFavoriteButton(button) {
+        const buildId = button.value;
+        const icon = button.children[0];
+        icon.style["font-variation-settings"] = `"FILL" ${buildId in this.favorites ? 1 : 0}`;
+    }
+}
+
+function onFavoriteButtonClick(event) {
+    const buildId = this.value;
+
+    favoritesManager.toggleFavorite(buildId)
+        .then(() => {
+            favoritesManager.updateFavoriteButton(this);
         })
-        .then(build => displayBuild(build))
-        .catch(error => displayError(error));
+        .catch(error => {
+            console.error(`Error toggling favorite for buildId ${buildId}:`, error);
+        });
 }
 
-// Hook to getBuild button
-var getBuildButton = document.getElementById('getBuild');
-getBuildButton.addEventListener('click', fetchBuild);
+const favoritesManager = new FavoritesManager();
 
+document.addEventListener("DOMContentLoaded", () => {
+    favoritesManager.username = document.getElementById("username").value;
 
-function displayBuild(build) {
-    var table = document.createElement("table");
-    var tbody = document.createElement("tbody");
-
-    // Create header row
-    var headerRow = document.createElement("tr");
-    var th1 = document.createElement("th");
-    var th2 = document.createElement("th");
-    th1.textContent = "Component";
-    th2.textContent = "Name";
-    headerRow.appendChild(th1);
-    headerRow.appendChild(th2);
-    tbody.appendChild(headerRow);
-
-    // Create rows for each key-value pair
-    for (var key in build) {
-      var row = document.createElement("tr");
-      var td1 = document.createElement("td");
-      var td2 = document.createElement("td");
-      
-      if(key !== "storage") {
-        td1.textContent = key;
-        td2.textContent = build[key];
-      }  
-
-      
-      row.appendChild(td1);
-      row.appendChild(td2);
-      tbody.appendChild(row);
+    if (!favoritesManager.username) {
+        return;
     }
-
-    // Append the tbody to the table
-    table.appendChild(tbody);
-
-    // Append the table to the specified div
-    document.getElementById("buildDetails").appendChild(table);
-
-    displayStorage(build);
-}
-
-function displayStorage(build) {
-    var table = document.createElement("table");
-    var tbody = document.createElement("tbody");
-
-    // Create header row
-    var headerRow = document.createElement("tr");
-    var th1 = document.createElement("th");
-    var th2 = document.createElement("th");
-    th1.textContent = "Storage Component";
-    th2.textContent = "Name";
-    headerRow.appendChild(th1);
-    headerRow.appendChild(th2);
-    tbody.appendChild(headerRow);
-
-    console.log("built is " + typeof(build['storage']));
-    console.log(build['storage']);
-    // Create rows for each key-value pair
-    for (let i=0 ; i<build['storage'].length ; i++){
-        for (var key in build['storage'][i]) {
-        
-            var row = document.createElement("tr");
-            var td1 = document.createElement("td");
-            var td2 = document.createElement("td");
-            
-            
-            td1.textContent = key;
-            td2.textContent = build['storage'][i][key];
-              
-      
-            
-            row.appendChild(td1);
-            row.appendChild(td2);
-            tbody.appendChild(row);
-          }
-    }
-
-    // Append the tbody to the table
-    table.appendChild(tbody);
-
-    // Append the table to the specified div
-    document.getElementById("storageDetails").appendChild(table);
-}
-
-
-function displayError(error) {
-    var buildDetails = document.getElementById('buildDetails');
-    buildDetails.innerHTML = error;
-}
-
+    
+    favoritesManager.getFavorites()
+        .then(() => {
+            const favoriteButtons = document.getElementsByClassName("favorite-button");
+            Array.from(favoriteButtons).forEach(button => {
+                favoritesManager.updateFavoriteButton(button);
+                button.addEventListener("click", onFavoriteButtonClick);
+            });
+        })
+        .catch(error => {
+            console.error("Error fetching favorites:", error);
+        });
+});

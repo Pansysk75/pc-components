@@ -4,14 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All Builds</title>
   <link rel="stylesheet" href="../public/styles.css" />
+  <link rel="stylesheet" href="../public/builds.css" />
   <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /><body>
 </head>
 
 <body>
   <%-include('partials/header')-%>
   <%-include('partials/navbar')-%>
+
+  <input type="hidden" id="username" value="<%= session.Username %>">
+
+  <title>All Builds</title>
+
   <div class="main-body">
     <h3>All Builds</h3>
     <div class='builds'>
@@ -22,9 +28,15 @@
               <h2> <%= builds[i].name %> </h2> 
               <div> by <b> <a href="user/<%= builds[i].Username %>"> <%= builds[i].Username %> </a> </b> </div>
             </div>
-            <button class="view-button" type="button">
-              <a target="_top" href="build/<%= builds[i].Build_id %>" text-decoration: none;>View Build</a>
-            </button>
+            <div class="button-container">
+              <button class="view-button" type="button">
+                <a target="_top" href="build/<%= builds[i].Build_id %>">View Build</a>
+              </button>
+              <button class="favorite-button" type="button" <%-session.Username?'':"disabled title='Login to favorite' " %> value="<%= builds[i].Build_id %>" >
+                  <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;"> favorite </span>
+              </button>
+            </div>
+         
           </div>
           <div class="details">
         
@@ -70,7 +82,7 @@
         <% } %>
     </div>
   </div>
-  <link rel="stylesheet" href="../public/builds.css">
+  <script type="module" src="../src/builds.js"></script>
 </body>
 
 </html>
