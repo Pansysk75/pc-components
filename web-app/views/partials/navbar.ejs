@@ -13,9 +13,25 @@
             </button>
         </div> -->
 
-        <div class="menuButton"> 
+        <!-- <div class="menuButton"> 
             <button onclick="myFunction()" class="button dropbtn" type="button" style="text-decoration: none;">Components</button>
             <div id="myDropdown" class="dropdown-content">
+                <a href="/components/cpus">CPUs</a>
+                <a href="/components/mobos">Motherboards</a>
+                <a href="/components/rams">Memory</a>
+                <a href="/components/gpus">Graphics Cards</a>
+                <a href="/components/storages">Storage</a>
+                <a href="/components/psus">Power Supplies</a>
+                <a href="/components/cases">Cases</a>
+            </div>
+        </div> -->
+
+        <div class="menuButton" id="componentsDropdown">
+            <button class="button" type="button">
+                <a id="component-button" class="buttton" target="_top" href="/components" text-decoration:
+                    none;>Components</a>
+            </button>
+            <div class="dropdown-content" id="myDropdown">
                 <a href="/components/cpus">CPUs</a>
                 <a href="/components/mobos">Motherboards</a>
                 <a href="/components/rams">Memory</a>

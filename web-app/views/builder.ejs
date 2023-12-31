@@ -14,51 +14,60 @@
 
 
     <div class="main-body">
-        <h3>Choose Your Parts</h3>
+        <h2>Choose Your Parts</h3>
         <!--------------------------------------------------------------------->
         <div class="componentContainer" id="cpuContainer">
             <h3>Choose a CPU</h3>
-            <label class="filterLabel">Manufacturer:</label>
-            <div class="filterOptions">
-                <input type="radio" id="cpuManufacturerAll" name="cpuManufacturerFilter" value="all" checked>
-                <label for="cpuManufacturerAll" class="filterLabel2">All</label>
-                <input type="radio" id="cpuManufacturerAMD" name="cpuManufacturerFilter" value="AMD">
-                <label for="cpuManufacturerAMD" class="filterLabel2">AMD</label>
-                <input type="radio" id="cpuManufacturerINTEL" name="cpuManufacturerFilter" value="INTEL">
-                <label for="cpuManufacturerINTEL" class="filterLabel2">INTEL</label>
-            </div>
-
-            <label class="filterLabel">Integrated Graphics:</label>
-            <div>
-                <input type="radio" id="cpuIntegratedAll" name="cpuIntegratedFilter" value="all" checked>
-                <label for="cpuIntegratedAll">All</label>
-                <input type="radio" id="cpuIntegratedYes" name="cpuIntegratedFilter" value="true">
-                <label for="cpuIntegratedTrue">Yes</label>
-                <input type="radio" id="cpuIntegratedFalse" name="cpuIntegratedFilter" value="false">
-                <label for="cpuIntegratedFalse">No</label>
+            
+            <div class="optionLine">
+                <label class="filterLabel">Manufacturer:</label>
+                <div class="radioButtons">
+                    <input type="radio" id="cpuManufacturerAll" name="cpuManufacturerFilter" value="all" checked>
+                    <label for="cpuManufacturerAll" class="filterLabel2">All</label>
+                    <input type="radio" id="cpuManufacturerAMD" name="cpuManufacturerFilter" value="AMD">
+                    <label for="cpuManufacturerAMD" class="filterLabel2">AMD</label>
+                    <input type="radio" id="cpuManufacturerINTEL" name="cpuManufacturerFilter" value="INTEL">
+                    <label for="cpuManufacturerINTEL" class="filterLabel2">INTEL</label>
+                </div>
             </div>
             
-            <label class="filterLabel">Number of Physical Cores:</label>
-            <div>
-                <input type="radio" id="cpuCoresAll" name="cpuCoresFilter" value="all" checked>
-                <label for="cpuCoresAll">All</label>
-                <input type="radio" id="cpuCores4" name="cpuCoresFilter" value="4">
-                <label for="cpuCoresAll">4</label>
-                <input type="radio" id="cpuCores6" name="cpuCoresFilter" value="6">
-                <label for="cpuCoresAll">6</label>
-                <input type="radio" id="cpuCores8" name="cpuCoresFilter" value="8">
-                <label for="cpuCoresAll">8</label>
-                <input type="radio" id="moreThanEightCoresFilter" name="cpuCoresFilter" value="moreThan8">
-                <label for="moreThanEightCoresFilter">More than 8</label>
+            <div class="optionLine">
+                <label class="filterLabel">Integrated Graphics:</label>
+                <div class="radioButtons">
+                    <input type="radio" id="cpuIntegratedAll" name="cpuIntegratedFilter" value="all" checked>
+                    <label for="cpuIntegratedAll">All</label>
+                    <input type="radio" id="cpuIntegratedYes" name="cpuIntegratedFilter" value="true">
+                    <label for="cpuIntegratedTrue">Yes</label>
+                    <input type="radio" id="cpuIntegratedFalse" name="cpuIntegratedFilter" value="false">
+                    <label for="cpuIntegratedFalse">No</label>
+                </div>
             </div>
-
-            <label class="filterLabel">Socket Type:</label>
-            <div id="cpuSocketFilter">
-                <!-- Socket filter radio buttons will be dynamically added here -->
-            </div>
-
             
-            <label for="selectCPU">Select a CPU:</label>
+            <div class="optionLine">
+                <label class="filterLabel">Number of Physical Cores:</label>
+                <div class="radioButtons">
+                    <input type="radio" id="cpuCoresAll" name="cpuCoresFilter" value="all" checked>
+                    <label for="cpuCoresAll">All</label>
+                    <input type="radio" id="cpuCores4" name="cpuCoresFilter" value="4">
+                    <label for="cpuCoresAll">4</label>
+                    <input type="radio" id="cpuCores6" name="cpuCoresFilter" value="6">
+                    <label for="cpuCoresAll">6</label>
+                    <input type="radio" id="cpuCores8" name="cpuCoresFilter" value="8">
+                    <label for="cpuCoresAll">8</label>
+                    <input type="radio" id="moreThanEightCoresFilter" name="cpuCoresFilter" value="moreThan8">
+                    <label for="moreThanEightCoresFilter">More than 8</label>
+                </div>
+            </div>
+            
+            <div class="optionLine">
+                <label class="filterLabel">Socket Type:</label>
+                <div id="cpuSocketFilter" class="radioButtons">
+                    <!-- Socket filter radio buttons will be dynamically added here -->
+                </div>
+            </div>
+            
+
+            <label for="selectCPU">Selected CPU:</label>
             <select id="selectCPU" name="selectCPU">
                 <!-- Options will be dynamically added here -->
             </select> 
@@ -68,58 +77,69 @@
         <!--------------------------------------------------------------------->
         <div class="componentContainer" id="moboContainer">
             <h3>Choose a Motherboard</h3>
-            <label class="filterLabel">Manufacturer:</label>
-            <div id="moboManufacturerFilter">
-                <!-- Socket filter radio buttons will be dynamically added here -->
+            
+            <div class="optionLine">
+                <label class="filterLabel">Manufacturer:</label>
+                <div id="moboManufacturerFilter" class="radioButtons">
+                    <!-- Socket filter radio buttons will be dynamically added here -->
+                </div>
             </div>
 
-            <label class="filterLabel">Socket Type:</label>
-            <div id="MoboSocketFilter">
-                <!-- Socket filter radio buttons will be dynamically added here -->
+            <div class="optionLine">
+                <label class="filterLabel">Socket Type:</label>
+                <div id="MoboSocketFilter" class="radioButtons">
+                    <!-- Socket filter radio buttons will be dynamically added here -->
+                </div>
             </div>
 
-            <label class="filterLabel">Number of Memory Slots:</label>
-            <div>
-                <input type="radio" id="moboMemorySlotsAll" name="moboSlotsFilter" value="all" checked>
-                <label for="moboMemorySlotsAll">All</label>
-                <input type="radio" id="moboMemorySlots2" name="moboSlotsFilter" value="2">
-                <label for="moboMemorySlots2">2</label>
-                <input type="radio" id="moboMemorySlots4" name="moboSlotsFilter" value="4">
-                <label for="moboMemorySlots4">4</label>
-                <input type="radio" id="moboMemorySlots8" name="moboSlotsFilter" value="8">
-                <label for="moboMemorySlots8">8</label>
+            <div class="optionLine">
+                <label class="filterLabel">Number of Memory Slots:</label>
+                <div class="radioButtons">
+                    <input type="radio" id="moboMemorySlotsAll" name="moboSlotsFilter" value="all" checked>
+                    <label for="moboMemorySlotsAll">All</label>
+                    <input type="radio" id="moboMemorySlots2" name="moboSlotsFilter" value="2">
+                    <label for="moboMemorySlots2">2</label>
+                    <input type="radio" id="moboMemorySlots4" name="moboSlotsFilter" value="4">
+                    <label for="moboMemorySlots4">4</label>
+                    <input type="radio" id="moboMemorySlots8" name="moboSlotsFilter" value="8">
+                    <label for="moboMemorySlots8">8</label>
+                </div>
             </div>
 
-            <label class="filterLabel">Supported DDR Generation:</label>
-            <div>
-                <input type="radio" id="moboDDRAll" name="moboDDRFilter" value="all" checked>
-                <label for="moboDDRAll">All</label>
-                <input type="radio" id="moboDDR3" name="moboDDRFilter" value="DDR3">
-                <label for="moboDDR3">DDR3</label>
-                <input type="radio" id="moboDDR4" name="moboDDRFilter" value="DDR4">
-                <label for="moboDDR4">DDR4</label>
-                <input type="radio" id="moboDDR5" name="moboDDRFilter" value="DDR5">
-                <label for="moboDDR5">DDR5</label>
-            </div>
-
-            <label class="filterLabel">Form Factor:</label>
-            <div>
-                <input type="radio" id="moboFormFactorAll" name="moboFormFactorFilter" value="all" checked>
-                <label for="moboFormFactorAll">All</label>
-                <input type="radio" id="moboFormFactorATX" name="moboFormFactorFilter" value="ATX">
-                <label for="moboFormFactorATX">ATX</label>
-                <input type="radio" id="moboFormFactorMicroATX" name="moboFormFactorFilter" value="Micro ATX">
-                <label for="moboFormFactorMicroATX">Micro ATX</label>
-                <input type="radio" id="moboFormFactorMiniITX" name="moboFormFactorFilter" value="Mini ITX">
-                <label for="moboFormFactorMiniITX">Mini ITX</label>
-                <input type="radio" id="moboFormFactorExtendedATX" name="moboFormFactorFilter" value="Extended ATX">
-                <label for="moboFormFactorExtendedATX">Extended ATX</label>
-                <input type="radio" id="moboFormFactorSSI" name="moboFormFactorFilter" value="SSI">
-                <label for="moboFormFactorSSI">SSI</label>
+            <div class="optionLine">
+                <label class="filterLabel">Supported DDR Generation:</label>
+                <div class="radioButtons">
+                    <input type="radio" id="moboDDRAll" name="moboDDRFilter" value="all" checked>
+                    <label for="moboDDRAll">All</label>
+                    <input type="radio" id="moboDDR3" name="moboDDRFilter" value="DDR3">
+                    <label for="moboDDR3">DDR3</label>
+                    <input type="radio" id="moboDDR4" name="moboDDRFilter" value="DDR4">
+                    <label for="moboDDR4">DDR4</label>
+                    <input type="radio" id="moboDDR5" name="moboDDRFilter" value="DDR5">
+                    <label for="moboDDR5">DDR5</label>
+                </div>
             </div>
             
-
-            <label for="selectMOBO">Select a Motherboard:</label>
+            <div class="optionLine">
+                <label class="filterLabel">Form Factor:</label>
+                <div class="radioButtons">
+                    <input type="radio" id="moboFormFactorAll" name="moboFormFactorFilter" value="all" checked>
+                    <label for="moboFormFactorAll">All</label>
+                    <input type="radio" id="moboFormFactorATX" name="moboFormFactorFilter" value="ATX">
+                    <label for="moboFormFactorATX">ATX</label>
+                    <input type="radio" id="moboFormFactorMicroATX" name="moboFormFactorFilter" value="Micro ATX">
+                    <label for="moboFormFactorMicroATX">Micro ATX</label>
+                    <input type="radio" id="moboFormFactorMiniITX" name="moboFormFactorFilter" value="Mini ITX">
+                    <label for="moboFormFactorMiniITX">Mini ITX</label>
+                    <input type="radio" id="moboFormFactorExtendedATX" name="moboFormFactorFilter" value="Extended ATX">
+                    <label for="moboFormFactorExtendedATX">Extended ATX</label>
+                    <input type="radio" id="moboFormFactorSSI" name="moboFormFactorFilter" value="SSI">
+                    <label for="moboFormFactorSSI">SSI</label>
+                </div>
+            </div>
+            
+            
+            <label for="selectMOBO">Selected Motherboard:</label>
             <select id="selectMOBO" name="selectMONO">
                 <!-- Options will be dynamically added here -->
             </select>
@@ -129,51 +149,60 @@
         <!--------------------------------------------------------------------->
         <div class="componentContainer" id="ramContainer">
             <h3>Choose a Memory</h3>
-            <label class="filterLabel">Manufacturer:</label>
-            <div id="ramManufacturerFilter"> 
-                <!-- Dynamically added here -->
-            </div>
-
-            <label class="filterLabel">DDR Generation:</label>
-            <div>
-                <input type="radio" id="ramDDRAll" name="ramDDRFilter" value="all" checked>
-                <label for="ramDDRAll">All</label>
-                <input type="radio" id="ramDDR3" name="ramDDRFilter" value="DDR3">
-                <label for="ramDDR3">DDR3</label>
-                <input type="radio" id="ramDDR4" name="ramDDRFilter" value="DDR4">
-                <label for="ramDDR4">DDR4</label>
-                <input type="radio" id="ramDDR5" name="ramDDRFilter" value="DDR5">
-                <label for="ramDDR5">DDR5</label>
-            </div>
-
-            <label class="filterLabel">Number of Modules:</label>
-            <div>
-                <input type="radio" id="ramModulesAll" name="ramModulesFilter" value="all" checked>
-                <label for="ramModulesAll">All</label>
-                <input type="radio" id="ramModules2" name="ramModulesFilter" value="2">
-                <label for="ramModules2">2</label>
-                <input type="radio" id="ramModules4" name="ramModulesFilter" value="4">
-                <label for="ramModules4">4</label>
-                <input type="radio" id="ramModules8" name="ramModulesFilter" value="8">
-                <label for="ramModules8">8</label>
-            </div>
-
-            <label class="filterLabel">Capacity:</label>
-            <div>
-                <input type="radio" id="ramCapacityAll" name="ramCapacityFilter" value="all" checked>
-                <label for="ramCapacityAll">All</label>
-                <input type="radio" id="ramCapacity8" name="ramCapacityFilter" value="8">
-                <label for="ramCapacity8">8GHz</label>
-                <input type="radio" id="ramCapacity16" name="ramCapacityFilter" value="16">
-                <label for="ramCapacity8">16Hz</label>
-                <input type="radio" id="ramCapacity32" name="ramCapacityFilter" value="32">
-                <label for="ramCapacity8">32GHz</label>
-                <input type="radio" id="ramCapacity64" name="ramCapacityFilter" value="64">
-                <label for="ramCapacity8">64GHz</label>
+            
+            <div class="optionLine">
+                <label class="filterLabel">Manufacturer:</label>
+                <div id="ramManufacturerFilter" class="radioButtons"> 
+                    <!-- Dynamically added here -->
+                </div>
             </div>
             
-
-            <label for="selectRAM">Select a Memory:</label>
+            <div class="optionLine">
+                <label class="filterLabel">DDR Generation:</label>
+                <div class="radioButtons">
+                    <input type="radio" id="ramDDRAll" name="ramDDRFilter" value="all" checked>
+                    <label for="ramDDRAll">All</label>
+                    <input type="radio" id="ramDDR3" name="ramDDRFilter" value="DDR3">
+                    <label for="ramDDR3">DDR3</label>
+                    <input type="radio" id="ramDDR4" name="ramDDRFilter" value="DDR4">
+                    <label for="ramDDR4">DDR4</label>
+                    <input type="radio" id="ramDDR5" name="ramDDRFilter" value="DDR5">
+                    <label for="ramDDR5">DDR5</label>
+                </div>
+            </div>
+            
+            <div class="optionLine">
+                <label class="filterLabel">Number of Modules:</label>
+                <div class="radioButtons">
+                    <input type="radio" id="ramModulesAll" name="ramModulesFilter" value="all" checked>
+                    <label for="ramModulesAll">All</label>
+                    <input type="radio" id="ramModules2" name="ramModulesFilter" value="2">
+                    <label for="ramModules2">2</label>
+                    <input type="radio" id="ramModules4" name="ramModulesFilter" value="4">
+                    <label for="ramModules4">4</label>
+                    <input type="radio" id="ramModules8" name="ramModulesFilter" value="8">
+                    <label for="ramModules8">8</label>
+                </div>
+            </div>
+            
+            <div class="optionLine">
+                <label class="filterLabel">Capacity:</label>
+                <div class="radioButtons">
+                    <input type="radio" id="ramCapacityAll" name="ramCapacityFilter" value="all" checked>
+                    <label for="ramCapacityAll">All</label>
+                    <input type="radio" id="ramCapacity8" name="ramCapacityFilter" value="8">
+                    <label for="ramCapacity8">8GHz</label>
+                    <input type="radio" id="ramCapacity16" name="ramCapacityFilter" value="16">
+                    <label for="ramCapacity8">16Hz</label>
+                    <input type="radio" id="ramCapacity32" name="ramCapacityFilter" value="32">
+                    <label for="ramCapacity8">32GHz</label>
+                    <input type="radio" id="ramCapacity64" name="ramCapacityFilter" value="64">
+                    <label for="ramCapacity8">64GHz</label>
+                </div>
+            </div>
+            
+            
+            <label for="selectRAM">Selected Memory:</label>
             <select id="selectRAM" name="selecRAM">
                 <!-- Options will be dynamically added here -->
             </select> 
@@ -183,44 +212,53 @@
         <!--------------------------------------------------------------------->
         <div class="componentContainer" id="gpuContainer">
             <h3>Choose a Graphics Card</h3>
-            <label class="filterLabel">Manufacturer:</label>
-            <div id="gpuManufacturerFilter"> 
-                <!-- Dynamically added here -->
+            
+            <div class="optionLine">
+                <label class="filterLabel">Manufacturer:</label>
+                <div id="gpuManufacturerFilter" class="radioButtons"> 
+                    <!-- Dynamically added here -->
+                </div>
             </div>
-
-            <label class="filterLabel">Minimum required PSU Wattage:</label>
-            <div id="gpuWattageFilter"> 
-                <!-- Dynamically added here -->
+            
+            <div class="optionLine">
+                <label class="filterLabel">Minimum required PSU Wattage:</label>
+                <div id="gpuWattageFilter" class="radioButtons"> 
+                    <!-- Dynamically added here -->
+                </div>
             </div>
-
-            <label class="filterLabel">GDDR Generation:</label>
-            <div>
-                <input type="radio" id="gpuGDDRAll" name="gpuGDDRFilter" value="all" checked>
-                <label for="gpuGDDRAll">All</label>
-                <input type="radio" id="gpuGDDR5" name="gpuGDDRFilter" value="GDDR5">
-                <label for="ramDDR3">GDDR5</label>
-                <input type="radio" id="gpuGDDR6" name="gpuGDDRFilter" value="GDDR6">
-                <label for="ramDDR4">GDDR6</label>
-                <input type="radio" id="gpuGDDR6X" name="gpuGDDRFilter" value="GDDR6X">
-                <label for="ramDDR5">GDDR6X</label>
+            
+            <div class="optionLine">
+                <label class="filterLabel">GDDR Generation:</label>
+                <div class="radioButtons">
+                    <input type="radio" id="gpuGDDRAll" name="gpuGDDRFilter" value="all" checked>
+                    <label for="gpuGDDRAll">All</label>
+                    <input type="radio" id="gpuGDDR5" name="gpuGDDRFilter" value="GDDR5">
+                    <label for="ramDDR3">GDDR5</label>
+                    <input type="radio" id="gpuGDDR6" name="gpuGDDRFilter" value="GDDR6">
+                    <label for="ramDDR4">GDDR6</label>
+                    <input type="radio" id="gpuGDDR6X" name="gpuGDDRFilter" value="GDDR6X">
+                    <label for="ramDDR5">GDDR6X</label>
+                </div>
             </div>
-
-            <label class="filterLabel">PCIE Generation:</label>
-            <div>
-                <input type="radio" id="gpuPCIEAll" name="gpuPCIEFilter" value="all" checked>
-                <label for="gpuPCIEAll">All</label>
-                <input type="radio" id="gpuPCIE83" name="gpuPCIEFilter" value="PCI Express x8 3.0">
-                <label for="gpuPCIE83">PCI Express x8 3.0</label>
-                <input type="radio" id="gpuPCIE163" name="gpuPCIEFilter" value="PCI Express x16 3.0">
-                <label for="gpuPCIE163">PCI Express x16 3.0</label>
-                <input type="radio" id="gpuPCIE84" name="gpuPCIEFilter" value="PCI Express x8 4.0">
-                <label for="gpuPCIE84">PCI Express x8 4.0</label>
-                <input type="radio" id="gpuPCIE164" name="gpuPCIEFilter" value="PCI Express x16 4.0">
-                <label for="gpuPCIE164">PCI Express x16 4.0</label>
+            
+            <div class="optionLine">
+                <label class="filterLabel">PCIE Generation:</label>
+                <div class="radioButtons">
+                    <input type="radio" id="gpuPCIEAll" name="gpuPCIEFilter" value="all" checked>
+                    <label for="gpuPCIEAll">All</label>
+                    <input type="radio" id="gpuPCIE83" name="gpuPCIEFilter" value="PCI Express x8 3.0">
+                    <label for="gpuPCIE83">PCI Express x8 3.0</label>
+                    <input type="radio" id="gpuPCIE163" name="gpuPCIEFilter" value="PCI Express x16 3.0">
+                    <label for="gpuPCIE163">PCI Express x16 3.0</label>
+                    <input type="radio" id="gpuPCIE84" name="gpuPCIEFilter" value="PCI Express x8 4.0">
+                    <label for="gpuPCIE84">PCI Express x8 4.0</label>
+                    <input type="radio" id="gpuPCIE164" name="gpuPCIEFilter" value="PCI Express x16 4.0">
+                    <label for="gpuPCIE164">PCI Express x16 4.0</label>
+                </div>
             </div>
+            
 
-
-            <label for="selectGPU">Select a Graphics Card:</label>
+            <label for="selectGPU">Selected Graphics Card:</label>
             <select id="selectGPU" name="selecGPU">
                 <!-- Options will be dynamically added here -->
             </select>
@@ -230,62 +268,73 @@
         <!--------------------------------------------------------------------->
         <div class="componentContainer" id="storageContainer">
             <h3>Choose Storage</h3>
-            <label class="filterLabel">Manufacturer:</label>
-            <div id="storageManufacturerFilter"> 
-                <!-- Dynamically added here -->
+            
+            <div class="optionLine">
+                <label class="filterLabel">Manufacturer:</label>
+                <div id="storageManufacturerFilter" class="radioButtons"> 
+                    <!-- Dynamically added here -->
+                </div>   
             </div>
-
-            <label class="filterLabel">Capacity (in GB):</label>
-            <div id="storageCapacityFilter"> 
-                <!-- Dynamically added here -->
+            
+            <div class="optionLine">
+                <label class="filterLabel">Capacity (in GB):</label>
+                <div id="storageCapacityFilter" class="radioButtons"> 
+                    <!-- Dynamically added here -->
+                </div>
             </div>
-
-            <label class="filterLabel">Type:</label>
-            <div>
-                <input type="radio" id="storageTypeAll" name="storageTypeFilter" value="all" checked>
-                <label for="storageTypeAll">All</label>
-                <input type="radio" id="storageTypeHDD" name="storageTypeFilter" value="HDD">
-                <label for="storageTypeHDD">HDD</label>
-                <input type="radio" id="storageTypeSSD" name="storageTypeFilter" value="SSD">
-                <label for="storageTypeSSD">SSD</label>
+            
+            <div class="optionLine">
+                <label class="filterLabel">Type:</label>
+                <div class="radioButtons">
+                    <input type="radio" id="storageTypeAll" name="storageTypeFilter" value="all" checked style="margin-right: 5px;">
+                    <label for="storageTypeAll" style="margin-right: 15px;">All</label>
+                    <input type="radio" id="storageTypeHDD" name="storageTypeFilter" value="HDD" style="margin-right: 5px;">
+                    <label for="storageTypeHDD" style="margin-right: 15px;">HDD</label>
+                    <input type="radio" id="storageTypeSSD" name="storageTypeFilter" value="SSD" style="margin-right: 5px;">
+                    <label for="storageTypeSSD">SSD</label>
+                </div>
             </div>
-
-            <label class="filterLabel">Form Factor:</label>
-            <div>
-                <input type="radio" id="storageFormFactorAll" name="storageFormFactorFilter" value="all" checked>
-                <label for="storageFormFactorAll">All</label>
-                <input type="radio" id="storageFormFactor25" name="storageFormFactorFilter" value="2.5'">
-                <label for="storageFormFactor25">2.5'</label>
-                <input type="radio" id="storageFormFactor35" name="storageFormFactorFilter" value="3.5'">
-                <label for="storageFormFactor35">3.5'</label>
-                <input type="radio" id="storageFormFactorM22242" name="storageFormFactorFilter" value="M.2 2242">
-                <label for="storageFormFactorM22242">M.2 2242</label>
-                <input type="radio" id="storageFormFactorM22260" name="storageFormFactorFilter" value="M.2 2260">
-                <label for="storageFormFactorM22260">M.2 2260</label>
-                <input type="radio" id="storageFormFactorM22280" name="storageFormFactorFilter" value="M.2 2280">
-                <label for="storageFormFactorM22280">M.2 2280</label>
-                <input type="radio" id="storageFormFactorM222110" name="storageFormFactorFilter" value="M.2 22110">
-                <label for="storageFormFactorM222110">M.2 22110</label>
+            
+            <div class="optionLine">
+                <label class="filterLabel">Form Factor:</label>
+                <div class="radioButtons">
+                    <input type="radio" id="storageFormFactorAll" name="storageFormFactorFilter" value="all" checked>
+                    <label for="storageFormFactorAll">All</label>
+                    <input type="radio" id="storageFormFactor25" name="storageFormFactorFilter" value="2.5'">
+                    <label for="storageFormFactor25">2.5'</label>
+                    <input type="radio" id="storageFormFactor35" name="storageFormFactorFilter" value="3.5'">
+                    <label for="storageFormFactor35">3.5'</label>
+                    <input type="radio" id="storageFormFactorM22242" name="storageFormFactorFilter" value="M.2 2242">
+                    <label for="storageFormFactorM22242">M.2 2242</label>
+                    <input type="radio" id="storageFormFactorM22260" name="storageFormFactorFilter" value="M.2 2260">
+                    <label for="storageFormFactorM22260">M.2 2260</label>
+                    <input type="radio" id="storageFormFactorM22280" name="storageFormFactorFilter" value="M.2 2280">
+                    <label for="storageFormFactorM22280">M.2 2280</label>
+                    <input type="radio" id="storageFormFactorM222110" name="storageFormFactorFilter" value="M.2 22110">
+                    <label for="storageFormFactorM222110">M.2 22110</label>
+                </div>
             </div>
-
-            <label class="filterLabel">Connectivity:</label>
-            <div>
-                <input type="radio" id="storageConnectivityAll" name="storageConnectivityFilter" value="all" checked>
-                <label for="storageConnectivityAll">All</label>
-                <input type="radio" id="storageConnectivityPCIE3" name="storageConnectivityFilter" value="PCI Express 3.0">
-                <label for="storageConnectivityPCIE3">PCI Express 3.0</label>
-                <input type="radio" id="storageConnectivityPCIE4" name="storageConnectivityFilter" value="PCI Express 4.0">
-                <label for="storageConnectivityPCIE4">PCI Express 4.0</label>
-                <input type="radio" id="storageConnectivityPCIE5" name="storageConnectivityFilter" value="PCI Express 5.0">
-                <label for="storageConnectivityPCIE5">PCI Express 5.0</label>
-                <input type="radio" id="storageConnectivitySAS3" name="storageConnectivityFilter" value="SAS 3.0">
-                <label for="storageConnectivitySAS3">SAS 3.0</label>
-                <input type="radio" id="storageConnectivitySataIII" name="storageConnectivityFilter" value="SATA III">
-                <label for="storageConnectivitySataIII">SATA III</label>   
+            
+            <div class="optionLine">
+                <label class="filterLabel">Connectivity:</label>
+                <div class="radioButtons">
+                    <input type="radio" id="storageConnectivityAll" name="storageConnectivityFilter" value="all" checked>
+                    <label for="storageConnectivityAll">All</label>
+                    <input type="radio" id="storageConnectivityPCIE3" name="storageConnectivityFilter" value="PCI Express 3.0">
+                    <label for="storageConnectivityPCIE3">PCI Express 3.0</label>
+                    <input type="radio" id="storageConnectivityPCIE4" name="storageConnectivityFilter" value="PCI Express 4.0">
+                    <label for="storageConnectivityPCIE4">PCI Express 4.0</label>
+                    <input type="radio" id="storageConnectivityPCIE5" name="storageConnectivityFilter" value="PCI Express 5.0">
+                    <label for="storageConnectivityPCIE5">PCI Express 5.0</label>
+                    <input type="radio" id="storageConnectivitySAS3" name="storageConnectivityFilter" value="SAS 3.0">
+                    <label for="storageConnectivitySAS3">SAS 3.0</label>
+                    <input type="radio" id="storageConnectivitySataIII" name="storageConnectivityFilter" value="SATA III">
+                    <label for="storageConnectivitySataIII">SATA III</label>   
+                </div>
             </div>
+            
 
-
-            <label for="selectStorage">Select Storage:</label>
+            <label for="selectStorage">Selected Storage:</label>
             <select id="selectStorage" name="selectStorage">
                 <!-- Options will be dynamically added here -->
             </select>
@@ -295,58 +344,69 @@
         <!--------------------------------------------------------------------->
         <div class="componentContainer" id="psuContainer">
             <h3>Choose Power Supply</h3>
-            <label class="filterLabel">Manufacturer:</label>
-            <div id="psuManufacturerFilter"> 
-                <!-- Dynamically added here -->
+            
+            <div class="optionLine">
+                <label class="filterLabel">Manufacturer:</label>
+                <div id="psuManufacturerFilter" class="radioButtons"> 
+                    <!-- Dynamically added here -->
+                </div>
             </div>
-
-            <label class="filterLabel">Wattage:</label>
-            <div id="psuWattageFilter"> 
-                <!-- Dynamically added here -->
+            
+            <div class="optionLine">
+                <label class="filterLabel">Wattage:</label>
+                <div id="psuWattageFilter" class="radioButtons"> 
+                    <!-- Dynamically added here -->
+                </div>
             </div>
-
-            <label class="filterLabel">Modularity:</label>
-            <div>
-                <input type="radio" id="psuModularityAll" name="psuModularityFilter" value="all" checked>
-                <label for="psuModularityAll">All</label>
-                <input type="radio" id="psuModularityFull" name="psuModularityFilter" value="Modular">
-                <label for="psuModularityFull">Modular</label>
-                <input type="radio" id="psuModularitySemi" name="psuModularityFilter" value="Semi-Modular">
-                <label for="psuModularitySemi">Semi Modular</label>
-                <input type="radio" id="psuModularityNon" name="psuModularityFilter" value="Non-Modular">
-                <label for="psuModularityNon">Non Modular</label>
+            
+            <div class="optionLine">
+                <label class="filterLabel">Modularity:</label>
+                <div class="radioButtons">
+                    <input type="radio" id="psuModularityAll" name="psuModularityFilter" value="all" checked>
+                    <label for="psuModularityAll">All</label>
+                    <input type="radio" id="psuModularityFull" name="psuModularityFilter" value="Modular">
+                    <label for="psuModularityFull">Modular</label>
+                    <input type="radio" id="psuModularitySemi" name="psuModularityFilter" value="Semi-Modular">
+                    <label for="psuModularitySemi">Semi Modular</label>
+                    <input type="radio" id="psuModularityNon" name="psuModularityFilter" value="Non-Modular">
+                    <label for="psuModularityNon">Non Modular</label>
+                </div>
             </div>
-
-            <label class="filterLabel">Form Factor:</label>
-            <div>
-                <input type="radio" id="psuFormFactorAll" name="psuFormFactorFilter" value="all" checked>
-                <label for="psuFormFactorAll">All</label>
-                <input type="radio" id="psuFormFactorATX" name="psuFormFactorFilter" value="ATX">
-                <label for="psuFormFactorATX">ATX</label>
-                <input type="radio" id="psuFormFactorEPS" name="psuFormFactorFilter" value="EPS">
-                <label for="psuFormFactorEPS">EPS</label>
+            
+            <div class="optionLine">
+                <label class="filterLabel">Form Factor:</label>
+                <div class="radioButtons">
+                    <input type="radio" id="psuFormFactorAll" name="psuFormFactorFilter" value="all" checked>
+                    <label for="psuFormFactorAll">All</label>
+                    <input type="radio" id="psuFormFactorATX" name="psuFormFactorFilter" value="ATX">
+                    <label for="psuFormFactorATX">ATX</label>
+                    <input type="radio" id="psuFormFactorEPS" name="psuFormFactorFilter" value="EPS">
+                    <label for="psuFormFactorEPS">EPS</label>
+                </div>
             </div>
-
-            <label class="filterLabel">Efficiency Certification:</label>
-            <div>
-                <input type="radio" id="psuEfficiencyAll" name="psuEfficiencyFilter" value="all" checked>
-                <label for="psuEfficiencyAll">All</label>
-                <input type="radio" id="psuEfficiencyStandard" name="psuEfficiencyFilter" value="80 PLUS Standard">
-                <label for="psuEfficiencyStandard">80 PLUS Standard</label>
-                <input type="radio" id="psuEfficiencyBronze" name="psuEfficiencyFilter" value="80 PLUS Bronze">
-                <label for="psuEfficiencyBronze">80 PLUS Bronze</label>
-                <input type="radio" id="psuEfficiencySilver" name="psuEfficiencyFilter" value="80 PLUS Silver">
-                <label for="psuEfficiencySilver">80 PLUS Silver</label>
-                <input type="radio" id="psuEfficiencyGold" name="psuEfficiencyFilter" value="80 PLUS Gold">
-                <label for="psuEfficiencyGold">80 PLUS Gold</label>
-                <input type="radio" id="psuEfficiencyPlatinum" name="psuEfficiencyFilter" value="80 PLUS Platinum">
-                <label for="psuEfficiencyPlatinum">80 PLUS Platinum</label>  
-                <input type="radio" id="psuEfficiencyTitanium" name="psuEfficiencyFilter" value="80 PLUS Titanium">
-                <label for="psuEfficiencyTitanium">80 PLUS Titanium</label>   
+            
+            <div class="optionLine">
+                <label class="filterLabel">Efficiency Certification:</label>
+                <div class="radioButtons">
+                    <input type="radio" id="psuEfficiencyAll" name="psuEfficiencyFilter" value="all" checked>
+                    <label for="psuEfficiencyAll">All</label>
+                    <input type="radio" id="psuEfficiencyStandard" name="psuEfficiencyFilter" value="80 PLUS Standard">
+                    <label for="psuEfficiencyStandard">80 PLUS Standard</label>
+                    <input type="radio" id="psuEfficiencyBronze" name="psuEfficiencyFilter" value="80 PLUS Bronze">
+                    <label for="psuEfficiencyBronze">80 PLUS Bronze</label>
+                    <input type="radio" id="psuEfficiencySilver" name="psuEfficiencyFilter" value="80 PLUS Silver">
+                    <label for="psuEfficiencySilver">80 PLUS Silver</label>
+                    <input type="radio" id="psuEfficiencyGold" name="psuEfficiencyFilter" value="80 PLUS Gold">
+                    <label for="psuEfficiencyGold">80 PLUS Gold</label>
+                    <input type="radio" id="psuEfficiencyPlatinum" name="psuEfficiencyFilter" value="80 PLUS Platinum">
+                    <label for="psuEfficiencyPlatinum">80 PLUS Platinum</label>  
+                    <input type="radio" id="psuEfficiencyTitanium" name="psuEfficiencyFilter" value="80 PLUS Titanium">
+                    <label for="psuEfficiencyTitanium">80 PLUS Titanium</label>   
+                </div>
             </div>
+            
 
-
-            <label for="selectPSU">Select Power Supply:</label>
+            <label for="selectPSU">Selected Power Supply:</label>
             <select id="selectPSU" name="selectPSU">
                 <!-- Options will be dynamically added here -->
             </select>
@@ -356,28 +416,34 @@
         <!--------------------------------------------------------------------->
         <div class="componentContainer" id="psuContainer">
             <h3>Choose Case</h3>
-            <label class="filterLabel">Manufacturer:</label>
-            <div id="caseManufacturerFilter"> 
-                <!-- Dynamically added here -->
+            
+            <div class="optionLine">
+                <label class="filterLabel">Manufacturer:</label>
+                <div id="caseManufacturerFilter" class="radioButtons"> 
+                    <!-- Dynamically added here -->
+                </div>
             </div>
-
-            <label class="filterLabel">Motherboard Form Factor:</label>
-            <div>
-                <input type="radio" id="caseFormFactorAll" name="caseFormFactorFilter" value="all" checked>
-                <label for="caseFormFactorAll">All</label>
-                <input type="radio" id="caseFormFactorATX" name="caseFormFactorFilter" value="ATX">
-                <label for="caseFormFactorATX">ATX</label>
-                <input type="radio" id="caseFormFactorMicroATX" name="caseFormFactorFilter" value="Micro ATX">
-                <label for="caseFormFactorMicroATX">Micro ATX</label>
-                <input type="radio" id="caseFormFactorMiniITX" name="caseFormFactorFilter" value="Mini ITX">
-                <label for="caseFormFactorMiniITX">Mini ITX</label>
-                <input type="radio" id="caseFormFactorExtendedATX" name="caseFormFactorFilter" value="Extended ATX">
-                <label for="caseFormFactorExtendedATX">Extended ATX</label>
-                <input type="radio" id="caseFormFactorSSI" name="caseFormFactorFilter" value="SSI">
-                <label for="caseFormFactorSSI">SSI</label>
+           
+            <div class="optionLine">
+                <label class="filterLabel">Motherboard Form Factor:</label>
+                <div class="radioButtons">
+                    <input type="radio" id="caseFormFactorAll" name="caseFormFactorFilter" value="all" checked>
+                    <label for="caseFormFactorAll">All</label>
+                    <input type="radio" id="caseFormFactorATX" name="caseFormFactorFilter" value="ATX">
+                    <label for="caseFormFactorATX">ATX</label>
+                    <input type="radio" id="caseFormFactorMicroATX" name="caseFormFactorFilter" value="Micro ATX">
+                    <label for="caseFormFactorMicroATX">Micro ATX</label>
+                    <input type="radio" id="caseFormFactorMiniITX" name="caseFormFactorFilter" value="Mini ITX">
+                    <label for="caseFormFactorMiniITX">Mini ITX</label>
+                    <input type="radio" id="caseFormFactorExtendedATX" name="caseFormFactorFilter" value="Extended ATX">
+                    <label for="caseFormFactorExtendedATX">Extended ATX</label>
+                    <input type="radio" id="caseFormFactorSSI" name="caseFormFactorFilter" value="SSI">
+                    <label for="caseFormFactorSSI">SSI</label>
+                </div>
             </div>
+            
 
-            <label for="selectCase">Select Case:</label>
+            <label for="selectCase">Selected Case:</label>
             <select id="selectCase" name="selectCase">
                 <!-- Options will be dynamically added here -->
             </select>
