@@ -1,8 +1,11 @@
 import {config} from './config.js';
 
+//  Get the dropdown element
+const moboDropdown = document.getElementById('selectMOBO');
+let selectedMobo = null;
+
 document.addEventListener('DOMContentLoaded', function () {
-    // Get the dropdown element and the static radio button elements
-    const dropdown = document.getElementById('selectMOBO');
+    // Get the static radio button elements
     const filterRadiosMemory = document.querySelectorAll('input[name="moboSlotsFilter"]');
     const filterRadiosDDR = document.querySelectorAll('input[name="moboDDRFilter"]');
     const filterRadiosFormFactor = document.querySelectorAll('input[name="moboFormFactorFilter"]');
@@ -12,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            // Populate the dropdown with all options
+            // Populate the moboDropdown with all options
             populateDropdown(data);
 
             // Attach event listeners to the memory slots filter radios
@@ -213,15 +216,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function populateDropdown(options) {
         // Clear existing options
-        dropdown.innerHTML = '';
+        moboDropdown.innerHTML = '';
 
-        // Populate the dropdown with values from the "name" key
+        // Add a placeholder option
+        const placeholderOption = document.createElement('option');
+        placeholderOption.value = ''; // You can set this to an empty string or any other value
+        placeholderOption.textContent = '-'; // Your desired placeholder text
+        moboDropdown.appendChild(placeholderOption);
+
+        // Populate the moboDropdown with values from the "name" key
         options.forEach(item => {
             const option = document.createElement('option');
-            option.value = item.name;
+            //option.value = item.name;
+            option.value = item.MOBO_id;
             option.textContent = item.name;
-            dropdown.appendChild(option);
+            moboDropdown.appendChild(option);
         });
     }
     
 });
+
+// Add the event listener directly inside the module
+moboDropdown.addEventListener('change', function () {
+    selectedMobo = moboDropdown.value;
+    console.log(selectedMobo);
+});
+
+export { selectedMobo };

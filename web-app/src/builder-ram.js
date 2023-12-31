@@ -1,8 +1,11 @@
 import {config} from './config.js';
 
+//  Get the dropdown element
+const ramDropdown = document.getElementById('selectRAM');
+let selectedRam = null;
+
 document.addEventListener('DOMContentLoaded', function () {
-    // Get the dropdown element and the static radio button elements
-    const dropdown = document.getElementById('selectRAM');
+    // Get the static radio button elements
     const filterRadiosDDR = document.querySelectorAll('input[name="ramDDRFilter"]');
     const filterRadiosModules = document.querySelectorAll('input[name="ramModulesFilter"]');
     const filterRadiosCapacity = document.querySelectorAll('input[name="ramCapacityFilter"]');
@@ -12,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            // Populate the dropdown with all options
+            // Populate the ramDropdown with all options
             populateDropdown(data);
 
             // Attach event listeners to the ddr generation filter radios
@@ -140,15 +143,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function populateDropdown(options) {
         // Clear existing options
-        dropdown.innerHTML = '';
+        ramDropdown.innerHTML = '';
 
-        // Populate the dropdown with values from the "name" key
+        // Add a placeholder option
+        const placeholderOption = document.createElement('option');
+        placeholderOption.value = ''; // You can set this to an empty string or any other value
+        placeholderOption.textContent = '-'; // Your desired placeholder text
+        ramDropdown.appendChild(placeholderOption);
+
+        // Populate the ramDropdown with values from the "name" key
         options.forEach(item => {
             const option = document.createElement('option');
-            option.value = item.name;
+            //option.value = item.name;
+            option.value = item.RAM_id;
             option.textContent = item.name;
-            dropdown.appendChild(option);
+            ramDropdown.appendChild(option);
         });
     }
     
 });
+
+// Add the event listener directly inside the module
+ramDropdown.addEventListener('change', function () {
+    selectedRam = ramDropdown.value;
+    console.log(selectedRam);
+});
+
+export { selectedRam };

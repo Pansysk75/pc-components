@@ -1,8 +1,11 @@
 import {config} from './config.js';
 
+//  Get the dropdown element
+const cpuDropdown = document.getElementById('selectCPU');
+let selectedCpu = null;
+
 document.addEventListener('DOMContentLoaded', function () {
-    // Get the dropdown element and the static radio button elements
-    const dropdown = document.getElementById('selectCPU');
+    // Get the static radio button elements
     const filterRadiosManufacturers = document.querySelectorAll('input[name="cpuManufacturerFilter"]');
     const filterRadiosIntegrated = document.querySelectorAll('input[name="cpuIntegratedFilter"]');
     const filterRadiosCores = document.querySelectorAll('input[name="cpuCoresFilter"]');
@@ -12,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            // Populate the dropdown with all options
+            // Populate the cpuDropdown with all options
             populateDropdown(data);
 
             // Attach event listeners to the manufacturer filter radios
@@ -40,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 const selectedCores = document.querySelector('input[name="cpuCoresFilter"]:checked').value;
                 const selectedSocket = document.querySelector('input[name="cpuSocketFilter"]:checked').value;
 
-                console.log(selectedSocket)
                 // Filter the options based on the selected filters
                 const filteredOptions = data.filter(item =>
                     (selectedManufacturer === 'all' || item.Manufacturer_name === selectedManufacturer) &&
@@ -127,14 +129,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function populateDropdown(options) {
         // Clear existing options
-        dropdown.innerHTML = '';
+        cpuDropdown.innerHTML = '';
 
-        // Populate the dropdown with values from the "name" key
+        // Add a placeholder option
+        const placeholderOption = document.createElement('option');
+        placeholderOption.value = ''; // You can set this to an empty string or any other value
+        placeholderOption.textContent = '-'; // Your desired placeholder text
+        cpuDropdown.appendChild(placeholderOption);
+
+        // Populate the cpuDropdown with values from the "name" key
         options.forEach(item => {
             const option = document.createElement('option');
-            option.value = item.name;
+            //option.value = item.name;
+            option.value = item.CPU_id;
             option.textContent = item.name;
-            dropdown.appendChild(option);
+            cpuDropdown.appendChild(option);
         });
     }
 });
+
+// Add the event listener directly inside the module
+cpuDropdown.addEventListener('change', function () {
+    selectedCpu = cpuDropdown.value;
+    console.log(selectedCpu);
+});
+
+export { selectedCpu };

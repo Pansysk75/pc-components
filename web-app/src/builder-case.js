@@ -1,8 +1,11 @@
 import {config} from './config.js';
 
+//  Get the dropdown element
+const caseDropdown = document.getElementById('selectCase');
+let selectedCase = null;
+
 document.addEventListener('DOMContentLoaded', function () {
-    // Get the dropdown element and the static radio button elements
-    const dropdown = document.getElementById('selectCase');
+    // Get the static radio button elements
     const filterRadiosFormFactor = document.querySelectorAll('input[name="caseFormFactorFilter"]');
 
     // Fetch data from the API endpoint
@@ -10,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            // Populate the dropdown with all options
+            // Populate the caseDropdown with all options
             populateDropdown(data);
 
             // Attach event listeners to the form factor filter radios
@@ -126,15 +129,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function populateDropdown(options) {
         // Clear existing options
-        dropdown.innerHTML = '';
+        caseDropdown.innerHTML = '';
 
-        // Populate the dropdown with values from the "name" key
+        // Add a placeholder option
+        const placeholderOption = document.createElement('option');
+        placeholderOption.value = ''; // You can set this to an empty string or any other value
+        placeholderOption.textContent = '-'; // Your desired placeholder text
+        caseDropdown.appendChild(placeholderOption);
+
+        // Populate the caseDropdown with values from the "name" key
         options.forEach(item => {
             const option = document.createElement('option');
-            option.value = item.name;
+            //option.value = item.name;
+            option.value = item.Case_id;
             option.textContent = item.name;
-            dropdown.appendChild(option);
+            caseDropdown.appendChild(option);
         });
     }
     
 });
+
+// Add the event listener directly inside the module
+caseDropdown.addEventListener('change', function () {
+    selectedCase = caseDropdown.value;
+    console.log(selectedCase);
+});
+
+export { selectedCase };

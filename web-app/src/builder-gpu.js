@@ -1,18 +1,20 @@
 import {config} from './config.js';
 
+//  Get the dropdown element
+const gpuDropdown = document.getElementById('selectGPU');
+let selectedGpu = null;
+
 document.addEventListener('DOMContentLoaded', function () {
-    // Get the dropdown element and the static radio button elements
-    const dropdown = document.getElementById('selectGPU');
+    // Get the static radio button elements
     const filterRadiosMemory = document.querySelectorAll('input[name="gpuGDDRFilter"]');
     const filterRadiosPCIE = document.querySelectorAll('input[name="gpuPCIEFilter"]');
     
-
     // Fetch data from the API endpoint
     var url = config.backendUrl + '/components/gpus';
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            // Populate the dropdown with all options
+            // Populate the gpuDropdown with all options
             populateDropdown(data);
 
             // Attach event listeners to the memory type filter radios
@@ -220,15 +222,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function populateDropdown(options) {
         // Clear existing options
-        dropdown.innerHTML = '';
+        gpuDropdown.innerHTML = '';
 
-        // Populate the dropdown with values from the "name" key
+        // Add a placeholder option
+        const placeholderOption = document.createElement('option');
+        placeholderOption.value = null; // You can set this to an empty string or any other value
+        placeholderOption.textContent = '-'; // Your desired placeholder text
+        gpuDropdown.appendChild(placeholderOption);
+
+        // Populate the gpuDropdown with values from the "name" key
         options.forEach(item => {
             const option = document.createElement('option');
-            option.value = item.name;
+            //option.value = item.name;
+            option.value = item.GPU_id;
             option.textContent = item.name;
-            dropdown.appendChild(option);
+            gpuDropdown.appendChild(option);
         });
     }
     
 });
+
+// Add the event listener directly inside the module
+gpuDropdown.addEventListener('change', function () {
+    selectedGpu = gpuDropdown.value;
+    console.log(selectedGpu);
+});
+
+export { selectedGpu };

@@ -1,8 +1,11 @@
 import {config} from './config.js';
 
+//  Get the psuDropdown element
+const psuDropdown = document.getElementById('selectPSU');
+let selectedPsu = null;
+
 document.addEventListener('DOMContentLoaded', function () {
-    // Get the dropdown element and the static radio button elements
-    const dropdown = document.getElementById('selectPSU');
+    // Get the static radio button elements
     const filterRadiosModularity = document.querySelectorAll('input[name="psuModularityFilter"]');
     const filterRadiosFormFactor = document.querySelectorAll('input[name="psuFormFactorFilter"]');
     const filterRadiosEfficiency = document.querySelectorAll('input[name="psuEfficiencyFilter"]');
@@ -227,15 +230,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function populateDropdown(options) {
         // Clear existing options
-        dropdown.innerHTML = '';
+        psuDropdown.innerHTML = '';
 
-        // Populate the dropdown with values from the "name" key
+        // Add a placeholder option
+        const placeholderOption = document.createElement('option');
+        placeholderOption.value = ''; // You can set this to an empty string or any other value
+        placeholderOption.textContent = '-'; // Your desired placeholder text
+        psuDropdown.appendChild(placeholderOption);
+
+        // Populate the psuDropdown with values from the "name" key
         options.forEach(item => {
             const option = document.createElement('option');
-            option.value = item.name;
+            //option.value = item.name;
+            option.value = item.PSU_id;
             option.textContent = item.name;
-            dropdown.appendChild(option);
+            psuDropdown.appendChild(option);
         });
     }
     
 });
+
+// Add the event listener directly inside the module
+psuDropdown.addEventListener('change', function () {
+    selectedPsu = psuDropdown.value;
+    console.log(selectedPsu);
+});
+
+export { selectedPsu };

@@ -1,8 +1,11 @@
 import {config} from './config.js';
 
+//  Get the dropdown element
+const storageDropdown = document.getElementById('selectStorage');
+let selectedStorage = null;
+
 document.addEventListener('DOMContentLoaded', function () {
-    // Get the dropdown element and the static radio button elements
-    const dropdown = document.getElementById('selectStorage');
+    // Get the static radio button elements
     const filterRadiosType = document.querySelectorAll('input[name="storageTypeFilter"]');
     const filterRadiosFormFactor = document.querySelectorAll('input[name="storageFormFactorFilter"]');
     const filterRadiosConnectivity = document.querySelectorAll('input[name="storageConnectivityFilter"]');
@@ -13,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            // Populate the dropdown with all options
+            // Populate the storageDropdown with all options
             populateDropdown(data);
 
             // Attach event listeners to the storage type filter radios
@@ -228,15 +231,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function populateDropdown(options) {
         // Clear existing options
-        dropdown.innerHTML = '';
+        storageDropdown.innerHTML = '';
 
-        // Populate the dropdown with values from the "name" key
+        // Add a placeholder option
+        const placeholderOption = document.createElement('option');
+        placeholderOption.value = ''; // You can set this to an empty string or any other value
+        placeholderOption.textContent = '-'; // Your desired placeholder text
+        storageDropdown.appendChild(placeholderOption);
+
+        // Populate the storageDropdown with values from the "name" key
         options.forEach(item => {
             const option = document.createElement('option');
-            option.value = item.name;
+            //option.value = item.name;
+            option.value = item.Storage_id;
             option.textContent = item.name;
-            dropdown.appendChild(option);
+            storageDropdown.appendChild(option);
         });
     }
     
 });
+
+// Add the event listener directly inside the module
+storageDropdown.addEventListener('change', function () {
+    selectedStorage = storageDropdown.value;
+    console.log(selectedStorage);
+});
+
+export { selectedStorage };
