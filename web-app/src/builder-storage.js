@@ -2,15 +2,16 @@ import {config} from './config.js';
 
 //  Get the dropdown element
 const storageDropdown = document.getElementById('selectStorage');
-let selectedStorage = null;
+//let selectedStorage = null;
+let storageNameArray = [];
+let storageIdArray = [];
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Get the static radio button elements
+    // Get the static (radio) button elements
     const filterRadiosType = document.querySelectorAll('input[name="storageTypeFilter"]');
     const filterRadiosFormFactor = document.querySelectorAll('input[name="storageFormFactorFilter"]');
     const filterRadiosConnectivity = document.querySelectorAll('input[name="storageConnectivityFilter"]');
     
-
     // Fetch data from the API endpoint
     var url = config.backendUrl + '/components/storages';
     fetch(url)
@@ -37,6 +38,52 @@ document.addEventListener('DOMContentLoaded', function () {
             // Create filters dynamically
             createManufacturerFilter(data);
             createCapacityFilter(data);
+
+
+
+
+           
+              
+            
+            // Add event listener for the "Add" button
+            const addButton = document.getElementById('addStorageButton');
+            if (addButton) {
+                addButton.addEventListener('click', addItem);
+            }
+        
+            // Function to add item to the array
+            function addItem() {
+                // Get the selected value from the dropdown
+                const dropdown = document.getElementById('selectStorage');
+                const selectedStorageId = dropdown.value;
+                const selectedStorageName = data[selectedStorageId].name;
+            
+                // Add the value to the array
+                storageIdArray.push(selectedStorageId);
+                storageNameArray.push(selectedStorageName);
+
+            
+                // Update the displayed array content
+                updateArrayContent();
+            }
+        
+            // Function to update array content
+            function updateArrayContent() {
+                // Display the array content in the list
+                const arrayContentElement = document.getElementById('arrayContent');
+                arrayContentElement.innerHTML = ''; // Clear previous content
+            
+                storageNameArray.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = item;
+                    arrayContentElement.appendChild(listItem);
+                });
+            }
+
+           
+
+
+
 
             function updateDropdown() {
                 // Get the selected values from all filters
@@ -251,10 +298,10 @@ document.addEventListener('DOMContentLoaded', function () {
     
 });
 
-// Add the event listener directly inside the module
-storageDropdown.addEventListener('change', function () {
-    selectedStorage = storageDropdown.value;
-    console.log(selectedStorage);
-});
+// // Add the event listener directly inside the module
+// storageDropdown.addEventListener('change', function () {
+//     selectedStorage = storageDropdown.value;
+//     console.log(selectedStorage);
+// });
 
-export { selectedStorage };
+export { storageIdArray };

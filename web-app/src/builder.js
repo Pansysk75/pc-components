@@ -2,7 +2,7 @@ import {selectedCpu} from './builder-cpu.js';
 import {selectedMobo} from './builder-mobo.js';
 import {selectedRam} from './builder-ram.js';
 import {selectedGpu} from './builder-gpu.js';
-import {selectedStorage} from './builder-storage.js';
+import {storageIdArray} from './builder-storage.js';
 import {selectedPsu} from './builder-psu.js';
 import {selectedCase} from './builder-case.js';
 import {config} from './config.js';
@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // Access the value of the text area
         const buildName = buildNameField.value;
 
+        let storageIdArrayIntegers = storageIdArray.map(str => parseInt(str, 10));
+        
         // Access selected values
         const newBuild = {
             "name": buildName,
@@ -24,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
             "RAM_id": selectedRam,
             "PSU_id": selectedPsu,
             "Case_id": selectedCase,
-            "storage_ids": [parseInt(selectedStorage, 10)]
+            "storage_ids": storageIdArrayIntegers
         };
         
         

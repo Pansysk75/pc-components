@@ -338,12 +338,21 @@
                         <label for="storageConnectivitySataIII">SATA III</label>   
                     </div>
                 </div>
-                
+            
 
                 <label for="selectStorage">Selected Storage:</label>
                 <select id="selectStorage" name="selectStorage">
                     <!-- Options will be dynamically added here -->
                 </select>
+
+                <!-- Add button -->
+                <button type="button" id="addStorageButton">Add</button>
+
+                <!-- Display the array content -->
+                <div>
+                    <h3>Storages added to build:</h3>
+                    <ul id="arrayContent"></ul>
+                </div>
 
             </div>
 
