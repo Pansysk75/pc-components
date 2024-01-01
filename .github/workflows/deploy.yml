@@ -32,16 +32,14 @@ jobs:
             export DATABASE_URI=${{ secrets.DATABASE_URI }}
 
             # Start or reload API server using PM2
-            pm2 start run.py --name api-server --interpreter ./venv/bin/python3 --update-env
-            pm2 reload api-server
+            pm2 reload api-server || pm2 start run.py --name api-server --interpreter ./venv/bin/python3 --update-env            
 
             # Web app setup
             cd ~/pc-components/web-app
             npm install
 
             # Start or reload web app using PM2
-            pm2 start server.js --name web-app --update-env
-            pm2 reload web-app
+            pm2 reload web-server || pm2 start server.js --name web-app --update-env
 
             # Save PM2 process list
             pm2 save
