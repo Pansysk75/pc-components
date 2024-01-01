@@ -189,7 +189,10 @@ router.post('/register', async (req, res) => {
     console.log("User data:");
     console.log(userData);
 
-    if (userData != undefined && userData.error == undefined) {
+    if (userData == undefined) {
+        res.send("There was an error with your registration");
+    }
+    else if (userData.error == undefined) {
         req.session.Username = username;
         res.redirect('/');
     }
