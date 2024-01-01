@@ -53,7 +53,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 const selectedStorageId = dropdown.value;
                 const selectedStorageName = data[selectedStorageId].name;
             
-                // Add the value to the array
+                // Add the value to the array only if it doesn't exist
+                if (storageIdArray.includes(selectedStorageId)) {
+                    alert('This storage is already added.');
+                    return;
+                }
                 storageIdArray.push(selectedStorageId);
                 storageNameArray.push(selectedStorageName);
 

@@ -61,10 +61,13 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 // Handle the response data
                 console.log('Response data:', data);
+                alert("Build saved successfully!");
+                window.location.href = '/';
             })
             .catch(error => {
                 // Handle errors
                 console.error('Error:', error);
+                alert("There was an error saving your build");
             });
 
     });
