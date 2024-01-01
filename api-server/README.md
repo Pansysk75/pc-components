@@ -21,7 +21,7 @@ By default, the web app communicates with this server.
 
 ### Run API Server Locally
 To run the API server locally, the following steps are required:
-- Have an instance of the `pc_components_database` running. 
+- Have an instance of the MySQL `pc_components_database` running, either locally or on a remote server (we have a database instance live and running, you can ask us for the credentials if you wish to use it).
 - Configure database credentials. This is done either with an environment variable `DATABASE_URI` (also `TEST_DATABASE_URI` if you wish to run the tests) or a config file. See `config/__init__.py` for more details. 
 - Install python requirements `pip install -r requirements.txt`
 - Run `python3 run.py`
