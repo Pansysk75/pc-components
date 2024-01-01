@@ -1,4 +1,3 @@
-# Github action for connecting to digitalocean server and run the deploy script
 name: Deploy
 on:
   push:
@@ -18,27 +17,31 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
-            set -x
-
-            # kill the previous server
-            kill -9 $(cat ~/pc-components/api-server/server_pid.txt)
-            kill -9 $(cat ~/pc-components/web-app/server_pid.txt)
-
             set -e
 
+            # Update the repository and install dependencies
             cd ~
             rm -rf ./pc-components
             git clone https://github.com/Pansysk75/pc-components.git
 
+            # API server setup
             cd ~/pc-components/api-server
             python3 -m venv venv
             source venv/bin/activate
             pip install -r requirements.txt
             export DATABASE_URI=${{ secrets.DATABASE_URI }}
-            python3 run.py &> server_log.txt &
-            echo $! > server_pid.txt
 
+            # Start or reload API server using PM2
+            pm2 start run.py --name api-server --interpreter ./venv/bin/python3 --update-env
+            pm2 reload api-server
+
+            # Web app setup
             cd ~/pc-components/web-app
             npm install
-            node server.js &> server_log.txt &
-            echo $! > server_pid.txt
+
+            # Start or reload web app using PM2
+            pm2 start server.js --name web-app --update-env
+            pm2 reload web-app
+
+            # Save PM2 process list
+            pm2 save
