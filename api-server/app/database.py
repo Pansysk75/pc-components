@@ -16,6 +16,14 @@ def connect_app(app, config):
         blocking=True,  # block and wait for a connection
         maxconnections=5  # max number of connections in the pool
     )
+    
+    # Make sure that we can connect to the database
+    try:
+        app.config['db_pool'].connection()
+    except Exception as failed_connection:
+        print(failed_connection)
+        raise Exception(f"Could not connect to the database!")
+
 
 # Sometimes db disconnects, this function will reconnect if necessary
 def get_connection(app):

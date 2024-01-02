@@ -16,12 +16,16 @@ config.read(config_path)
 
 # Parse the connection URI to get the individual components
 def parse_uri(uri):
+    if (uri in ["mysql+pymysql://username:password@host:port/pc_components_database",
+                "mysql+pymysql://username:password@host:port/test_pc_components_database"]):
+        raise Exception(f"Change the config/config.ini file to add your \"username\",\"password\",\"host\",\"port\" from your database")
+
     result = {}
     result["uri"] = uri
     result["driver"] = uri.split(':')[0]
     result["username"] = uri.split(':')[1].split('//')[1].split(':')[0]
-    result["password"] = uri.split(':')[2].split('@')[0]
-    result["host"] = uri.split(':')[2].split('@')[1]
+    result["password"] = '@'.join(uri.split(':')[2].split('@')[0:-1])
+    result["host"] = uri.split(':')[2].split('@')[-1]
     result["port"] = int(uri.split(':')[3].split('/')[0])
     result["database"] = uri.split(':')[3].split('/')[1].split('?')[0]
     return result
