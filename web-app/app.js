@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const ejs = require('ejs');
 
+const {config} = require('./src/config.js'); 
+const backendUrl  = config.backendUrl;
+
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use("/public", express.static(__dirname + "/public"));
@@ -18,8 +21,8 @@ router.use(session({
 // This is used only for session management (its a POST so it doesn't need to serve a page)
 router.post('/login', async (req, res) => {
     let username = req.body.Username;
-    const backendUrl = "http://64.226.122.251:81/user/" + username;
-    let userData = await fetch(backendUrl)
+    const url = backendUrl + "/user/" + username;
+    let userData = await fetch(url)
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -49,12 +52,12 @@ router.get('/', (req, res) => {
 
 router.get('/user/:username', async (req, res) => {
     
-    const backendUrl = "http://64.226.122.251:81/"
+    const url = backendUrl + "/"
 
     let username = req.params.username;
 
     // Fetch user from backend
-    let userData = await fetch(backendUrl + "user/" + username)
+    let userData = await fetch(url + "user/" + username)
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -83,8 +86,8 @@ router.get('/build/:id', async (req, res) => {
     let id = req.params.id;
 
     // Fetch build from backend
-    const backendUrl = "http://64.226.122.251:81/build/" + id;
-    let buildData = await fetch(backendUrl)
+    const url = backendUrl + "/build/" + id;
+    let buildData = await fetch(url)
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -95,8 +98,8 @@ router.get('/build/:id', async (req, res) => {
         });
 
     // Fetch build ratings
-    const backendUrl2 = "http://64.226.122.251:81/build/" + id + "/ratings";
-    let ratingsData = await fetch(backendUrl2)
+    const url2 = backendUrl + "/build/" + id + "/ratings";
+    let ratingsData = await fetch(url2)
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -117,8 +120,8 @@ router.get('/components/:type', async (req, res) => {
     let type = req.params.type;
 
     // Fetch components from backend
-    const backendUrl = "http://64.226.122.251:81/components/" + type;
-    let componentsList = await fetch(backendUrl)
+    const url = backendUrl + "/components/" + type;
+    let componentsList = await fetch(url)
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -135,9 +138,9 @@ router.get('/components/:type', async (req, res) => {
 router.get('/builds', async (req, res) => {
 
     // Fetch builds from backend
-    const backendUrl = "http://64.226.122.251:81/builds";
+    const url = backendUrl + "/builds";
 
-    let buildsData = await fetch(backendUrl)
+    let buildsData = await fetch(url)
         .then(response => response.json())
         .then(data => {
             return data;
@@ -168,9 +171,9 @@ router.post('/register', async (req, res) => {
     let username = req.body.Username;
     let email = req.body.email;
 
-    const backendUrl = "http://64.226.122.251:81/user";
+    const url = backendUrl + "/user";
 
-    let userData = await fetch(backendUrl, {
+    let userData = await fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
