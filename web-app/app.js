@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const ejs = require('ejs');
 
-const {config} = require('./src/config.json'); 
-const backendUrl  = config.backendUrl;
+const config = require('./src/config.json'); 
+const backendUrl  = config["!!!backendUrl"];
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));

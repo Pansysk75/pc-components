@@ -1,4 +1,9 @@
-import {config} from './config.js';
+
+var config = require('./src/config.json'); 
+// var config = config[]
+
+
+var config = config["!!!backendUrl"];
 
 // Function to submit a rating with comment
 function submitRating() {
@@ -6,7 +11,7 @@ function submitRating() {
     var username = document.getElementById('username').value;
     var rating = document.getElementById('rating').value;
     var comment = document.getElementById('comment').value;
-    var url = config.backendUrl + '/build/' + buildId + '/ratings';
+    var url = config + '/build/' + buildId + '/ratings';
     console.log('Submitting rating for build ' + buildId + ' with rating ' + rating + ' and comment ' + comment);
     console.log('Submitting rating to ' + url);
     fetch(url, {
@@ -28,7 +33,7 @@ function submitRating() {
 
 // Function to delete a rating
 function deleteRating(username, build_id){
-    var url = config.backendUrl + '/build/' + build_id + '/ratings';
+    var url = config + '/build/' + build_id + '/ratings';
 
     var rating = {
         "Username": username,
