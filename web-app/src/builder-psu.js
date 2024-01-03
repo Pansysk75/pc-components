@@ -1,4 +1,5 @@
-import {config} from './config.js';
+import { readConfig } from './utils.js';
+const config = await readConfig();
 
 //  Get the psuDropdown element
 const psuDropdown = document.getElementById('selectPSU');

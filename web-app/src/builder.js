@@ -5,7 +5,9 @@ import {selectedGpu} from './builder-gpu.js';
 import {storageIdArray} from './builder-storage.js';
 import {selectedPsu} from './builder-psu.js';
 import {selectedCase} from './builder-case.js';
-import {config} from './config.js';
+
+import { readConfig } from './utils.js';
+const config = await readConfig();
 
 document.addEventListener('DOMContentLoaded', function () {
     const saveButton = document.getElementById('saveBuildButton');

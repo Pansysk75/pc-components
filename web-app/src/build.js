@@ -1,9 +1,5 @@
-
-var config = require('./src/config.json'); 
-// var config = config[]
-
-
-var config = config["!!!backendUrl"];
+import { readConfig } from './utils.js';
+const config = await readConfig();
 
 // Function to submit a rating with comment
 function submitRating() {
@@ -11,9 +7,10 @@ function submitRating() {
     var username = document.getElementById('username').value;
     var rating = document.getElementById('rating').value;
     var comment = document.getElementById('comment').value;
-    var url = config + '/build/' + buildId + '/ratings';
+    var url = config.backendUrl + '/build/' + buildId + '/ratings';
     console.log('Submitting rating for build ' + buildId + ' with rating ' + rating + ' and comment ' + comment);
     console.log('Submitting rating to ' + url);
+
     fetch(url, {
         method: 'POST',
         headers: {
@@ -65,12 +62,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Hook submitRating button
     var submitRatingButton = document.getElementById('submitRating');
-    submitRatingButton.addEventListener('click', submitRating);
-
+    if (submitRatingButton) {
+        submitRatingButton.addEventListener('click', submitRating);
+    }
     // Hook deleteRating buttons
     var deleteRatingButtons = document.getElementsByClassName('delete-rating');
     for (const button of deleteRatingButtons) {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             // Parent of "rating" class should have a child with class "username"
             var parent = this.closest('.rating');
             var username = parent.getElementsByClassName('username')[0].value;
