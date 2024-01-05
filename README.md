@@ -17,3 +17,4 @@ the Express - NodeJs framework was used.
 The web app is deployed [here](http://159.89.215.209/)
 
 For further details on how to run the API Server and the web app locally, follow the instructions in the corresponding folders.
+

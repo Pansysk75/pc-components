@@ -1,5 +1,5 @@
-import {config} from './config.js';
-
+import { readConfig } from './utils.js';
+const config = await readConfig();
 
 function deleteBuild(buildId) {
     // Send a DELETE request to the backend API

@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const ejs = require('ejs');
 
+const backendUrl = require('./config.json').backendUrl;
+
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use("/public", express.static(__dirname + "/public"));
@@ -18,8 +20,7 @@ router.use(session({
 // This is used only for session management (its a POST so it doesn't need to serve a page)
 router.post('/login', async (req, res) => {
     let username = req.body.Username;
-    const backendUrl = "http://64.226.122.251:81/user/" + username;
-    let userData = await fetch(backendUrl)
+    let userData = await fetch(backendUrl + "user/" + username)
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -48,12 +49,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/user/:username', async (req, res) => {
-    
-    const backendUrl = "http://64.226.122.251:81/"
-
     let username = req.params.username;
-
-    // Fetch user from backend
     let userData = await fetch(backendUrl + "user/" + username)
         .then(response => response.json())
         .then(data => {
@@ -71,7 +67,6 @@ router.get('/user/:username', async (req, res) => {
 
     console.log(userData);
     
-    // Render template with data
     res.render("user", { session: req.session, user: userData });
 });
 
@@ -82,9 +77,10 @@ router.get('/build/:id', async (req, res) => {
     // Get id from url
     let id = req.params.id;
 
+    console.log("Backend url: " + backendUrl);
+
     // Fetch build from backend
-    const backendUrl = "http://64.226.122.251:81/build/" + id;
-    let buildData = await fetch(backendUrl)
+    let buildData = await fetch(backendUrl + "build/" + id)
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -95,8 +91,7 @@ router.get('/build/:id', async (req, res) => {
         });
 
     // Fetch build ratings
-    const backendUrl2 = "http://64.226.122.251:81/build/" + id + "/ratings";
-    let ratingsData = await fetch(backendUrl2)
+    let ratingsData = await fetch(backendUrl + "build/" + id + "/ratings")
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -105,6 +100,11 @@ router.get('/build/:id', async (req, res) => {
         .catch(error => {
             console.log(error);
         });
+
+    console.log("Build data:");
+    console.log(buildData);
+    console.log("Ratings data:");
+    console.log(ratingsData);
 
     // Render template with data
     res.render("build", { session: req.session, build: buildData, ratings: ratingsData });
@@ -117,8 +117,7 @@ router.get('/components/:type', async (req, res) => {
     let type = req.params.type;
 
     // Fetch components from backend
-    const backendUrl = "http://64.226.122.251:81/components/" + type;
-    let componentsList = await fetch(backendUrl)
+    let componentsList = await fetch(backendUrl + "components/" + type)
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -135,9 +134,7 @@ router.get('/components/:type', async (req, res) => {
 router.get('/builds', async (req, res) => {
 
     // Fetch builds from backend
-    const backendUrl = "http://64.226.122.251:81/builds";
-
-    let buildsData = await fetch(backendUrl)
+    let buildsData = await fetch(backendUrl + "builds")
         .then(response => response.json())
         .then(data => {
             return data;
@@ -168,15 +165,14 @@ router.post('/register', async (req, res) => {
     let username = req.body.Username;
     let email = req.body.email;
 
-    const backendUrl = "http://64.226.122.251:81/user";
-
-    let userData = await fetch(backendUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ Username: username, email: email }),
-    })
+    let userData = await fetch(backendUrl + "user",
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ Username: username, email: email }),
+        })
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -208,5 +204,8 @@ router.get('/builder', (req, res) => {
     res.render('builder', { session: req.session });
 });
 
+router.get('/config.json', (req, res) => {
+    res.sendFile(__dirname + '/config.json');
+});
 
 module.exports = router;

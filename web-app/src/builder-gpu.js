@@ -1,4 +1,5 @@
-import {config} from './config.js';
+import { readConfig } from './utils.js';
+const config = await readConfig();
 
 //  Get the dropdown element
 const gpuDropdown = document.getElementById('selectGPU');
