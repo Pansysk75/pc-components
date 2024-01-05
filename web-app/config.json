@@ -1,4 +1,4 @@
 {
     "backendUrl": "http://64.226.122.251:81/",
-    "_backendUrl": "http://localhost:81/"
+    "replace_backendUrl_with_this_to_use_local_backend": "http://localhost:81/"
 }
