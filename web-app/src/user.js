@@ -28,13 +28,9 @@ function onDeleteButtonClick(event) {
         });
 }
 
-// Wait for the DOM to be loaded
-document.addEventListener('DOMContentLoaded', function () {
 
 // For all buttons of class "delete-build", set event listener to delete the build
-    const deleteButtons = document.getElementsByClassName('delete-build');
-    for (const button of deleteButtons) {
-        button.addEventListener('click', onDeleteButtonClick);
-    }
-
-});
+const deleteButtons = document.getElementsByClassName('delete-build');
+for (const button of deleteButtons) {
+    button.addEventListener('click', onDeleteButtonClick);
+}

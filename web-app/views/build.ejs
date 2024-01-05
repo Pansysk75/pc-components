@@ -13,36 +13,35 @@
 
 <body>
 
-    <%-include('partials/header')-%>
-    <%-include('partials/navbar')-%>
+  <%-include('partials/header')-%>
+  <%-include('partials/navbar')-%>
 
-    <input type="hidden" id="build_id" value="<%= build.Build_id %>">
+  <input type="hidden" id="build_id" value="<%= build.Build_id %>">
 
-    <div class="build-details">
-      <div class="build-details-header">
-        <h2> <%= build.name %> </h2>
-        <div> by <b> <a href="/user/<%= build.Username %>"> <%= build.Username %> </a> </b> </div>
-      </div>
-      <div class="build-details-container">
-        <h3>Build Details: </h3>
-        <div class="build-details-body">
-          <p><strong>CPU:</strong> <%= build.CPU_name %></p>
-          <p><strong>Motherboard:</strong> <%= build.MOBO_name %></p>
-          <p><strong>Case:</strong> <%= build.Case_name %></p>
-          <p><strong>Power Supply:</strong> <%= build.PSU_name %></p>
-          <p><strong>RAM:</strong> <%= build.RAM_name %></p>
-          <p><strong>GPU:</strong> <%= build.GPU_name %></p>
-          <div><strong>Storage:</strong>
-            <ul>
-              <% for (let i = 0; i < build.storage.length; i++) { %>
-                <li><%= build.storage[i].Storage_name %></li>
-                <% } %>
-            </ul>
-          </div>
+  <div class="build-details">
+    <div class="build-details-header">
+      <h2> <%= build.name %> </h2>
+      <div> by <b> <a href="/user/<%= build.Username %>"> <%= build.Username %> </a> </b> </div>
+    </div>
+    <div class="build-details-container">
+      <h3>Build Details: </h3>
+      <div class="build-details-body">
+        <p><strong>CPU:</strong> <%= build.CPU_name %></p>
+        <p><strong>Motherboard:</strong> <%= build.MOBO_name %></p>
+        <p><strong>Case:</strong> <%= build.Case_name %></p>
+        <p><strong>Power Supply:</strong> <%= build.PSU_name %></p>
+        <p><strong>RAM:</strong> <%= build.RAM_name %></p>
+        <p><strong>GPU:</strong> <%= build.GPU_name %></p>
+        <div><strong>Storage:</strong>
+          <ul>
+            <% for (let i = 0; i < build.storage.length; i++) { %>
+              <li><%= build.storage[i].Storage_name %></li>
+              <% } %>
+          </ul>
         </div>
       </div>
-     
-
+    </div>
+    
     <div class="ratings">
       <h3>Comments</h3>
       <% for (let i = 0; i < ratings.length; i++) { %>
@@ -80,7 +79,7 @@
                 <input type="number" name="rating" id="rating" min="1" max="5" required>
               </div>
             </div>
-  
+
             <div class="submission-field">
               <label for="comment">Your Comment:</label>
               <textarea name="comment" id="comment" cols="30" rows="10" required></textarea>
@@ -99,9 +98,11 @@
         
       <% } %>
 
+    </div>
+
   </div>
 
-  <script type="module" src="../src/build.js"></script>
+  <script defer type="module" src="../src/build.js"></script>
 
 </body>
 </html>

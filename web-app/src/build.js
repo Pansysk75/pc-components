@@ -30,7 +30,7 @@ function submitRating() {
 
 // Function to delete a rating
 function deleteRating(username, build_id){
-    var url = config + '/build/' + build_id + '/ratings';
+    var url = config.backendUrl + '/build/' + build_id + '/ratings';
 
     var rating = {
         "Username": username,
@@ -57,24 +57,22 @@ function deleteRating(username, build_id){
     });
 }
 
-// Wait for the DOM to be loaded
-document.addEventListener('DOMContentLoaded', function () {
 
-    // Hook submitRating button
-    var submitRatingButton = document.getElementById('submitRating');
-    if (submitRatingButton) {
-        submitRatingButton.addEventListener('click', submitRating);
-    }
-    // Hook deleteRating buttons
-    var deleteRatingButtons = document.getElementsByClassName('delete-rating');
-    for (const button of deleteRatingButtons) {
-        button.addEventListener('click', function () {
-            // Parent of "rating" class should have a child with class "username"
-            var parent = this.closest('.rating');
-            var username = parent.getElementsByClassName('username')[0].value;
-            var build_id = document.getElementById('build_id').value;
-            deleteRating(username, build_id);
-        });
-    }
-});
+// Hook submitRating button
+var submitRatingButton = document.getElementById('submitRating');
+if (submitRatingButton) {
+    submitRatingButton.addEventListener('click', submitRating);
+}
+// Hook deleteRating buttons
+var deleteRatingButtons = document.getElementsByClassName('delete-rating');
+for (const button of deleteRatingButtons) {
+    button.addEventListener('click', function () {
+        // Parent of "rating" class should have a child with class "username"
+        var parent = this.closest('.rating');
+        var username = parent.getElementsByClassName('username')[0].value;
+        var build_id = document.getElementById('build_id').value;
+        deleteRating(username, build_id);
+    });
+}
+
 

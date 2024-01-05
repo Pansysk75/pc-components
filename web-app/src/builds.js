@@ -94,25 +94,23 @@ function onFavoriteButtonClick(event) {
 
 const favoritesManager = new FavoritesManager();
 
-document.addEventListener("DOMContentLoaded", () => {
-    favoritesManager.username = document.getElementById("username").value;
+favoritesManager.username = document.getElementById("username").value;
 
-    if (!favoritesManager.username) {
-        return;
-    }
-    
+if (favoritesManager.username) {
     favoritesManager.getFavorites()
-        .then(() => {
-            const favoriteButtons = document.getElementsByClassName("favorite-button");
-            Array.from(favoriteButtons).forEach(button => {
-                favoritesManager.updateFavoriteButton(button);
-                button.addEventListener("click", onFavoriteButtonClick);
-            });
-        })
-        .catch(error => {
-            console.error("Error fetching favorites:", error);
+    .then(() => {
+        const favoriteButtons = document.getElementsByClassName("favorite-button");
+        Array.from(favoriteButtons).forEach(button => {
+            favoritesManager.updateFavoriteButton(button);
+            button.addEventListener("click", onFavoriteButtonClick);
         });
-});
+    })
+    .catch(error => {
+        console.error("Error fetching favorites:", error);
+    });
+}
+    
+
 
 
 class BuildManager {
@@ -154,15 +152,12 @@ function onDeleteButtonClick(event) {
 
 const buildManager = new BuildManager();
 
-document.addEventListener("DOMContentLoaded", () => {
-    buildManager.username = document.getElementById("username").value;
 
-    if (!buildManager.username) {
-        return;
-    }
+buildManager.username = document.getElementById("username").value;
 
+if (buildManager.username) {
     const deleteButtons = document.getElementsByClassName("delete-button");
     Array.from(deleteButtons).forEach(button => {
-        button.addEventListener("click", onDeleteButtonClick);
+    button.addEventListener("click", onDeleteButtonClick);
     });
-});
+}
